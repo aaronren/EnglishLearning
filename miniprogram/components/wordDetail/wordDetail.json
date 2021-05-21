@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "tip-bar": "../../components/tipBar/tipBar"
+  }
+}

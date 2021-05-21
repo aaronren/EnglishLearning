@@ -1,0 +1,58 @@
+<!--miniprogram/pages/index/index.wxml-->
+
+<search></search>
+
+<view class="container">
+  <view class="UCenter-bg">
+    <!-- 用户 openid -->
+    <view class="userinfo">
+      <button 
+        open-type="getUserInfo"
+        class="userinfo-avatar"
+        style="background-image: url({{avatarUrl}})"
+        size="default"
+        bindgetuserinfo='bindGetUserInfo'
+      ></button>
+    </view>
+    <view class="text-xl text-shadow">{{userInfo.nickName}}</view>
+    <!-- catchtap="toAbout" -->
+    <view class="margin-top-sm text-shadow">
+      <text>学习成就梦想</text>
+    </view>
+    <image src="http://www.aaronview.cn/image/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right" catchtap="toTimeRecord">
+      <view class="text-xxl text-orange">{{insistDays}}</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-attentionfill"></text> 坚持天数</view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right" catchtap="toAchievement">
+      <view class="text-xxl text-blue">{{learnedWords}}</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-fork"></text> 已学单词</view>
+    </view>
+    <view class="flex flex-sub flex-direction" catchtap="toAchievement">
+      <view class="text-xxl text-green">{{averageSore}}/3</view>
+      <view class="margin-top-sm">
+        <text class="cuIcon-favorfill"></text> 平均得分</view>
+    </view>
+  </view>
+
+  <view class="nav-frame">
+    <view class='nav-list'>
+      <block wx:for="{{elements}}" wx:key="index">
+        <navigator open-type="navigate" hover-class='none' url="/pages/{{item.nav}}" class="nav-li bg-{{item.color}}">
+          <view class="nav-title">{{item.title}}</view>
+          <view class="nav-name">{{item.name}}</view>
+          <text class='cuIcon-{{item.icon}}'></text>
+        </navigator>
+      </block>
+    </view>
+  </view>
+
+  <!-- <button class="cu-btn icon about" catchtap="toAbout">
+    <text class="cuIcon-cascades"></text>
+  </button> -->
+</view>

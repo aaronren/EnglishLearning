@@ -1,0 +1,3 @@
+<!--miniprogram/pages/test/test.wxml-->
+
+<spell word="{{word}}"></spell>

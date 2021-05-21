@@ -1,0 +1,25 @@
+<!--miniprogram/pages/achievement/achievement.wxml-->
+
+<view class="cu-list menu sm-border">
+  <view class="cu-item" wx:if="{{wordsList.length<=0}}">
+    <view class="content">
+      <text class="text-grey text-xs">您学习后单词成绩就会记录于此</text>
+    </view>
+  </view>
+  <block wx:if="{{wordsList.length>0}}">
+    <view class="cu-item" wx:for="{{wordsList}}" wx:key="index">
+      <view class="content">
+        <text class="cuIcon-title text-{{item.star<=1?'red':'grey'}}"></text>
+        <text class="text-{{item.star<=1?'red':'grey'}}">{{item.word}}</text>
+      </view>
+      <view class="action">
+        <text class="cuIcon-favorfill lg star-right text-{{item.star>jj?'yellow':'grey'}}" wx:for="{{3}}" wx:for-item="jj" wx:key="jj"></text>
+      </view>
+    </view>
+  </block>
+  <view class="cu-item">
+    <view class="content">
+      <text class="text-grey text-xs">说明：低于3星的单词还会在后续学习中出现</text>
+    </view>
+  </view>
+</view>

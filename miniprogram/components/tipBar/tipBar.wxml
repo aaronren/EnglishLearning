@@ -1,0 +1,7 @@
+<!--components/tipBar/tipBar.wxml name="slide-down" show="{{show}}" -->
+<!-- <view>我是子组件</view> -->
+<view class="tip-container" animation="{{ani_export}}" catchtap="onTap">
+  <view class="tip-style tip-{{type}}">
+    <text>{{message}}</text>
+  </view>
+</view>

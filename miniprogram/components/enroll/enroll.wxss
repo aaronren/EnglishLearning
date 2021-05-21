@@ -1,0 +1,52 @@
+/* components/enroll/enroll.wxss */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  position: absolute;
+  background-color: white;
+}
+
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.userinfo-avatar[size] {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.titleText {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #020e0f;
+  text-align: center;
+}
+
+.contentText {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.authBtn {
+  margin-top: 35px;
+  height: 45px;
+  font-size: 17.5px;
+}

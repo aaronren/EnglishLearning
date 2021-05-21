@@ -1,0 +1,33 @@
+<!--miniprogram/pages/timeRecord/timeRecord.wxml-->
+
+<enroll></enroll>
+
+<block wx:if="{{!hasRecord}}">
+<view class="cu-timeline">
+  <view class="cu-time">Date</view>
+  <view class="cu-item text-blue">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-blue">Time</view>
+        <view class="cu-tag line-blue">加油</view>
+      </view>
+      <view class="margin-top">您还没有学习记录，请赶紧点击“开始学习”吧！祝您学习成就梦想！</view>
+    </view>
+  </view>
+</view>
+</block>
+
+<block wx:if="{{hasRecord}}">
+<view class="cu-timeline" wx:for="{{records}}" wx:for-index="idx" wx:key="idx">
+  <view class="cu-time" wx:if="{{idx>0?(item.recordDate!=records[idx-1].recordDate):true}}">{{item.recordDate}}</view>
+  <view class="cu-item text-{{item.finishStep==3?'blue':'red'}}">
+    <view class="content">
+      <view class="cu-capsule radius">
+        <view class="cu-tag bg-{{item.finishStep==3?'blue':'red'}}">{{item.recordTime}}</view>
+        <view class="cu-tag line-{{item.finishStep==3?'blue':'red'}}">{{item.finishStep==3?'完成':'未完成'}}</view>
+      </view>
+      <view class="margin-top">学习时长{{item.spendTime}}，共{{item.wordsCount}}个单词{{item.finishStep>=3?('，平均星星数为'+item.averageScore+'星'):''}}</view>
+    </view>
+  </view>
+</view>
+</block>

@@ -1,0 +1,52 @@
+/* components/wordDetail/wordDetail.wxss */
+
+.scrollview {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+/* 词性和sense line上方的横线条 */
+
+.cu-line {
+	overflow: hidden;
+	height: 20rpx;
+	background-color: #ffffff;
+	display: inline-flex;
+	align-items: center;
+	width: 100%;
+}
+
+.cu-line.xs {
+	height: 5rpx;
+}
+
+.cu-line.sm {
+	height: 10rpx;
+}
+
+.cu-line view {
+	width: 0;
+	height: 100%;
+	align-items: center;
+	display: flex;
+	justify-items: flex-end;
+	justify-content: space-around;
+	color: var(--white);
+}
+
+.margin-top-ss {
+	margin-top: 5rpx;
+}
+
+.margin-right-ss {
+	margin-top: 5rpx;
+}
+
+/* .text-darkGray,
+.line-darkGray,
+.lines-darkGray {
+	color: var(--darkGray);
+} */

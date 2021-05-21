@@ -1,0 +1,18 @@
+<!--pages/practice/spell/spell.wxml-->
+
+<view id="29-3" class="full-screen">
+  <view id="29-6" class="frame-pron">
+    <text class="cuIcon-notification pron-icon lg text-blue"></text>
+    <text id="29-9" class="text-pron">{{word.uk_pron}}</text>
+  </view>
+  <text id="65-3" class="text-defn">{{word.trans}}</text>
+  <view id="103-0" class="frame-answer">
+    <text id="30-0" class="text-answer">{{spellAnswer}}</text>
+    <text class="cuIcon-backdelete pron-icon lg text-blue" catchtap="toDeleteWord"></text>
+  </view>
+  <view id="29-10" class="keyboard-sel">
+    <view id="30-2" class="frame-option" wx:for="{{keyboardItems}}" wx:key="index" data-index="{{index}}" catchtap="toSpellWord">
+      <text id="31-9" class="text-{{item.state===0?'white':'grey'}} text-option">{{item.char}}</text>
+    </view>
+  </view>
+</view>

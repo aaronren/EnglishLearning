@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/dailyWords/dailyWords",
+    "pages/practice/practice",
+    "pages/timeRecord/timeRecord",
+    "pages/achievement/achievement",
+    "pages/review/review",
+    "pages/oneWord/oneWord"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "青少年背单词",
+    "navigationBarTextStyle": "black"
+  },
+  "plugins": {},
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}

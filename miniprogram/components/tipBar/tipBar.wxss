@@ -1,0 +1,38 @@
+/* components/tipBar/tipBar.wxss */
+
+.tip-container {
+  position: absolute;
+  z-index: 99;
+  top: -32px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 32px;
+}
+
+.tip-style {
+  text-align: center;
+  word-wrap: break-word;
+  padding: 6px 15px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.tip-primary {
+  background-color: #1989fa;
+  color: white;
+}
+
+.tip-success {
+  background-color: #07c160;
+  color: white;
+}
+
+.tip-danger {
+  background-color: #ee0a24;
+  color: white;
+}
+
+.tip-warning {
+  background-color: #ee9c3e;
+  color: white;
+}

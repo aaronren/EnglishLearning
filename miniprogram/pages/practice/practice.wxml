@@ -1,0 +1,97 @@
+<!--miniprogram/pages/practice/practice.wxml-->
+
+<view class="container">
+  <!-- <view class="action">
+    <button class="cu-btn bg-green shadow" bindtap="nextSteps">下一步</button>
+  </view> -->
+  <!--进度步骤-->
+  <view class="flex">
+    <view class="cu-progress xs">
+      <view class="bg-blue" style="width: {{progress}};"></view>
+    </view>
+  </view>
+
+  <!--词义练习-->
+  <view wx:if="{{stepIndex<2}}" class="question-show">
+    <view class="word-info">
+      <block wx:if="{{stepIndex==0}}">
+        <text class="word-content">{{currentWord.word}}</text>
+        <view class="pron-container" catchtap='toPlayWord'>
+          <text class="cuIcon-notification pron-icon lg text-blue"></text>
+        </view>
+      </block>
+      <text class="word-definition" wx:if="{{stepIndex==1}}">{{currentWord.trans}}</text>
+    </view>
+    <view class="select-botton" wx:if="{{wordIndex<wordCount}}">
+      <view class="content margin-left">
+        <text class="text-grey text-xs">请选择正确的选项</text>
+      </view>
+      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==0?'green':'gray light'}}" 
+        bindtap='toSelectMean' data-index="0">
+        <view class="action animation-{{wrongSelectIndex==0?'shake':''}}">
+          <text class="cuIcon-title text-blue"></text>
+          <text class="">{{stepIndex==0?randomFourWord[0].trans:randomFourWord[0].word}}</text>
+        </view>
+      </view>
+      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==1?'green':'gray light'}}" 
+        bindtap='toSelectMean' data-index="1">
+        <view class="action animation-{{wrongSelectIndex==1?'shake':''}}">
+          <text class="cuIcon-title text-blue"></text>
+          <text class="">{{stepIndex==0?randomFourWord[1].trans:randomFourWord[1].word}}</text>
+        </view>
+      </view>
+      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==2?'green':'gray light'}}" 
+        bindtap='toSelectMean' data-index="2">
+        <view class="action animation-{{wrongSelectIndex==2?'shake':''}}">
+          <text class="cuIcon-title text-blue"></text>
+          <text class="">{{stepIndex==0?randomFourWord[2].trans:randomFourWord[2].word}}</text>
+        </view>
+      </view>
+      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==3?'green':'gray light'}}" 
+        bindtap='toSelectMean' data-index="3">
+        <view class="action animation-{{wrongSelectIndex==3?'shake':''}}">
+          <text class="cuIcon-title text-blue"></text>
+          <text class="">{{stepIndex==0?randomFourWord[3].trans:randomFourWord[3].word}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--拼写练习-->
+  <view wx:if="{{stepIndex==2}}">
+    <spell word="{{currentWord}}"></spell>
+    <text class="text-df text-red tips-align" wx:if="{{spellShowRemind}}">{{currentWord.word}}</text>
+    <view class="bottom-button">
+      <view class="cu-bar bg-white tabbar border shop">
+        <view class="bg-green submit" catchtap="toShowRemind">提示一下</view>
+      </view>
+    </view>
+  </view>
+
+  <!--恭喜完成-->
+  <view wx:if="{{stepIndex==3}}">
+    <view class="word-info">
+      <text class="word-content">🎉恭喜完成🎉</text>
+    </view>
+    <view class="bottom-button">
+      <view class="cu-bar bg-white tabbar border shop">
+        <view class="bg-green submit" bindtap="toAddSubscribeMessage">
+        明天{{remindTime}}提醒学习</view>
+      </view>
+    </view>
+  </view>
+
+  <!--DialogModal-->
+  <view class="cu-modal {{showFirstTip?'show':''}}">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">温馨提示</view>
+        <view class="action" bindtap="toHideModal">
+          <text class="cuIcon-close text-red"></text>
+        </view>
+      </view>
+      <view class="padding-xl">请坚持学习完成，中途退出将不记录天数和得分噢</view>
+    </view>
+  </view>
+<!-- end -->
+</view>

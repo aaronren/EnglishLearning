@@ -1,0 +1,18 @@
+<!--miniprogram/pages/dailyWords.wxml-->
+
+<view class='cu-load load-modal blue' wx:if="{{isLoading}}">
+  <view class='gray-text'>准备中...</view>
+</view>
+
+<word-detail class="scroll-view"></word-detail>
+
+<!-- 底部 下一个 按钮 -->
+<view class="bottom-button cu-bar bg-white tabbar border shop" wx:if="{{wordCount>0}}">
+  <view class="bg-{{nextBtnEnable?'blue':'grey'}} submit" catchtap="{{nextBtnEnable?'toNextLearn':''}}" 
+  wx:if="{{wordIndex<wordCount}}">
+  下一个</view>
+  <view class="bg-yellow submit" catchtap="toRepeatLearn" wx:if="{{wordIndex>=wordCount}}">
+  再记一遍</view>
+  <view class="bg-green submit" catchtap="toPracticePage" wx:if="{{wordIndex>=wordCount}}">
+  开始练习</view>
+</view>

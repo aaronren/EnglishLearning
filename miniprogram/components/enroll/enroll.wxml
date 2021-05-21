@@ -1,0 +1,14 @@
+<!--components/enroll/enroll.wxml-->
+
+<view class='container' wx:if="{{show}}">
+  <button 
+    open-type="getUserInfo"
+    class="userinfo-avatar"
+    style="background-image: url({{avatarUrl}})"
+    size="default"
+    bindgetuserinfo='bindGetUserInfo'
+  ></button>
+  <view class='titleText'>申请授权登录，便于存储学习记录</view>
+  <view class='contentText'>获得您的公开信息(昵称,头像等)</view>
+  <button class='authBtn' type='primary' open-type='getUserInfo' bindgetuserinfo='bindGetUserInfo'>授权登录</button>
+</view>

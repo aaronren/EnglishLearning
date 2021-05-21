@@ -1,0 +1,11 @@
+<!--miniprogram/pages/oneWord/oneWord.wxml-->
+
+<view class='cu-load load-modal blue' wx:if="{{isLoading}}">
+  <view class='gray-text'>准备中...</view>
+</view>
+
+<word-detail class="scroll-view" wx:if="{{!showError}}"></word-detail>
+
+<view class="error-view" wx:if="{{showError}}">
+  <text class="text-xl">抱歉，暂未收录该单词</text>
+</view>

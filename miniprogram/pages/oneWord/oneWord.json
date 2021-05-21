@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "青少年背单词",
+  "disableScroll": true,
+  "usingComponents": {
+    "word-detail": "../../components/wordDetail/wordDetail"
+  }
+}
