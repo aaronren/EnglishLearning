@@ -55,6 +55,7 @@ exports.main = async (event, context) => {
   // 加入一个比赛, 不存在则创建
   const {
     roomNumber,
+    score,
   } = event;
 
   const gameIns = await db.collection('game').where({
@@ -77,6 +78,7 @@ exports.main = async (event, context) => {
           roomNumber,
           owner: wxContext.OPENID,
           quiz: paper,
+          status: 'open',
           participates: [{
             pid: wxContext.OPENID,
             status: 'pending',
@@ -159,12 +161,53 @@ exports.main = async (event, context) => {
   }
 
   if (event.action === 'finishQuiz') {
-    // TODO 完成比赛
+    if (gameIns.data.length > 0) {
+      const game = gameIns.data[0];
+      const { participates = [] } = game;
+      const me = participates.find(p => p.pid === wxContext.OPENID);
+      if (me) {
+        me.status = 'finished';
+        me.score = score;
+        await db.collection('game').where({
+          roomNumber,
+        }).update({
+          data: {
+            participates,
+          },
+        });
+        return promisify({
+          code: 0,
+          msg: '完成比赛',
+          users: participates,
+        })
+      }
+    }
 
   }
 
   // 关闭比赛
   if (event.action === 'closeGame') {
-    // TODO 检查是否存在比赛, 检查操作者是否为创建者
+    if (gameIns.data.length > 0) {
+      const game = gameIns.data[0];
+      const { owner } = game;
+      if (owner === wxContext.OPENID) {
+        await db.collection('game').where({
+          roomNumber,
+        }).update({
+          data: {
+            status: 'close',
+          },
+        });
+        return promisify({
+          code: 0,
+          msg: '比赛已关闭',
+        })
+      } else {
+        return promisify({
+          code: -1,
+          msg: '您无法关闭改比赛'
+        })
+      }
+    }
   }
 }
