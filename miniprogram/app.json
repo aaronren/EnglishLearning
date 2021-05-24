@@ -6,7 +6,8 @@
     "pages/timeRecord/timeRecord",
     "pages/achievement/achievement",
     "pages/review/review",
-    "pages/oneWord/oneWord"
+    "pages/oneWord/oneWord",
+    "pages/room/room"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -1,0 +1,5 @@
+<view class="container">
+  <view class="joinRoom" catchtap="joinRoomAction">
+    加入房间
+  </view>
+</view>

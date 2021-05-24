@@ -40,6 +40,12 @@
     </view>
   </view>
 
+  <view class="navi-join">
+    <navigator open-type="navigate" url="/pages/room/room">
+      <view>加入比赛</view>
+    </navigator>
+  </view>
+
   <view class="nav-frame">
     <view class='nav-list'>
       <block wx:for="{{elements}}" wx:key="index">
