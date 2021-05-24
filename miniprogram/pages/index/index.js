@@ -223,6 +223,25 @@ Page({
       wx.reportMonitor('caseWordsEmpty', 1)
     }
     app.globalData.caseWords = new_list
+    this.getStudyWords()
+  },
+
+  // 加载当次学习数据，当前的随机方法可能会重复选中单词
+  getStudyWords() {
+    const word_list = app.globalData.caseWords // ['chair'] //
+    wx.cloud.callFunction({
+      name: 'getWords',
+      data: {
+        words: word_list
+      },
+      success: res => {
+        app.globalData.caseWordObjs = res.result.data
+      },
+      fail: err => {
+        console.error('index - getWords调用失败：', err)
+        wx.reportMonitor('getCloudStudyWordsFail', 1)
+      }
+    })
   },
 
   /**

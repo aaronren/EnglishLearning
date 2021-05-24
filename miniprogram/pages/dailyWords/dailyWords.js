@@ -22,6 +22,18 @@ Page({
 
   // 加载当次学习数据，当前的随机方法可能会重复选中单词
   getStudyWords() {
+    // 已有单词数据，则直接本地取
+    if (app.globalData.caseWordObjs.length === app.globalData.caseWords.length) {
+      this.data.wordList = app.globalData.caseWordObjs
+      this.setData({
+        wordCount: this.data.wordList.length,
+        wordIndex: 0
+      })
+      // 获取第一个单词
+      this.loadCurrentWord(0, true)
+      return
+    }
+    // 未有单词数据则在线取
     var tstart = timing.timestamp()
     this.setData({
       isLoading: true
