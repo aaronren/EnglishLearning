@@ -44,20 +44,31 @@ const generatePaper = async () => {
   return words;
 }
 
+const promisify = (res) => {
+  return new Promise((resolve) => {
+    resolve(res);
+  })
+}
+
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();
   // 加入一个比赛, 不存在则创建
+  const {
+    roomNumber,
+  } = event;
+
+  const gameIns = await db.collection('game').where({
+    roomNumber,
+  }).get();
+
+  if (event.action === 'load') {
+    return promisify({
+      code: 0,
+      game: gameIns.data[0],
+    });
+  }
+
   if (event.action === 'join') {
-    const {
-      roomNumber,
-    } = event;
-
-    const gameIns = await db.collection('game').where({
-      roomNumber,
-    }).get();
-
-    console.log('gameIns', gameIns, roomNumber);
-
     // 创建一个比赛
     if (gameIns.data.length < 1) {
       const paper = await generatePaper();
@@ -74,22 +85,25 @@ exports.main = async (event, context) => {
         }
       })
       // 创建成功
-      return {
+      return promisify({
         code: 0,
-      }
+        user: [{
+          status: 'pending',
+          score: 0,
+        }],
+      })
       // 加入一个比赛
     } else {
       const game = gameIns.data[0];
       const { participates = [] } = game;
       if (participates.length > 2) {
-        return {
+        return promisify({
           code: -1,
           errMsg: '队伍已经大于2人, 请重新创建比赛~',
-        }
+        })
       }
       const isMe = !!participates.find(p => p.pid === wxContext.OPENID);
 
-      console.log('isMe', isMe);
       if (!isMe) {
         // 加入队伍
         participates.push({
@@ -104,27 +118,53 @@ exports.main = async (event, context) => {
             participates,
           },
         });
-        return {
+        return promisify({
           code: 0,
           msg: '加入成功',
-        }
+          users: participates,
+        })
       } else {
-        return {
+        return promisify({
           code: 0,
           msg: '比赛加载成功',
           data: game,
-        }
+          users: participates,
+        })
       }
     }
   }
 
-  // 更新玩家状态, 如参加中, 或者为已结束, 展示结果
-  if (event.action === 'update') {
-    // TODO 检查是否在比赛列表中
+  if (event.action === 'beginQuiz') {
+    if (gameIns.data.length > 0) {
+      const game = gameIns.data[0];
+      const { participates = [] } = game;
+
+      const me = participates.find(p => p.pid === wxContext.OPENID);
+      if (me) {
+        me.status = 'starting';
+        await db.collection('game').where({
+          roomNumber,
+        }).update({
+          data: {
+            participates,
+          },
+        });
+        return promisify({
+          code: 0,
+          msg: '比赛开始',
+          users: participates,
+        })
+      }
+    }
+  }
+
+  if (event.action === 'finishQuiz') {
+    // TODO 完成比赛
+
   }
 
   // 关闭比赛
-  if (event.action === 'close') {
+  if (event.action === 'closeGame') {
     // TODO 检查是否存在比赛, 检查操作者是否为创建者
   }
 }

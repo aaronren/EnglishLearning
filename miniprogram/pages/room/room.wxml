@@ -2,4 +2,8 @@
   <view class="joinRoom" catchtap="joinRoomAction">
     加入房间
   </view>
+
+  <view class="begin" catchtap="beginGame">
+    begin
+  </view>
 </view>
