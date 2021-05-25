@@ -65,6 +65,12 @@ Page({
     }
   },
 
+  beginStudy() {
+    wx.navigateTo({
+      url: '/pages/dailyWords/dailyWords',
+    })
+  },
+
   // 用户按了允许授权按钮
   bindGetUserInfo: function (res) {
     if (this.data.userInfo==undefined && res.detail.userInfo) {

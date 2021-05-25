@@ -1,64 +1,118 @@
 <!--miniprogram/pages/index/index.wxml-->
 
-<search></search>
+<view class="topBanner flex">
+  <view class="userInfo flex">
+    <view
+      open-type="getUserInfo"
+      class="userinfo-avatar icon"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+      bindgetuserinfo='bindGetUserInfo'
+    />
 
-<view class="container">
-  <view class="UCenter-bg">
-    <!-- 用户 openid -->
-    <view class="userinfo">
-      <button 
-        open-type="getUserInfo"
-        class="userinfo-avatar"
-        style="background-image: url({{avatarUrl}})"
-        size="default"
-        bindgetuserinfo='bindGetUserInfo'
-      ></button>
-    </view>
-    <view class="text-xl text-shadow">{{userInfo.nickName}}</view>
-    <!-- catchtap="toAbout" -->
-    <view class="margin-top-sm text-shadow">
-      <text>学习成就梦想</text>
-    </view>
-    <image src="http://www.aaronview.cn/image/wave.gif" mode="scaleToFill" class="gif-wave"></image>
-  </view>
-
-  <view class="padding flex text-center text-grey bg-white shadow-warp">
-    <view class="flex flex-sub flex-direction solid-right" catchtap="toTimeRecord">
-      <view class="text-xxl text-orange">{{insistDays}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-attentionfill"></text> 坚持天数</view>
-    </view>
-    <view class="flex flex-sub flex-direction solid-right" catchtap="toAchievement">
-      <view class="text-xxl text-blue">{{learnedWords}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-fork"></text> 已学单词</view>
-    </view>
-    <view class="flex flex-sub flex-direction" catchtap="toAchievement">
-      <view class="text-xxl text-green">{{averageSore}}/3</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-favorfill"></text> 平均得分</view>
+    <view class="userName">
+      {{userInfo.nickName}}
     </view>
   </view>
 
-  <view class="navi-join">
-    <navigator open-type="navigate" url="/pages/room/room">
-      <view>加入比赛</view>
-    </navigator>
+  <view class="search flex">
+    <view class="searchIcon icon" />
+  </view>
+</view>
+
+<view class="topBgImg icon" />
+
+<view class="studyCard">
+  <view class="listTag icon flex">单词本: KET</view>
+
+  <view class="leftWords">
+    剩余单词: 6750
   </view>
 
-  <view class="nav-frame">
-    <view class='nav-list'>
-      <block wx:for="{{elements}}" wx:key="index">
-        <navigator open-type="navigate" hover-class='none' url="/pages/{{item.nav}}" class="nav-li bg-{{item.color}}">
-          <view class="nav-title">{{item.title}}</view>
-          <view class="nav-name">{{item.name}}</view>
-          <text class='cuIcon-{{item.icon}}'></text>
-        </navigator>
-      </block>
+  <view class="studyPlan">
+    学习计划
+  </view>
+
+  <view class="studyStatus flex">
+    <view class="statusItem flex">
+      <view class="value">
+        {{insistDays}}
+      </view>
+      <view class="title">
+        坚持天数
+      </view>
+    </view>
+
+    <view class="statusItem flex">
+      <view class="value">
+        {{learnedWords}}
+      </view>
+      <view class="title">
+        已学单词
+      </view>
+    </view>
+
+    <view class="statusItem flex">
+      <view class="value">
+        {{averageSore}}/3
+      </view>
+      <view class="title">
+        平均得分
+      </view>
     </view>
   </view>
 
-  <!-- <button class="cu-btn icon about" catchtap="toAbout">
-    <text class="cuIcon-cascades"></text>
-  </button> -->
+  <view class="beginStudy" catchtap="beginStudy">
+    开始学习
+  </view>
+</view>
+
+<view class="actions">
+  <navigator open-type="navigate" url="/pages/room/room" hover-class="none">
+    <view class="actionItem battle">
+      <view class="iconWrapper">
+        <view class="actionIcon icon battleIcon" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">单词对战</view>
+        <view class="subtitle">对战排位比拼</view>
+      </view>
+    </view>
+  </navigator>
+
+  <navigator open-type="navigate" url="/pages/review/review" hover-class="none">
+    <view class="actionItem review">
+      <view class="iconWrapper">
+        <view class="actionIcon icon reviewIcon" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">错题集</view>
+        <view class="subtitle">错题加强练习</view>
+      </view>
+    </view>
+  </navigator>
+
+  <navigator open-type="navigate" url="/pages/setting/setting" hover-class="none">
+    <view class="actionItem setting">
+      <view class="iconWrapper">
+        <view class="actionIcon icon settingIcon" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">学习设置</view>
+        <view class="subtitle">个人偏好设置</view>
+      </view>
+    </view>
+  </navigator>
+
+  <navigator open-type="navigate" url="/pages/timeRecord/timeRecord" hover-class="none">
+    <view class="actionItem record">
+      <view class="iconWrapper">
+        <view class="actionIcon icon recordIcon" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">学习记录</view>
+        <view class="subtitle">学习进阶详情</view>
+      </view>
+    </view>
+  </navigator>
 </view>
