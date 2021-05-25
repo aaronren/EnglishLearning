@@ -19,6 +19,23 @@ Page({
         userInfo: app.globalData.userInfo,
       },
       success: res => {
+        console.log('result', res);
+        if (res && res.result.code === 0) {
+          wx.showToast({
+            title: '加入成功',
+            duration: 2000,
+            icon: 'none',
+            complete: () => {
+              this.initPage();
+            }
+          });
+        } else {
+          wx.showToast({
+            title: '加入失败',
+            duration: 2000,
+            icon: 'none',
+          })
+        }
       }
     })
   },
@@ -41,8 +58,8 @@ Page({
     wx.navigateTo({
       url: `/pages/quiz/quiz?roomid=${'1234567'}`,
       events: {
-        acceptDataFromOpenedPage: (data) => {
-          console.log('data', data);
+        quizFinishHandler: () => {
+          this.initPage();
         }
       }
     })
@@ -83,15 +100,7 @@ Page({
     });
   },
 
-  finishHandler() {
-    wx.showToast({
-      title: '您已经参加过了比赛了~',
-      icon: 'none',
-      duration: 2000,
-    })
-  },
-
-  onLoad() {
+  initPage() {
     wx.cloud.callFunction({
       name: 'game',
       data: {
@@ -109,6 +118,18 @@ Page({
           }
         }
       }
+    });
+  },
+
+  finishHandler() {
+    wx.showToast({
+      title: '您已经参加过了比赛了~',
+      icon: 'none',
+      duration: 2000,
     })
+  },
+
+  onLoad() {
+    this.initPage();
   }
 })

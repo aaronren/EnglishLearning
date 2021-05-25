@@ -126,14 +126,11 @@ exports.main = async (event, context) => {
         return promisify({
           code: 0,
           msg: '加入成功',
-          users: participates,
         })
       } else {
         return promisify({
-          code: 0,
-          msg: '比赛加载成功',
-          data: game,
-          users: participates,
+          code: -1,
+          msg: '已经在队伍中',
         })
       }
     } else {

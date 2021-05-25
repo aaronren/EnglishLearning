@@ -51,6 +51,9 @@ Page({
           }
         });
 
+        const eventChannel = this.getOpenerEventChannel();
+        eventChannel.emit('quizFinishHandler');
+
         wx.navigateBack({
           score,
         })
