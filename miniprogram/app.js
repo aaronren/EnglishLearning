@@ -115,6 +115,7 @@ App({
       },
       complete: res => {
         this.globalData.records = res.result.data.reverse()
+        console.log('----', this.globalData.records)
         // 发送通知
         event.emit('gainCloudRecords', this.globalData.records)
       }
