@@ -56,6 +56,7 @@ exports.main = async (event, context) => {
   const {
     roomNumber,
     score,
+    userInfo,
   } = event;
 
   const gameIns = await db.collection('game').where({
@@ -69,34 +70,35 @@ exports.main = async (event, context) => {
     });
   }
 
+  if (event.action === 'createRoom') {
+    const paper = await generatePaper();
+    const addItem = {
+      roomNumber,
+      owner: wxContext.OPENID,
+      quiz: paper,
+      status: 'open',
+      participates: [{
+        pid: wxContext.OPENID,
+        status: 'pending',
+        score: 0,
+        ...userInfo,
+      }],
+    }
+    await db.collection('game').add({
+      data: {
+        ...addItem,
+      }
+    })
+    // 创建成功
+    return promisify({
+      code: 0,
+      data: addItem,
+    })
+  }
+
   if (event.action === 'join') {
-    // 创建一个比赛
-    if (gameIns.data.length < 1) {
-      const paper = await generatePaper();
-      await db.collection('game').add({
-        data: {
-          roomNumber,
-          owner: wxContext.OPENID,
-          quiz: paper,
-          status: 'open',
-          participates: [{
-            pid: wxContext.OPENID,
-            status: 'pending',
-            score: 0,
-          }],
-        }
-      })
-      // 创建成功
-      return promisify({
-        code: 0,
-        user: [{
-          status: 'pending',
-          score: 0,
-        }],
-      })
-      // 加入一个比赛
-    } else {
-      const game = gameIns.data[0];
+    const game = gameIns.data[0];
+    if (game) {
       const { participates = [] } = game;
       if (participates.length > 2) {
         return promisify({
@@ -105,13 +107,14 @@ exports.main = async (event, context) => {
         })
       }
       const isMe = !!participates.find(p => p.pid === wxContext.OPENID);
-
+  
       if (!isMe) {
         // 加入队伍
         participates.push({
           pid: wxContext.OPENID,
           status: 'pending',
           score: 0,
+          ...userInfo,
         });
         await db.collection('game').where({
           roomNumber,
@@ -133,6 +136,11 @@ exports.main = async (event, context) => {
           users: participates,
         })
       }
+    } else {
+      return promisify({
+        code: -1,
+        msg: '加入房间失败',
+      })
     }
   }
 

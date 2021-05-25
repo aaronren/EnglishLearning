@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.container .info {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info .person {
+  width: 50%;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+}
+
+.person .avatar {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 100rpx;
+  margin-bottom: 10rpx;
+}
+
+.person .avatar.empty {
+  background-color: #666;
+}
+
+.person .name {
+  font-size: 24rpx;
+}
+
+.bottom_button {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 150rpx;
+  background-color: bisque;
+}
+
+.bottom_button .text {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 28rpx;
+  color: #000;
+  height: 100%;
+}

@@ -1,9 +1,38 @@
 <view class="container">
-  <view class="joinRoom" catchtap="joinRoomAction">
-    加入房间
+  <view class="info">
+    <view class="person" wx:if="{{participates[0]}}">
+      <image src="{{participates[0].avatarUrl}}" class="avatar" />
+      <view class="name">{{participates[0].nickName}}</view>
+      <view class="status">{{participates[0].status}}</view>
+    </view>
+    <view wx:else class="person">
+      <view class="avatar empty" />
+    </view>
+
+    <view class="person" wx:if="{{partcipates[1]}}">
+      <image src="{{participates[1].avatarUrl}}" class="avatar" />
+      <view class="name">{{participates[1].nickName}}</view>
+      <view class="status">{{participates[1].status}}</view>
+    </view>
+    <view wx:else class="person">
+      <view class="avatar empty" />
+    </view>
+  </view>
+  <!-- loading -->
+
+  <view class="bottom_button" wx:if="{{button}}">
+  1
+    <view wx:if="{{button.disable}}">
+      {{button.msg}}
+    </view>
+
+    <view wx:else catchtap="{{button.action}}">
+      {{button.msg}}
+    </view>
   </view>
 
-  <view class="begin" catchtap="beginGame">
-    begin
+  <view class="bottom_button" wx:elif="{{curUser && (curUser.status === 'pending' || curUser.status === 'finished')}}">
+    <view wx:if="curUser.status === 'pending'" catchtap="beginQuiz" class="text">立即开始</view>
+    <view wx:else class="text">比赛结束</view>
   </view>
 </view>
