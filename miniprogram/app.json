@@ -7,7 +7,8 @@
     "pages/achievement/achievement",
     "pages/review/review",
     "pages/oneWord/oneWord",
-    "pages/room/room"
+    "pages/room/room",
+    "pages/quiz/quiz"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

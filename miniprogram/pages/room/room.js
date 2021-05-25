@@ -6,7 +6,6 @@ Page({
   data: {
     gameInfo: null,
     participates: [],
-    quiz: [],
     curOpenId: '',
     button: null,
   },
@@ -38,31 +37,27 @@ Page({
     })
   },
 
-  beginGame() {
-    wx.cloud.callFunction({
-      name: 'game',
-      data: {
-        action: 'beginQuiz',
-        roomNumber: '1234567',
-      },
-      success: res => {
-        console.log('begin', res)
+  beginQuiz() {
+    wx.navigateTo({
+      url: `/pages/quiz/quiz?roomid=${'1234567'}`,
+      events: {
+        acceptDataFromOpenedPage: (data) => {
+          console.log('data', data);
+        }
       }
     })
   },
 
   initGame(gameInfo) {
-    const { participates = [], quiz = [] } = gameInfo;
+    const { participates = [] } = gameInfo;
     const data = {
       participates,
-      quiz,
     };
     const curOpenId = app.globalData.openid;
     const curUser = participates.find(p => p.pid === curOpenId);
     if (curUser) {
       data.curUser = curUser;
     } else {
-      console.log('init join')
       if (participates.length === 2) {
         this.setData({
           ...data,
@@ -107,5 +102,4 @@ Page({
       }
     })
   }
-
 })

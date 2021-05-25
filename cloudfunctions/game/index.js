@@ -145,27 +145,27 @@ exports.main = async (event, context) => {
   }
 
   if (event.action === 'beginQuiz') {
-    if (gameIns.data.length > 0) {
-      const game = gameIns.data[0];
-      const { participates = [] } = game;
+    // if (gameIns.data.length > 0) {
+    //   const game = gameIns.data[0];
+    //   const { participates = [] } = game;
 
-      const me = participates.find(p => p.pid === wxContext.OPENID);
-      if (me) {
-        me.status = 'starting';
-        await db.collection('game').where({
-          roomNumber,
-        }).update({
-          data: {
-            participates,
-          },
-        });
-        return promisify({
-          code: 0,
-          msg: '比赛开始',
-          users: participates,
-        })
-      }
-    }
+    //   const me = participates.find(p => p.pid === wxContext.OPENID);
+    //   if (me) {
+    //     me.status = 'starting';
+    //     await db.collection('game').where({
+    //       roomNumber,
+    //     }).update({
+    //       data: {
+    //         participates,
+    //       },
+    //     });
+    //     return promisify({
+    //       code: 0,
+    //       msg: '比赛开始',
+    //       users: participates,
+    //     })
+    //   }
+    // }
   }
 
   if (event.action === 'finishQuiz') {
