@@ -4,6 +4,9 @@
       <image src="{{participates[0].avatarUrl}}" class="avatar" />
       <view class="name">{{participates[0].nickName}}</view>
       <view class="status">{{participates[0].status}}</view>
+      <view class="score" wx-if="{{participates[0].status === 'finished'}}">
+        {{participates[0].score}}
+      </view>
     </view>
     <view wx:else class="person">
       <view class="avatar empty" />
@@ -13,6 +16,9 @@
       <image src="{{participates[1].avatarUrl}}" class="avatar" />
       <view class="name">{{participates[1].nickName}}</view>
       <view class="status">{{participates[1].status}}</view>
+      <view class="score" wx-if="{{participates[1].status === 'finished'}}">
+        {{participates[1].score}}
+      </view>
     </view>
     <view wx:else class="person">
       <view class="avatar empty" />
@@ -21,7 +27,6 @@
   <!-- loading -->
 
   <view class="bottom_button" wx:if="{{button}}">
-  1
     <view wx:if="{{button.disable}}">
       {{button.msg}}
     </view>
@@ -32,7 +37,7 @@
   </view>
 
   <view class="bottom_button" wx:elif="{{curUser && (curUser.status === 'pending' || curUser.status === 'finished')}}">
-    <view wx:if="curUser.status === 'pending'" catchtap="beginQuiz" class="text">立即开始</view>
-    <view wx:else class="text">比赛结束</view>
+    <view wx:if="{{curUser.status === 'pending'}}" catchtap="beginQuiz" class="text">立即开始</view>
+    <view wx:else class="text" catchtap="finishHandler">比赛结束</view>
   </view>
 </view>

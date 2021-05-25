@@ -76,10 +76,19 @@ Page({
           }
         })
       }
+      return;
     }
     this.setData({
       ...data,
     });
+  },
+
+  finishHandler() {
+    wx.showToast({
+      title: '您已经参加过了比赛了~',
+      icon: 'none',
+      duration: 2000,
+    })
   },
 
   onLoad() {

@@ -24,7 +24,6 @@ Page({
       if (answer === optionIdx) {
         // 回答正确
         correct += 1;
-        console.log('correct')
         this.setData({
           correctCnt: correct,
         });
@@ -32,7 +31,6 @@ Page({
         // TODO 动画
       } else {
         // 回答错误
-        console.log('wrong')
         // TODO 动画
       }
 
