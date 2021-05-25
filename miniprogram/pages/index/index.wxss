@@ -52,14 +52,12 @@ page{
 .searchIcon {
   width: 32rpx;
   height: 32rpx;
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/search_icon.png');
 }
 
 .topBgImg {
   width: 100%;
   position: absolute;
   height: 368rpx;
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/top_banner.png');
   top: 0;
 }
 
@@ -77,7 +75,6 @@ page{
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/list_tag.png');
   width: 192rpx;
   height: 48rpx;
   align-items: center;
@@ -86,6 +83,19 @@ page{
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #FFFFFF;
+}
+
+.listTag .listTagIcon {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.listTag .text {
+  position: relative;
+  z-index: 10;
 }
 
 .studyCard .leftWords {
@@ -207,22 +217,6 @@ page{
 .actionItem .actionIcon {
   width: 54rpx;
   height: 54rpx;
-}
-
-.actionIcon.battleIcon {
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/battle.png');
-}
-
-.actionIcon.reviewIcon {
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/battle.png');
-}
-
-.actionIcon.settingIcon {
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/setting.png');
-}
-
-.actionIcon.recordIcon {
-  background-image: url('https://h5.ssp.qq.com/static/web/englishlearning/imgs/record.png');
 }
 
 .actionItem .actionInfo {

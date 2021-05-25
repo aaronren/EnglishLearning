@@ -16,14 +16,18 @@
   </view>
 
   <view class="search flex">
-    <view class="searchIcon icon" />
+    <image class="searchIcon" src="../../images/search_icon.png" />
   </view>
 </view>
 
 <view class="topBgImg icon" />
+<image class="topBgImg" src="../../images/top_banner.png" />
 
 <view class="studyCard">
-  <view class="listTag icon flex">单词本: KET</view>
+  <view class="listTag flex">
+    <image src="../../images/list_tag.png" class="listTagIcon" />
+    <view class="text">单词本: KET</view>
+  </view>
 
   <view class="leftWords">
     剩余单词: 6750
@@ -71,7 +75,7 @@
   <navigator open-type="navigate" url="/pages/room/room" hover-class="none">
     <view class="actionItem battle">
       <view class="iconWrapper">
-        <view class="actionIcon icon battleIcon" />
+        <image class="actionIcon" src="../../images/battle.png" />
       </view>
       <view class="actionInfo">
         <view class="title">单词对战</view>
@@ -83,7 +87,7 @@
   <navigator open-type="navigate" url="/pages/review/review" hover-class="none">
     <view class="actionItem review">
       <view class="iconWrapper">
-        <view class="actionIcon icon reviewIcon" />
+        <image class="actionIcon" src="../../images/review.png" />
       </view>
       <view class="actionInfo">
         <view class="title">错题集</view>
@@ -95,7 +99,7 @@
   <navigator open-type="navigate" url="/pages/setting/setting" hover-class="none">
     <view class="actionItem setting">
       <view class="iconWrapper">
-        <view class="actionIcon icon settingIcon" />
+        <image class="actionIcon" src="../../images/setting.png" />
       </view>
       <view class="actionInfo">
         <view class="title">学习设置</view>
@@ -107,7 +111,7 @@
   <navigator open-type="navigate" url="/pages/timeRecord/timeRecord" hover-class="none">
     <view class="actionItem record">
       <view class="iconWrapper">
-        <view class="actionIcon icon recordIcon" />
+        <image class="actionIcon" src="../../images/record.png" />
       </view>
       <view class="actionInfo">
         <view class="title">学习记录</view>
