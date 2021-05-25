@@ -14,9 +14,10 @@
 }
 
 .text-pron {
-  height: 35px;
-  font-size: 30px;
-  color: #616060;
+  font-size: 36px;
+  text-align: left;
+  min-height: 42px;
+  color: #222222;
 }
 
 .pron-icon {
@@ -41,21 +42,55 @@
   min-height: 50px;
   max-height: 260px;
   align-self: stretch;
-  font-size: 25px;
-  text-align: left;
+  font-size: 14px;
+  text-align: center;
   color: #000000;
   margin-left: 15rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 60rpx;
 }
 
 .text-answer {
   display: inline-block;
-  font-size: 30px;
+  font-size: 16px;
   text-align: center;
-  min-height: 35px;
+  min-height: 19px;
+  margin-bottom: 5.5px;
+}
+
+.text-answer-0 {
   color: #000000;
-  margin-left: 50rpx;
-  margin-right: 30rpx;
+}
+
+.text-answer-1 {
+  color: #00cf88;
+}
+
+.text-answer-2 {
+  color: #ff8e57;
+}
+
+.view-line {
+  display: flex;
+  width: 115px;
+  height: 1px;
+  background-color: #0b0a0a;
+}
+
+.frame-answerline {
+  display: flex;
+  width: 115px;
+  height: 25.5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.del-btn {
+  display: flex;
+  width: 35px;
+  height: 35px;
+  background-color: #c4c4c4;
 }
 
 .frame-answer {
@@ -70,10 +105,16 @@
 
 .text-option {
   display: inline-block;
-  width: 45px;
-  height: 45px;
-  font-size: 36px;
-  text-align: center;
+  font-size: 22px;
+  color: #666666;
+}
+
+.frame-white {
+  background-color: #ffffff;
+}
+
+.frame-grey {
+  background-color: #f5f5f5;
 }
 
 .frame-option {
@@ -83,8 +124,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #45c3fa;
-  border-radius: 3px;
+  border-radius: 4px;
+  border-width: 2rpx;
+  border-color: #e6e6e6;
+  border-style: solid;
   margin: 5px 5px 5px 5px;
 }
 
