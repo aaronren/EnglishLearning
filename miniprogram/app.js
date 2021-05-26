@@ -1,9 +1,5 @@
 //app.js
-
-// 
 const mta = require('./utils/mta_analysis.js')
-
-// const timing = require('./utils/timing.js')
 const event = require('./utils/event.js')
 const storage = require('./utils/storage.js')
 const media = require('./utils/media.js')
@@ -41,8 +37,7 @@ App({
         //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
         //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
         //   如不填则使用默认环境（第一个创建的环境）
-        // env: 'online-0fkul', // 'debug-0k6dy', // 
-        env: 'debug-0k6dy', // 'debug-0k6dy', // 
+        env: wx.cloud.DYNAMIC_CURRENT_ENV, //'online-0fkul', // 'debug-0k6dy',
         traceUser: true,
       })
     }
@@ -136,31 +131,5 @@ App({
         }
       }
     })
-  },
-
-  // 权限询问
-  // getRecordAuth: function() {
-  //   wx.getSetting({
-  //       success(res) {
-  //           console.log("succ")
-  //           console.log(res)
-  //           if (!res.authSetting['scope.record']) {
-  //               wx.authorize({
-  //                   scope: 'scope.record',
-  //                   success() {
-  //                           // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
-  //                           console.log("succ auth")
-  //                   }, fail() {
-  //                           console.log("fail auth")
-  //                   }
-  //               })
-  //           } else {
-  //               console.log("record has been authed")
-  //           }
-  //       }, fail(res) {
-  //               console.log("fail")
-  //               console.log(res)
-  //       }
-  //   })
-  // },
+  }
 })
