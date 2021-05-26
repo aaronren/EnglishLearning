@@ -12,6 +12,10 @@ page {
   background-color: #ffffff;
 }
 
+.progress {
+  background-image: linear-gradient(to right, #00cf88, #3dfb9a);
+}
+
 .question-show {
   display: flex;
   flex-direction: column;

@@ -7,7 +7,7 @@
   <!--进度步骤-->
   <view class="flex">
     <view class="cu-progress xs">
-      <view class="bg-blue" style="width: {{progress}};"></view>
+      <view class="progress" style="width: {{progress}};"></view>
     </view>
   </view>
 
