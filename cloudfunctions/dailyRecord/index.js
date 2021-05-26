@@ -25,7 +25,6 @@ exports.main = async (event, context) => {
       }
     })
   } else {
-    console.log('add')
     return await db.collection('dailyRecord').add({
       data: {
         _openid: wxContext.OPENID,

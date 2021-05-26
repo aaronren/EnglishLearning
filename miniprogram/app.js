@@ -63,7 +63,6 @@ App({
     })
     // enroll界面登录后获得通知
     event.on('userHasLogin', this, function(param) {
-      console.log('userHasLogin', param)
       this.globalData.userInfo = param
     })
 
@@ -115,7 +114,6 @@ App({
       },
       complete: res => {
         this.globalData.records = res.result.data.reverse()
-        console.log('----', this.globalData.records)
         // 发送通知
         event.emit('gainCloudRecords', this.globalData.records)
       }
