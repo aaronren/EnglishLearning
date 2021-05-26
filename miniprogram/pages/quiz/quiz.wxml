@@ -1,13 +1,43 @@
 <view class="container">
-  <!-- progress -->
+  <view class="bg">
+    <view class="leftBg" />
+    <view class="rightBg" />
 
-  <view class="word" wx:if="{{quizs[progressIndex]}}">
-    {{quizs[progressIndex].word}}
-  </view>
-
-  <view class="options" wx:if="{{quizs[progressIndex]}}">
-    <view wx:for="{{quizs[progressIndex].quiz.questions}}" wx:for-item="question" wx:key="index" catchtap="makeDicision" data-index="{{index}}">
-      {{question}}
+    <view class="bgText">
+      <view class="text">V</view>
+      <view class="text">S</view>
     </view>
   </view>
+
+  <view class="avatars">
+    <view class="infos">
+      <view class="part">
+        <image src="{{participates[0].avatarUrl}}" class="avatar left" />
+        <view class="progressWrapper">
+          <view class="cu-progress">
+            <view class="progress-bgColor" style="width: 60%;"></view>
+          </view>
+
+          <view class="score left">80</view>
+        </view>
+      </view>
+
+      <image class="vsIcon" src="../../images/vs.png" />
+
+      <view class="part">
+        <view class="progressWrapper">
+          <view class="score right">80</view>
+          <view class="fake-progress" style="width: 60%" />
+        </view>
+        <image src="{{participates[1].avatarUrl}}" class="avatar right" />
+      </view>
+    </view>
+    <view class="namePart">
+      <view class="name">超级王者</view>
+      <view class="name">超级王者</view>
+    </view>
+  </view>
+
+        
+
 </view>

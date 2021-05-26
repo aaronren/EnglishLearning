@@ -1,0 +1,145 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.container .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .bg .leftBg {
+  display: flex;
+  flex: 1;
+  background: #E1F8F1;
+  height: 100%;
+}
+
+.container .bg .rightBg {
+  display: flex;
+  flex: 1;
+  background: #B9F1E5;
+  opacity: 0.68;
+  height: 100%;
+}
+
+.container .bg .bgText {
+  position: absolute;
+  width: 600rpx;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgText .text {
+  font-size: 500rpx;
+  opacity: 0.2;
+  font-weight: bold;
+  color: #41EFB5;
+}
+
+.avatars {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 44rpx;
+  flex-direction: column;
+}
+
+.avatars .infos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatars .namePart {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10rpx;
+  position: relative;
+  padding: 0 20rpx;
+}
+
+.namePart .name {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #222222;
+  line-height: 34rpx;
+}
+
+.avatars .part {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+
+.avatars .part .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  border: 4rpx solid #FFF;
+}
+
+.avatars .progressWrapper {
+  display: flex;
+  width: 250rpx;
+  height: 48rpx;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+}
+
+.progressWrapper .progress-bgColor {
+  background-image: linear-gradient(90deg, #3DFB9A 0%, #00CF88 100%);
+  border-radius: 4rpx 0 0 4rpx;
+}
+
+.progressWrapper .fake-progress {
+  background-image: linear-gradient(90deg, #FEAE26 0%, #FEC95C 100%);
+  height: 30rpx;
+  position: absolute;
+  right: 0;
+}
+
+.progressWrapper .cu-progress {
+  height: 30rpx;
+  background-color: #fff;
+}
+
+.progressWrapper .score {
+  position: absolute;
+  height: 28rpx;
+  font-size: 28rpx;
+  font-family: DINMittelschriftLTW1G;
+  color: #FFFFFF;
+  top: 50%;
+  margin-top: -14rpx;
+  width: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.progressWrapper .score.right {
+  right: 10rpx;
+}
+
+.progressWrapper .score.left {
+  left: 10rpx;
+}
+
+.vsIcon {
+  width: 50rpx;
+  height: 50rpx;
+}

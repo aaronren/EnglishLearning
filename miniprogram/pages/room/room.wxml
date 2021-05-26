@@ -11,11 +11,12 @@
 
   <view class="avatars">
     <view class="leftPart">
-      <image src="{{participates[0].avatarUrl}}" class="avatar left" />
+      <image src="{{curUser.avatarUrl}}" class="avatar left" />
     </view>
 
     <view class="rightPart">
-      <image src="{{participates[1].avatarUrl}}" class="avatar right" />
+    <!-- default -->
+      <image src="" class="avatar right" />
     </view>
   </view>
 
@@ -40,45 +41,3 @@
 
   <input type="text" class="hiddenInput" bindinput="roomInputChangeHandler" bindfocus="bindfocus" maxlength="4" focus="{{inputFocus}}" />
 </view>
-
- <!-- <view class="info">
-    <view class="person" wx:if="{{participates[0]}}">
-      <image src="{{participates[0].avatarUrl}}" class="avatar" />
-      <view class="name">{{participates[0].nickName}}</view>
-      <view class="status">{{participates[0].status}}</view>
-      <view class="score" wx-if="{{participates[0].status === 'finished'}}">
-        {{participates[0].score}}
-      </view>
-    </view>
-    <view wx:else class="person">
-      <view class="avatar empty" />
-    </view>
-
-    <view class="person" wx:if="{{participates[1]}}">
-      <image src="{{participates[1].avatarUrl}}" class="avatar {{participates[1].avatarUrl ? '' : 'empty'}}" />
-      <view class="name">{{participates[1].nickName || '游客'}}</view>
-      <view class="status">{{participates[1].status}}</view>
-      <view class="score" wx-if="{{participates[1].status === 'finished'}}">
-        {{participates[1].score}}
-      </view>
-    </view>
-    <view wx:else class="person">
-      <view class="avatar empty" />
-    </view>
-  </view>
-  <!-- loading -->
-
-  <view class="bottom_button" wx:if="{{button}}">
-    <view wx:if="{{button.disable}}" class="text">
-      {{button.msg}}
-    </view>
-
-    <view wx:else catchtap="joinRoomAction" class="text">
-      {{button.msg}}
-    </view>
-  </view>
-
-  <view class="bottom_button" wx:elif="{{curUser && (curUser.status === 'pending' || curUser.status === 'finished')}}">
-    <view wx:if="{{curUser.status === 'pending'}}" catchtap="beginQuiz" class="text">立即开始</view>
-    <view wx:else class="text" catchtap="finishHandler">比赛结束</view>
-  </view> -->

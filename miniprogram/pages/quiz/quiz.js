@@ -9,6 +9,7 @@ Page({
     quizs: [], // 考卷
     progressIndex: 0, // 进度
     correctCnt: 0, // 正确数
+    participates: [],
   },
 
   async makeDicision(event) {
@@ -65,13 +66,7 @@ Page({
     }
   },
 
-  test(event) {
-    console.log('event', event);
-  },
-
   onLoad(options) {
-    console.log('options', options);
-
     this.setData({
       roomid: options.roomid,
     })
@@ -83,11 +78,12 @@ Page({
         roomNumber: options.roomid,
       },
       success: res => {
-        console.log('load game', res);
         if (res && res.result && res.result.code === 0) {
           console.log('quizs', res.result.game.quiz);
+          const game = res.result.game;
           this.setData({
-            quizs: res.result.game.quiz,
+            quizs: game.quiz,
+            participates: game.participates,
           });
         }
       }
