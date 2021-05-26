@@ -38,6 +38,41 @@
     </view>
   </view>
 
-        
+  <view wx:if="{{!ready}}" />
+  <view wx:elif="{{quizPreLoading}}" class="preLoadContent">
+    <view class="quizIndex">
+      <view class="text">第</view>
+      <image src="../../images/number_{{progressIndex+1}}.png" class="quizNumberIcon" />
+      <view class="text">题</view>
+    </view>
+  </view>
+  <view wx:else class="quizsContainer">
+    <view class="countDown whiteCircle xl">
+      <view class="countDown darkGreenCircle l">
+        <view class="countDown lightGreenCircle m">
+          <view class="countDown darkGreenCircle s">
+            {{countDown}}
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="word">
+      {{quizs[progressIndex].word}}
+    </view>
+
+    <view class="option {{wrongAnswerIdx === index ? 'wrong' : rightAnswerIdx === index ? 'right' : ''}}" wx:for="{{quizs[progressIndex].quiz.questions}}" wx:for-item="item" wx:for-index="index" data-index="{{index}}" wx:key="index" catchtap="makeDicision">
+      <view class="text">
+        {{item}}
+      </view>
+      <view class="tag wrong-tag" wx:if="{{wrongAnswerIdx == index}}">
+        <image src="../../images/option_wrong.png" class="icon" />
+      </view>
+      <view class="tag right-tag" wx:elif="{{rightAnswerIdx == index}}">
+        <image src="../../images/option_right.png" class="icon" />
+      </view>
+      <view wx:else />
+    </view>
+  </view>
 
 </view>

@@ -143,3 +143,175 @@
   width: 50rpx;
   height: 50rpx;
 }
+
+.preLoadContent {
+  width: 100%;
+  margin-top: 482rpx;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.preLoadContent .quizIndex {
+  width: 458rpx;
+  height: 112rpx;
+  background: linear-gradient(90deg, #3BFA99 0%, #50E3F7 100%);
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preLoadContent .quizIndex .text {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 32rpx;
+  text-shadow: 0rpx 2rpx 2rpx #00A46C;
+}
+
+.preLoadContent .quizIndex .quizNumberIcon {
+  width: 26rpx;
+  height: 50rpx;
+  margin: 0 16rpx;
+}
+
+.quizsContainer {
+  position: relative;
+  margin-top: 150rpx;
+  width: 670rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  left: 50%;
+  margin-left: -335rpx;
+  padding: 164rpx 0 100rpx 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.countDown.whiteCircle {
+  background-color: #fff;
+}
+
+.countDown.darkGreenCircle {
+  background-color: #B9F1E5;
+}
+
+.countDown.lightGreenCircle {
+  background-color: #E1F8F1;
+}
+
+.countDown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countDown.xl {
+  width: 164rpx;
+  height: 164rpx;
+  border-radius: 82rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -82rpx;
+  top: -82rpx;
+}
+
+.countDown.l {
+  width: 142rpx;
+  height: 142rpx;
+  border-radius: 71rpx;
+}
+
+.countDown.m {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+}
+
+.countDown.s {
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 49rpx;
+}
+
+.quizsContainer .word {
+  font-size: 72rpx;
+  font-family: Arial-Black, Arial;
+  font-weight: 900;
+  color: #222222;
+  line-height: 72rpx;
+  margin-bottom: 100rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.quizsContainer .option {
+  width: 590rpx;
+  height: 90rpx;
+  border-radius: 20rpx 40rpx 12rpx 12rpx;
+  border: 1rpx solid #E6E6E6;
+  position: relative;
+  left: 50%;
+  margin-left: -295rpx;
+  margin-bottom: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
+}
+
+.quizsContainer .option.wrong {
+  color: #F96A32;
+  border: 1rpx solid #FF8E57;
+  background-color: #FFF4F0;
+}
+
+.quizsContainer .option.right {
+  color: #00CF88;
+  border: 1rpx solid #00CF88;
+  background-color: #E9FFF5;
+}
+
+.option .text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90%;
+  text-align: center;
+}
+
+.option .tag {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 12rpx 2rpx 12rpx 2rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.option .tag.wrong-tag {
+  background-color: #FF8E56;
+}
+
+.option .tag.right-tag {
+  background-color: #06CF88;
+}
+
+.option .tag .icon {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+
+
+

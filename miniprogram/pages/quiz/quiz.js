@@ -1,5 +1,7 @@
 const app = getApp();
 
+const COUNT_DOWN = 6;
+
 Page({
   /**
    * 页面数据缓存
@@ -7,17 +9,23 @@ Page({
 
   data: {
     quizs: [], // 考卷
-    progressIndex: 0, // 进度
+    progressIndex: -1, // 进度
     correctCnt: 0, // 正确数
     participates: [],
+    quizPreLoading: false,
+    answers: [],
+    countDown: COUNT_DOWN,
+    ready: false,
+    wrongAnswerIdx: -1,
+    rightAnswerIdx: -1,
   },
 
   async makeDicision(event) {
     const { currentTarget } = event;
     const { dataset } = currentTarget;
     const optionIdx = dataset.index;
-
-    const { quizs, progressIndex, correctCnt, roomid } = this.data;
+    const { answers } = this.data;
+    const { quizs, progressIndex, correctCnt } = this.data;
     const currentQuestion = quizs[progressIndex];
     let correct = correctCnt;
     if (currentQuestion) {
@@ -25,44 +33,70 @@ Page({
       if (answer === optionIdx) {
         // 回答正确
         correct += 1;
-        this.setData({
-          correctCnt: correct,
-        });
+        answers.push(1);
 
-        // TODO 动画
+        this.setData({
+          rightAnswerIdx: answer,
+        });
       } else {
         // 回答错误
-        // TODO 动画
+        answers.push(0);
+        this.setData({
+          wrongAnswerIdx: optionIdx,
+        })
       }
+
+      this.setData({
+        correctCnt: correct,
+        answers,
+      });
 
       // 移动到下一题
-      if (progressIndex === quizs.length - 1) {
-        wx.showToast({
-          title: '回答完毕, 正在提交结果',
-          icon: 'none',
-          duration: 2000,
-        });
-        const score = Math.floor((correct / quizs.length) * 100);
-        await wx.cloud.callFunction({
-          name: 'game',
-          data: {
-            action: 'finishQuiz',
-            score,
-            roomNumber: roomid,
-          }
-        });
+      setTimeout(() => {
+        this.moveToNextQuiz();
+      }, 2000);
+    }
+  },
 
-        const eventChannel = this.getOpenerEventChannel();
-        eventChannel.emit('quizFinishHandler');
+  moveToNextQuiz() {
+    this.setData({
+      wrongAnswerIdx: -1,
+      rightAnswerIdx: -1,
+    });
+    const { progressIndex, quizs } = this.data;
+    if (progressIndex === quizs.length - 1) {
+      // wx.showToast({
+      //   title: '回答完毕, 正在提交结果',
+      //   icon: 'none',
+      //   duration: 2000,
+      // });
+      // const score = Math.floor((correct / quizs.length) * 100);
+      // await wx.cloud.callFunction({
+      //   name: 'game',
+      //   data: {
+      //     action: 'finishQuiz',
+      //     score,
+      //     roomNumber: roomid,
+      //   }
+      // });
 
-        wx.navigateBack({
-          score,
-        })
-      } else {
+      // const eventChannel = this.getOpenerEventChannel();
+      // eventChannel.emit('quizFinishHandler');
+
+      // wx.navigateBack({
+      //   score,
+      // })
+    } else {
+      this.setData({
+        quizPreLoading: true,
+        progressIndex: progressIndex + 1,
+      });
+
+      setTimeout(() => {
         this.setData({
-          progressIndex: progressIndex + 1,
-        });
-      }
+          quizPreLoading: false,
+        })
+      }, 2000)
     }
   },
 
@@ -79,12 +113,14 @@ Page({
       },
       success: res => {
         if (res && res.result && res.result.code === 0) {
-          console.log('quizs', res.result.game.quiz);
           const game = res.result.game;
           this.setData({
+            ready: true,
             quizs: game.quiz,
             participates: game.participates,
           });
+          console.log('quizs', game.quiz);
+          this.moveToNextQuiz();
         }
       }
     })
