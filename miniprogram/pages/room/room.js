@@ -8,6 +8,7 @@ Page({
     participates: [],
     curOpenId: '',
     button: null,
+    roomInput: [],
   },
 
   joinRoomAction() {
@@ -63,6 +64,10 @@ Page({
         }
       }
     })
+  },
+
+  roomInputChangeHandler(event) {
+    console.log('input', event)
   },
 
   initGame(gameInfo) {

@@ -1,5 +1,47 @@
 <view class="container">
-  <view class="info">
+  <view class="bg">
+    <view class="leftBg" />
+    <view class="rightBg" />
+
+    <view class="bgText">
+      <view class="text">V</view>
+      <view class="text">S</view>
+    </view>
+  </view>
+
+  <view class="avatars">
+    <view class="leftPart">
+      <image src="{{participates[0].avatarUrl}}" class="avatar left" />
+    </view>
+
+    <view class="rightPart">
+      <image src="{{participates[1].avatarUrl}}" class="avatar right" />
+    </view>
+  </view>
+
+  <view class="roomInput">
+    <text class="title">请输入房间号</text>
+
+    <view class="inputWrapper">
+      <view class="inputBox">{{roomInput[0]}}</view>
+      <view class="inputBox">{{roomInput[1]}}</view>
+      <view class="inputBox">{{roomInput[2]}}</view>
+      <view class="inputBox">{{roomInput[3]}}</view>
+
+      <!-- <input type="number" class="hiddenInput" id="roomInput" onChange="roomInputChangeHandler" /> -->
+    </view>
+  </view>
+
+  <view class="controlBtn">
+    开始对战
+  </view>
+
+  <view class="controlBtn">
+    创建房间
+  </view>
+</view>
+
+ <!-- <view class="info">
     <view class="person" wx:if="{{participates[0]}}">
       <image src="{{participates[0].avatarUrl}}" class="avatar" />
       <view class="name">{{participates[0].nickName}}</view>
@@ -39,5 +81,4 @@
   <view class="bottom_button" wx:elif="{{curUser && (curUser.status === 'pending' || curUser.status === 'finished')}}">
     <view wx:if="{{curUser.status === 'pending'}}" catchtap="beginQuiz" class="text">立即开始</view>
     <view wx:else class="text" catchtap="finishHandler">比赛结束</view>
-  </view>
-</view>
+  </view> -->
