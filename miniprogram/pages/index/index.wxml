@@ -1,58 +1,164 @@
 <!--miniprogram/pages/index/index.wxml-->
 
-<search></search>
+<view class="topBanner flex">
+  <view class="userInfo flex">
+    <view
+      open-type="getUserInfo"
+      class="userinfo-avatar icon"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+      bindgetuserinfo='bindGetUserInfo'
+    />
 
-<view class="container">
-  <view class="UCenter-bg">
-    <!-- 用户 openid -->
-    <view class="userinfo">
-      <button 
-        open-type="getUserInfo"
-        class="userinfo-avatar"
-        style="background-image: url({{avatarUrl}})"
-        size="default"
-        bindgetuserinfo='bindGetUserInfo'
-      ></button>
-    </view>
-    <view class="text-xl text-shadow">{{userInfo.nickName}}</view>
-    <!-- catchtap="toAbout" -->
-    <view class="margin-top-sm text-shadow">
-      <text>学习成就梦想</text>
-    </view>
-    <image src="http://www.aaronview.cn/image/wave.gif" mode="scaleToFill" class="gif-wave"></image>
-  </view>
-
-  <view class="padding flex text-center text-grey bg-white shadow-warp">
-    <view class="flex flex-sub flex-direction solid-right" catchtap="toTimeRecord">
-      <view class="text-xxl text-orange">{{insistDays}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-attentionfill"></text> 坚持天数</view>
-    </view>
-    <view class="flex flex-sub flex-direction solid-right" catchtap="toAchievement">
-      <view class="text-xxl text-blue">{{learnedWords}}</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-fork"></text> 已学单词</view>
-    </view>
-    <view class="flex flex-sub flex-direction" catchtap="toAchievement">
-      <view class="text-xxl text-green">{{averageSore}}/3</view>
-      <view class="margin-top-sm">
-        <text class="cuIcon-favorfill"></text> 平均得分</view>
+    <view class="userName">
+      {{userInfo.nickName}}
     </view>
   </view>
 
-  <view class="nav-frame">
-    <view class='nav-list'>
-      <block wx:for="{{elements}}" wx:key="index">
-        <navigator open-type="navigate" hover-class='none' url="/pages/{{item.nav}}" class="nav-li bg-{{item.color}}">
-          <view class="nav-title">{{item.title}}</view>
-          <view class="nav-name">{{item.name}}</view>
-          <text class='cuIcon-{{item.icon}}'></text>
-        </navigator>
-      </block>
+  <view class="search flex">
+    <image class="searchIcon" src="../../images/search_icon.png" />
+  </view>
+</view>
+
+<view class="topBgImg icon" />
+<image class="topBgImg" src="../../images/top_banner.png" />
+
+<view class="studyCard">
+  <view class="listTag flex">
+    <image src="../../images/list_tag.png" class="listTagIcon" />
+    <view class="text">单词本: KET</view>
+  </view>
+
+  <view class="leftWords">
+    剩余单词: 6750
+  </view>
+
+  <view class="studyPlan">
+    学习计划
+  </view>
+
+  <view class="studyStatus flex">
+    <view class="statusItem flex">
+      <view class="value">
+        {{insistDays}}
+      </view>
+      <view class="title">
+        坚持天数
+      </view>
+    </view>
+
+    <view class="statusItem flex">
+      <view class="value">
+        {{learnedWords}}
+      </view>
+      <view class="title">
+        已学单词
+      </view>
+    </view>
+
+    <view class="statusItem flex">
+      <view class="value">
+        {{averageSore}}/3
+      </view>
+      <view class="title">
+        平均得分
+      </view>
     </view>
   </view>
 
-  <!-- <button class="cu-btn icon about" catchtap="toAbout">
-    <text class="cuIcon-cascades"></text>
-  </button> -->
+  <view class="beginStudy" catchtap="beginStudy">
+    开始学习
+  </view>
+</view>
+
+<view class="actions">
+  <navigator open-type="navigate" url="/pages/room/room" hover-class="none">
+    <view class="actionItem battle">
+      <view class="iconWrapper">
+        <image class="actionIcon" src="../../images/battle.png" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">单词对战</view>
+        <view class="subtitle">对战排位比拼</view>
+      </view>
+    </view>
+  </navigator>
+
+  <navigator open-type="navigate" url="/pages/review/review" hover-class="none">
+    <view class="actionItem review">
+      <view class="iconWrapper">
+        <image class="actionIcon" src="../../images/review.png" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">错题集</view>
+        <view class="subtitle">错题加强练习</view>
+      </view>
+    </view>
+  </navigator>
+
+  <view class="actionItem setting" catchtap="settingModalShow">
+    <view class="iconWrapper">
+      <image class="actionIcon" src="../../images/setting.png" />
+    </view>
+    <view class="actionInfo">
+      <view class="title">学习设置</view>
+      <view class="subtitle">个人偏好设置</view>
+    </view>
+  </view>
+
+  <navigator open-type="navigate" url="/pages/timeRecord/timeRecord" hover-class="none">
+    <view class="actionItem record">
+      <view class="iconWrapper">
+        <image class="actionIcon" src="../../images/record.png" />
+      </view>
+      <view class="actionInfo">
+        <view class="title">学习记录</view>
+        <view class="subtitle">学习进阶详情</view>
+      </view>
+    </view>
+  </navigator>
+</view>
+
+<view class="modal" wx:if="{{settingModalShow}}">
+  <view class="mask" catchtap="settingModalHide" />
+
+  <view class="modalPopup">
+    <image src="../../images/modal_close.png" class="closeBtn" catchtap="settingModalHide" />
+
+    <image src="../../images/modal_banner.png" class="banner" />
+
+    <view class="title">
+      学习设置
+    </view>
+
+    <view class="content">
+      <picker-view bindchange="settingBookChange" indicator-style="height: 40px;" class="pickerview" value="{{settingBookOptions.value}}">
+        <picker-view-column class="pickerColumn">
+          <view wx:for="{{settingBookOptions.name}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column class="pickerColumn">
+          <view wx:for="{{settingBookOptions.books}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column class="pickerColumn">
+          <view wx:for="{{settingBookOptions.words}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+
+      <picker-view bindchange="settingDailyChange" indicator-style="height: 40px;" value="{{settingDailyOptions.value}}">
+        <picker-view-column class="pickerColumn">
+          <view wx:for="{{settingDailyOptions.name}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column class="pickerColumn">
+          <view wx:for="{{settingDailyOptions.number}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column class="pickerColumn">
+          <view wx:for="{{settingDailyOptions.unit}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+
+    <view class="saveButton" catchtap="settingSaveActon">
+      保存
+    </view>
+  </view>
 </view>

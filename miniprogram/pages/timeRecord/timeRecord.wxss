@@ -1,1 +1,135 @@
 /* miniprogram/pages/timeRecord/timeRecord.wxss */
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background-color: #fff;
+  padding-top: 30rpx;
+}
+
+.timelineItem {
+  margin-bottom: 32rpx;
+  flex-direction: column;
+  padding: 0 30rpx;
+  position: relative;
+}
+
+.timelineItem .recordTime {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #A6A6A6;
+  line-height: 24rpx;
+  margin-bottom: 28rpx;
+}
+
+.timelineLine {
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+}
+
+.timelineLine .timelineDot {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.timelineLine .dashLine {
+  width: 1rpx;
+  height: 182rpx;
+  border: 1rpx dotted #A6A6A6;
+}
+
+.timelineCard {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 604rpx;
+  height: 198rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid #aaa;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.timelineCard .recordTag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+}
+
+.recordTag .recordTime {
+  min-width: 64rpx;
+  height: 36rpx;
+  border-top-left-radius: 12rpx;
+  border-top-right-radius: 4rpx;
+  border-bottom-right-radius: 12rpx;
+  border-bottom-left-radius: 4rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: bold;
+  font-family: DINMittelschriftLTW1G;
+  color: #FFFFFF;
+  padding: 0 10rpx;
+}
+
+.recordTag .recordStatus {
+  height: 36rpx;
+  padding: 0 10rpx;
+  border: 1rpx solid #3DFB9A;
+  border-top-right-radius: 4rpx;
+  border-bottom-right-radius: 4rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #00CF88;
+}
+
+.timelineCard .timelineInfo {
+  padding-top: 50rpx;
+  justify-content: space-between;
+  align-items: center;
+  width: 524rpx;
+}
+
+.timelineInfo .infoItem {
+  flex-direction: column;
+}
+
+.infoItem .valueWrapper {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 18rpx;
+}
+
+.valueWrapper .value {
+  font-size: 48rpx;
+  font-family: DINMittelschriftLTW1G;
+  color: #222222;
+  font-weight: bold;
+  line-height: 52rpx;
+  letter-spacing: 2rpx;
+}
+
+.valueWrapper .unit {
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #222222;
+  line-height: 40rpx;
+  margin-left: 4rpx;
+}
+
+.infoItem .title {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #222222;
+  line-height: 28rpx;
+}

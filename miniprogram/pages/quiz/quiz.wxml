@@ -1,0 +1,13 @@
+<view class="container">
+  <!-- progress -->
+
+  <view class="word" wx:if="{{quizs[progressIndex]}}">
+    {{quizs[progressIndex].word}}
+  </view>
+
+  <view class="options" wx:if="{{quizs[progressIndex]}}">
+    <view wx:for="{{quizs[progressIndex].quiz.questions}}" wx:for-item="question" wx:key="index" catchtap="makeDicision" data-index="{{index}}">
+      {{question}}
+    </view>
+  </view>
+</view>
