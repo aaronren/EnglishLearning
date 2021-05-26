@@ -4,12 +4,6 @@ page {
   height: 100%;
 }
 
-.icon {
-  background-position: 100% 100%;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
 .topBanner {
   z-index: 10;
   position: relative;
@@ -24,14 +18,32 @@ page {
   justify-content: center;
 }
 
-.userinfo-avatar {
-  width: 80rpx;
-  height: 80rpx;
-  border: 1rpx solid rgba(255, 255, 255, 0.5);
-  border-radius: 40rpx;
+/* ------------------- */
+
+.avatar-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.userInfo .userName {
+.userinfo-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  background-size: cover;
+}
+
+.userinfo-avatar[size] {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.userinfo-avatar:after {
+  border: none;
+}
+
+.userinfo .userName {
   margin-left: 20rpx;
   font-size: 36rpx;
   font-family: PingFangSC-Semibold, PingFang SC;
@@ -39,6 +51,8 @@ page {
   color: #FFFFFF;
   line-height: 50rpx;
 }
+
+/* ------------------- */
 
 .search {
   width: 76rpx;

@@ -1,17 +1,17 @@
 <!--miniprogram/pages/index/index.wxml-->
 
 <view class="topBanner flex">
-  <view class="userInfo flex">
-    <view
+  <view class="userinfo avatar-flex">
+    <button
       open-type="getUserInfo"
-      class="userinfo-avatar icon"
+      class="userinfo-avatar"
       style="background-image: url({{avatarUrl}})"
       size="default"
       bindgetuserinfo='bindGetUserInfo'
-    />
+    ></button>
 
     <view class="userName">
-      {{userInfo.nickName}}
+      {{userInfo.nickName ? userInfo.nickName : '请点头像'}}
     </view>
   </view>
 
@@ -33,8 +33,8 @@
     剩余单词: 6750
   </view>
 
-  <view class="studyPlan">
-    学习计划
+  <view class="studyPlan" catchtap="toAchievement">
+    历史记录
   </view>
 
   <view class="studyStatus flex">
