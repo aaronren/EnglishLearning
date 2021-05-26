@@ -17,42 +17,65 @@
       <block wx:if="{{stepIndex==0}}">
         <text class="word-content">{{currentWord.word}}</text>
         <view class="pron-container" catchtap='toPlayWord'>
-          <text class="cuIcon-notification pron-icon lg text-blue"></text>
+          <image src="../../images/speaker.png" class="pron-icon" />
+          <text class="pron-text">{{currentWord.uk_pron}}</text>
+        </view>
+        <!-- sentences -->
+        <view class="eg-sentense">
+          {{currentWord.sentense.en}}
         </view>
       </block>
       <text class="word-definition" wx:if="{{stepIndex==1}}">{{currentWord.trans}}</text>
     </view>
-    <view class="select-botton" wx:if="{{wordIndex<wordCount}}">
-      <view class="content margin-left">
-        <text class="text-grey text-xs">请选择正确的选项</text>
-      </view>
-      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==0?'green':'gray light'}}" 
-        bindtap='toSelectMean' data-index="0">
-        <view class="action animation-{{wrongSelectIndex==0?'shake':''}}">
-          <text class="cuIcon-title text-blue"></text>
-          <text class="">{{stepIndex==0?randomFourWord[0].trans:randomFourWord[0].word}}</text>
+
+    <view class="select-options" wx:if="{{wordIndex < wordCount}}">
+      <view class="select-option {{wrongSelectIndex == 0 ? 'wrong' : rightSelectIndex < 0 ? 'notyet' : rightSelectIndex == 0 ? 'right' : 'notyet' }}" bindtap="toSelectMean" data-index="0">
+        <view class="text">
+          {{stepIndex==0?randomFourWord[0].trans:randomFourWord[0].word}}
         </view>
-      </view>
-      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==1?'green':'gray light'}}" 
-        bindtap='toSelectMean' data-index="1">
-        <view class="action animation-{{wrongSelectIndex==1?'shake':''}}">
-          <text class="cuIcon-title text-blue"></text>
-          <text class="">{{stepIndex==0?randomFourWord[1].trans:randomFourWord[1].word}}</text>
+        <view class="tag wrong-tag" wx:if="{{wrongSelectIndex == 0}}">
+          <image src="../../images/option_wrong.png" class="icon" />
         </view>
-      </view>
-      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==2?'green':'gray light'}}" 
-        bindtap='toSelectMean' data-index="2">
-        <view class="action animation-{{wrongSelectIndex==2?'shake':''}}">
-          <text class="cuIcon-title text-blue"></text>
-          <text class="">{{stepIndex==0?randomFourWord[2].trans:randomFourWord[2].word}}</text>
+        <view class="tag right-tag" wx:elif="{{rightSelectIndex == 0}}">
+          <image src="../../images/option_right.png" class="icon" />
         </view>
+        <view wx:else />
       </view>
-      <view class="cu-bar margin-top padding-xs bg-{{rightSelectIndex==3?'green':'gray light'}}" 
-        bindtap='toSelectMean' data-index="3">
-        <view class="action animation-{{wrongSelectIndex==3?'shake':''}}">
-          <text class="cuIcon-title text-blue"></text>
-          <text class="">{{stepIndex==0?randomFourWord[3].trans:randomFourWord[3].word}}</text>
+      <view class="select-option {{wrongSelectIndex == 1 ? 'wrong' : rightSelectIndex < 0 ? 'notyet' : rightSelectIndex == 1 ? 'right' : 'notyet' }} " bindtap="toSelectMean" data-index="1">
+        <view class="text">
+          {{stepIndex==0?randomFourWord[1].trans:randomFourWord[1].word}}
         </view>
+        <view class="tag wrong-tag" wx:if="{{wrongSelectIndex == 1}}">
+          <image src="../../images/option_wrong.png" class="icon" />
+        </view>
+        <view class="tag right-tag" wx:elif="{{rightSelectIndex == 1}}">
+          <image src="../../images/option_right.png" class="icon" />
+        </view>
+        <view wx:else />
+      </view>
+      <view class="select-option {{wrongSelectIndex == 2 ? 'wrong' : rightSelectIndex < 0 ? 'notyet' : rightSelectIndex == 2 ? 'right' : 'notyet' }} " bindtap="toSelectMean" data-index="2">
+        <view class="text">
+          {{stepIndex==0?randomFourWord[2].trans:randomFourWord[2].word}}
+        </view>
+        <view class="tag wrong-tag" wx:if="{{wrongSelectIndex == 2}}">
+          <image src="../../images/option_wrong.png" class="icon" />
+        </view>
+        <view class="tag right-tag" wx:elif="{{rightSelectIndex == 2}}">
+          <image src="../../images/option_right.png" class="icon" />
+        </view>
+        <view wx:else />
+      </view>
+      <view class="select-option {{wrongSelectIndex == 3 ? 'wrong' : rightSelectIndex < 0 ? 'notyet' : rightSelectIndex == 3 ? 'right' : 'notyet' }} " bindtap="toSelectMean" data-index="3">
+        <view class="text">
+          {{stepIndex==0?randomFourWord[3].trans:randomFourWord[3].word}}
+        </view>
+        <view class="tag wrong-tag" wx:if="{{wrongSelectIndex == 3}}">
+          <image src="../../images/option_wrong.png" class="icon" />
+        </view>
+        <view class="tag right-tag" wx:elif="{{rightSelectIndex == 3}}">
+          <image src="../../images/option_right.png" class="icon" />
+        </view>
+        <view wx:else />
       </view>
     </view>
   </view>

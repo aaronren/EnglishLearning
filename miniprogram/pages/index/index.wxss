@@ -279,7 +279,7 @@ page{
   height: 27rpx;
   right: 38rpx;
   top: 38rpx;
-  z-index: 10;
+  z-index: 20;
 }
 
 .modalPopup .banner {
