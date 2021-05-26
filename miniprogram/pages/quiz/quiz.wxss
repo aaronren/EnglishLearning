@@ -319,6 +319,8 @@
   height: 16rpx;
 }
 
-
+.finishedContent {
+  position: relative;
+}
 
 

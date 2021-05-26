@@ -38,7 +38,22 @@
     </view>
   </view>
 
-  <view wx:if="{{!ready}}" />
+  <view wx:if="{{finished}}" class="finishedContent">
+    <view class="resultPanel">
+      <view wx:for="{{resultPanel}}" wx:key="index" wx:for-item="item">
+        <view class="part">
+          <view>
+            
+          </view>
+        </view>
+
+        <view class="part">
+        
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:elif="{{!ready}}" />
   <view wx:elif="{{quizPreLoading}}" class="preLoadContent">
     <view class="quizIndex">
       <view class="text">第</view>
