@@ -67,7 +67,6 @@ Page({
       name: 'game',
       data: {
         action: 'createRoom',
-        roomNumber: '1234567',
         userInfo: app.globalData.userInfo,
       },
       success: res => {

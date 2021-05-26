@@ -9,7 +9,7 @@ const db = cloud.database();
 const generatePaper = async () => {
   const words = await db.collection('wordsList')
   .aggregate()
-  .sample({ size: 10 })
+  .sample({ size: 7 })
   .end()
   .then(res => {
     return res && res.list || [];
@@ -56,6 +56,7 @@ exports.main = async (event, context) => {
   const {
     roomNumber,
     score,
+    answers,
     userInfo,
   } = event;
 
@@ -139,30 +140,6 @@ exports.main = async (event, context) => {
     }
   }
 
-  if (event.action === 'beginQuiz') {
-    // if (gameIns.data.length > 0) {
-    //   const game = gameIns.data[0];
-    //   const { participates = [] } = game;
-
-    //   const me = participates.find(p => p.pid === wxContext.OPENID);
-    //   if (me) {
-    //     me.status = 'starting';
-    //     await db.collection('game').where({
-    //       roomNumber,
-    //     }).update({
-    //       data: {
-    //         participates,
-    //       },
-    //     });
-    //     return promisify({
-    //       code: 0,
-    //       msg: '比赛开始',
-    //       users: participates,
-    //     })
-    //   }
-    // }
-  }
-
   if (event.action === 'finishQuiz') {
     if (gameIns.data.length > 0) {
       const game = gameIns.data[0];
@@ -171,6 +148,7 @@ exports.main = async (event, context) => {
       if (me) {
         me.status = 'finished';
         me.score = score;
+        me.answers = answers;
         await db.collection('game').where({
           roomNumber,
         }).update({
