@@ -1,33 +1,97 @@
 <!--miniprogram/pages/timeRecord/timeRecord.wxml-->
 
-<enroll></enroll>
+<view class="container">
+  <enroll></enroll>
 
-<block wx:if="{{!hasRecord}}">
-<view class="cu-timeline">
-  <view class="cu-time">Date</view>
-  <view class="cu-item text-blue">
-    <view class="content">
-      <view class="cu-capsule radius">
-        <view class="cu-tag bg-blue">Time</view>
-        <view class="cu-tag line-blue">加油</view>
+  <block wx:if="{{!hasRecord}}">
+    <view class="timelineItem flex" wx:for="{{records}}" wx:key="index">
+      <view class="recordTime">
+        Date
       </view>
-      <view class="margin-top">您还没有学习记录，请赶紧点击“开始学习”吧！祝您学习成就梦想！</view>
-    </view>
-  </view>
-</view>
-</block>
 
-<block wx:if="{{hasRecord}}">
-<view class="cu-timeline" wx:for="{{records}}" wx:for-index="idx" wx:key="idx">
-  <view class="cu-time" wx:if="{{idx>0?(item.recordDate!=records[idx-1].recordDate):true}}">{{item.recordDate}}</view>
-  <view class="cu-item text-{{item.finishStep==3?'blue':'red'}}">
-    <view class="content">
-      <view class="cu-capsule radius">
-        <view class="cu-tag bg-{{item.finishStep==3?'blue':'red'}}">{{item.recordTime}}</view>
-        <view class="cu-tag line-{{item.finishStep==3?'blue':'red'}}">{{item.finishStep==3?'完成':'未完成'}}</view>
+      <view class="flex">
+        <view class="timelineLine flex">
+          <image src="../../images/dot.png" class="timelineDot" />
+
+          <view class="dashLine" />
+        </view>
+
+        <view class="timelineCard flex">
+          <view class="recordTag {{item.finishStep==3?'finished':'notyet'}}">
+            <view class="recordTime">Time</view>
+            <view class="recordStatus">加油</view>
+          </view>
+
+          <view class="timelineInfo flex">
+            <view>您还没有学习记录，请赶紧点击“开始学习”吧！祝您学习成就梦想！</view>
+          </view>
+        </view>
       </view>
-      <view class="margin-top">学习时长{{item.spendTime}}，共{{item.wordsCount}}个单词{{item.finishStep>=3?('，平均星星数为'+item.averageScore+'星'):''}}</view>
     </view>
-  </view>
+  </block>
+
+  <block wx:else>
+    <view class="timelineItem flex" wx:for="{{records}}" wx:key="index">
+      <view class="recordTime">
+        {{item.recordDate}}
+      </view>
+
+      <view class="flex">
+        <view class="timelineLine flex">
+          <image src="../../images/dot.png" class="timelineDot" />
+
+          <view class="dashLine" />
+        </view>
+
+        <view class="timelineCard flex">
+          <view class="recordTag {{item.finishStep==3?'finished':'notyet'}}">
+            <view class="recordTime">{{item.recordTime}}</view>
+            <view class="recordStatus">{{item.finishStep==3?'完成':'未完成'}}</view>
+          </view>
+
+          <view class="timelineInfo flex">
+            <view class="infoItem flex">
+              <view class="valueWrapper">
+                <view class="value">
+                {{item.spendTime}}
+                </view>
+                <view class="unit">分</view>
+              </view>
+
+              <view class="title">
+                学习时长
+              </view>
+            </view>
+
+            <view class="infoItem flex">
+              <view class="valueWrapper">
+                <view class="value">
+                {{item.wordsCount}}
+                </view>
+                <view class="unit">个</view>
+              </view>
+
+              <view class="title">
+                已学单词
+              </view>
+            </view>
+
+            <view class="infoItem flex">
+              <view class="valueWrapper">
+                <view class="value">
+                {{item.averageScore}}
+                </view>
+                <view class="unit">星</view>
+              </view>
+
+              <view class="title">
+                平均得分
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
 </view>
-</block>
+

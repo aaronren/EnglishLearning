@@ -1,9 +1,0 @@
-/* pages/setting/setting.wxss */
-
-/* 底部按钮 */
-
-.bottom-button {
-  width: 100%;
-  bottom: 0;
-  position: fixed;
-}

@@ -4,189 +4,335 @@ page{
   height: 100%;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
+.icon {
+  background-position: 100% 100%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.topBanner {
+  z-index: 10;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60rpx 30rpx;
+}
+
+.topBanner .userInfo {
+  align-items: center;
+  justify-content: center;
+}
+
+.userinfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border: 1rpx solid rgba(255, 255, 255, 0.5);
+  border-radius: 40rpx;
+}
+
+.userInfo .userName {
+  margin-left: 20rpx;
+  font-size: 36rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 50rpx;
+}
+
+.search {
+  width: 76rpx;
+  height: 60rpx;
+  background: rgba(239, 239, 239, 0.3);
+  align-items: center;
+  justify-content: center;
+  border-radius: 36px;
+}
+
+.searchIcon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.topBgImg {
+  width: 100%;
+  position: absolute;
+  height: 368rpx;
+  top: 0;
+}
+
+.studyCard {
+  width: 714rpx;
+  height: 500rpx;
+  position: relative;
+  left: 50%;
+  margin-left: -357rpx;
+  border-radius: 20rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.studyCard .listTag {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 192rpx;
+  height: 48rpx;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.listTag .listTagIcon {
+  position: absolute;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
 }
 
-
-.UCenter-bg {
-  background-image: url(http://www.aaronview.cn/image/girls_sky.jpg);
-  background-size: 100%; /*cover;*/
-  height: 500rpx;
-  display: flex;
-  /* justify-content: center; */
-  padding-top: 40rpx;
-  overflow: hidden;
+.listTag .text {
   position: relative;
+  z-index: 10;
+}
+
+.studyCard .leftWords {
+  position: absolute;
+  left: 30rpx;
+  top: 76rpx;
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #222222;
+  line-height: 28rpx;
+}
+
+.studyCard .studyPlan {
+  width: 172rpx;
+  height: 56rpx;
+  border-radius: 40rpx;
+  border: 1rpx solid #00C67B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #00C67B;
+  position: absolute;
+  top: 38rpx;
+  right: 50rpx;
+}
+
+.studyStatus {
+  padding: 180rpx 70rpx 0;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 60rpx;
+}
+
+.studyStatus .statusItem {
   flex-direction: column;
   align-items: center;
-  color: #fff;
-  font-weight: 300;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  justify-content: center;
 }
 
-.UCenter-bg text {
-  opacity: 0.8;
+.statusItem .value {
+  font-size: 60rpx;
+  font-family: DINMittelschriftLTW1G;
+  font-weight: bold;
+  color: #222222;
+  line-height: 52rpx;
+  letter-spacing: 4rpx;
+  margin-bottom: 20rpx;
 }
 
-.UCenter-bg image {
-  width: 200rpx;
+.statusItem .title {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #222222;
+  line-height: 28rpx;
+}
+
+.beginStudy {
+  width: 394rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: 50%;
+  margin-left: -197rpx;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 30rpx;
+}
+
+.actions .actionItem {
+  width: 336rpx;
+  height: 152rpx;
+  border: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+}
+
+.actionItem.battle {
+  background-color: #FEF5F7;
+}
+
+.actionItem.review {
+  background-color: #E6FFF4;
+}
+
+.actionItem.setting {
+  background-color: #ECFEFF;
+}
+
+.actionItem.record {
+  background-color: #FFFDEB;
+}
+
+.actionItem .iconWrapper {
+  width: 130rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.actionItem .actionIcon {
+  width: 54rpx;
+  height: 54rpx;
+}
+
+.actionItem .actionInfo {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.actionInfo .title {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #222222;
+  line-height: 32rpx;
+  margin-bottom: 16rpx;
+}
+
+.actionInfo .subtitle {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #A6A6A6;
+  line-height: 24rpx;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal .modalPopup {
+  display: flex;
+  flex-direction: column;
+  width: 646rpx;
+  position: relative;
+  background-color: #fff;
+  border-radius: 20rpx;
+}
+
+.modalPopup .closeBtn {
+  position: absolute;
+  width: 27rpx;
+  height: 27rpx;
+  right: 38rpx;
+  top: 38rpx;
+  z-index: 20;
+}
+
+.modalPopup .banner {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  left: 0;
+  height: 150rpx;
+}
+
+.modalPopup .title {
+  padding: 40rpx;
+  font-size: 36rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  position: relative;
+  z-index: 10;
+  color: #222222;
+}
+
+.modalPopup .content {
+  margin-bottom: 50rpx;
+}
+
+.modalPopup .saveButton {
+  width: 218rpx;
+  height: 64rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  line-height: 28rpx;
+  left: 50%;
+  position: relative;
+  margin-left: -109rpx;
+  margin-bottom: 40rpx;
+}
+
+.modalPopup .columnItem {
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+}
+
+.modalPopup .pickerColumn {
   height: 200rpx;
 }
 
-.UCenter-bg .gif-wave{
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  z-index: 1;
-  mix-blend-mode: screen;  
-  height: 100rpx;   
-}
-
-/* ------------------- */
-
-.userinfo-avatar {
-  width: 100rpx;
-  height: 100rpx;
-  margin: 20rpx;
-  border-radius: 50%;
-  background-size: cover;
-  background-color: white;
-}
-
-.userinfo-avatar[size] {
-  width: 100rpx;
-  height: 100rpx;
-}
-
-.userinfo-avatar:after {
-  border: none;
-}
-
-/* ------------------- */
-
-.nav-frame {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  /* background-repeat: no-repeat; */
-  background-image: url(http://www.aaronview.cn/image/bottom_bg.jpg);
-  background-size: 100% 100%;
-}
-
-.nav-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.nav-li {
-  padding: 30rpx;
-  border-radius: 12rpx;
-  width: 45%;
-  margin: 10rpx 2.5% 20rpx;
-  background-image: url(http://www.aaronview.cn/image/card_bg.png);
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: 1;
-}
-
-.nav-li::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background-color: inherit;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  bottom: -10%;
-  border-radius: 10rpx;
-  opacity: 0.2;
-  transform: scale(0.9, 0.9);
-}
-
-.nav-li.cur {
-  color: #fff;
-  background: rgb(94, 185, 94);
-  box-shadow: 4rpx 4rpx 6rpx rgba(94, 185, 94, 0.4);
-}
-
-.nav-title {
-  font-size: 32rpx;
-  font-weight: 300;
-}
-
-.nav-title::first-letter {
-  font-size: 40rpx;
-  margin-right: 4rpx;
-}
-
-.nav-name {
-  font-size: 28rpx;
-  text-transform: Capitalize;
-  margin-top: 20rpx;
-  position: relative;
-}
-
-.nav-name::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 40rpx;
-  height: 6rpx;
-  background: #fff;
-  bottom: 0;
-  right: 0;
-  opacity: 0.5;
-}
-
-.nav-name::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100rpx;
-  height: 1px;
-  background: #fff;
-  bottom: 0;
-  right: 40rpx;
-  opacity: 0.3;
-}
-
-.nav-name::first-letter {
-  font-weight: bold;
-  font-size: 36rpx;
-  margin-right: 1px;
-}
-
-.nav-li text {
-  position: absolute;
-  right: 30rpx;
-  top: 30rpx;
-  font-size: 52rpx;
-  width: 60rpx;
-  height: 60rpx;
-  text-align: center;
-  line-height: 60rpx;
-}
-
-.text-shadow {
-  text-shadow: 1px 1px 1px #000;
-}
-
-.text-light {
-  font-weight: 300;
-}
-
-/* 关于按钮 */
-.cu-btn.about {
-  bottom: 20rpx;
-  right: 20rpx;
-  position: fixed;
+.modalPopup .pickerview {
+  margin-bottom: 20rpx;
 }

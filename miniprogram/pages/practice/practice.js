@@ -164,6 +164,7 @@ Page({
 
   // 单词发音
   toPlayWord: function() {
+    console.log('this.data', this.data.currentWord)
     media.playWordAudio(this.data.currentWord.uk_audio)
   },
 
@@ -235,7 +236,7 @@ Page({
  
   loadCurrentWord: function(index,autoplay) {
     if (index < this.data.wordCount) {
-      var curWord = this.data.randomWordList[index]
+      var curWord = this.wordPracticeInfoGen(this.data.randomWordList[index]);
       this.setData({
         wordIndex: index,
         currentWord: curWord,
@@ -265,13 +266,29 @@ Page({
     this.randomFourWordWithIndex()
   },
 
+  wordPracticeInfoGen(word) {
+    const tmpWord = {...word};
+    // 处理例句
+    const { sense = [] } = tmpWord;
+    for (let i = 0; i < sense.length; i++) {
+      const s = sense[i];
+      const { eg } = s;
+      if (eg && eg.length > 0) {
+        tmpWord.sentense = eg[0];
+        break;
+      }
+    }
+    console.log('word', tmpWord);
+    return tmpWord;
+  },
+
   /*
   随机四个单词，含当前currentWord单词
   */
   randomFourWordWithIndex() {
     //打乱顺序后，就取前4个
     var tempRandList = utils.disorder(this.data.randomWordList)
-    var tempFourWord = tempRandList.slice(0,4)
+    var tempFourWord = tempRandList.slice(0,4).map(word => this.wordPracticeInfoGen(word));
     //判断4个中有没有指定的单词
     var word = this.data.currentWord.word
     var excludeCurrentWord = true
@@ -305,7 +322,8 @@ Page({
       // 选择正确
       this.toPlayTipAudio(true) //提示音
       that.setData({
-        rightSelectIndex: touchIndex
+        rightSelectIndex: touchIndex,
+        wrongSelectIndex: -1,
       })
       setTimeout(function() {
         // 1s后切换
