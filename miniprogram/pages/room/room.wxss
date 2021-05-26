@@ -120,6 +120,14 @@
   border-radius: 8rpx;
   border: 1rpx solid #E6E6E6;
   margin: 0 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  font-family: DINMittelschriftLTW1G;
+  color: #222222;
+  font-weight: bold;
+  line-height: 52rpx;
 }
 
 .controlBtn {
@@ -139,4 +147,10 @@
   position: relative;
   left: 50%;
   margin-left: -197rpx;
+}
+
+.hiddenInput {
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
 }

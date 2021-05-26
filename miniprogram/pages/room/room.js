@@ -9,33 +9,60 @@ Page({
     curOpenId: '',
     button: null,
     roomInput: [],
+    inputFocus: false,
+  },
+
+  directToQuizPage() {
+    const roomNumber = this.data.roomInput.join('');
+    wx.navigateTo({
+      url: `/pages/quiz/quiz?roomid=${roomNumber}`,
+      events: {
+        quizFinishHandler: () => {
+          // this.initPage();
+        }
+      }
+    });
   },
 
   joinRoomAction() {
+    if (this.data.roomInput.length < 4) {
+      wx.showToast({
+        title: '房间号不正确, 请重新输入',
+        icon: 'none',
+        duration: 2000,
+      });
+      return;
+    }
+
+    const roomNumber = this.data.roomInput.join('');
     wx.cloud.callFunction({
       name: 'game',
       data: {
         action: 'join',
-        roomNumber: '1234567',
+        roomNumber,
         userInfo: app.globalData.userInfo,
       },
       success: res => {
-        console.log('result', res);
         if (res && res.result.code === 0) {
           wx.showToast({
             title: '加入成功',
             duration: 2000,
             icon: 'none',
             complete: () => {
-              this.initPage();
+              this.directToQuizPage();
             }
           });
         } else {
-          wx.showToast({
-            title: '加入失败',
-            duration: 2000,
-            icon: 'none',
-          })
+          // 已经在队伍中, 直接进入quiz页面
+          if (res.result.code === 100) {
+            this.directToQuizPage();
+          } else {
+            wx.showToast({
+              title: '加入房间失败',
+              duration: 2000,
+              icon: 'none',
+            });
+          }
         }
       }
     })
@@ -50,24 +77,26 @@ Page({
         userInfo: app.globalData.userInfo,
       },
       success: res => {
-        this.initGame(res.result.data);
+        this.setData({
+          roomInput: res.result.data.roomNumber.split(''),
+        });
+        wx.showToast({
+          title: '创建房间成功',
+          duration: 2000,
+        })
       }
     })
   },
 
   beginQuiz() {
-    wx.navigateTo({
-      url: `/pages/quiz/quiz?roomid=${'1234567'}`,
-      events: {
-        quizFinishHandler: () => {
-          this.initPage();
-        }
-      }
-    })
+    
   },
 
   roomInputChangeHandler(event) {
-    console.log('input', event)
+    const { detail } = event;
+    this.setData({
+      roomInput: detail.value.split(''),
+    })
   },
 
   initGame(gameInfo) {
@@ -134,7 +163,24 @@ Page({
     })
   },
 
+  focusInputHandler() {
+    console.log('focusInput')
+    this.setData({
+      inputFocus: true,
+    })
+  },
+
   onLoad() {
     this.initPage();
-  }
+  },
+
+  onReady() {
+    const querySelector = wx.createSelectorQuery().in(this);
+    const inputDom = querySelector.select('#roomInput');
+    const inputDom1 = querySelector.select('.hiddenInput').node((res) => {
+      console.log('00000', res)
+    });
+
+    console.log('inputDom', inputDom, inputDom1);
+  },
 })

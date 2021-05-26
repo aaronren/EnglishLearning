@@ -59,6 +59,30 @@ exports.main = async (event, context) => {
     userInfo,
   } = event;
 
+  if (event.action === 'createRoom') {
+    const paper = await generatePaper();
+    const roomCnt = await db.collection('game').count();
+    const roomNumber = Array.from({ length: 4 - String(roomCnt.total).length }, (i) => 0).join('') + String(roomCnt.total);
+    
+    const addItem = {
+      roomNumber,
+      owner: wxContext.OPENID,
+      quiz: paper,
+      status: 'open',
+      participates: [],
+    }
+    await db.collection('game').add({
+      data: {
+        ...addItem,
+      }
+    });
+    // 创建成功
+    return promisify({
+      code: 0,
+      data: addItem,
+    })
+  }
+
   const gameIns = await db.collection('game').where({
     roomNumber,
   }).get();
@@ -68,32 +92,6 @@ exports.main = async (event, context) => {
       code: 0,
       game: gameIns.data[0],
     });
-  }
-
-  if (event.action === 'createRoom') {
-    const paper = await generatePaper();
-    const addItem = {
-      roomNumber,
-      owner: wxContext.OPENID,
-      quiz: paper,
-      status: 'open',
-      participates: [{
-        pid: wxContext.OPENID,
-        status: 'pending',
-        score: 0,
-        ...userInfo,
-      }],
-    }
-    await db.collection('game').add({
-      data: {
-        ...addItem,
-      }
-    })
-    // 创建成功
-    return promisify({
-      code: 0,
-      data: addItem,
-    })
   }
 
   if (event.action === 'join') {
@@ -129,7 +127,7 @@ exports.main = async (event, context) => {
         })
       } else {
         return promisify({
-          code: -1,
+          code: 100,
           msg: '已经在队伍中',
         })
       }

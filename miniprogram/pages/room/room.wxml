@@ -22,23 +22,23 @@
   <view class="roomInput">
     <text class="title">请输入房间号</text>
 
-    <view class="inputWrapper">
+    <view class="inputWrapper" catchtap="focusInputHandler">
       <view class="inputBox">{{roomInput[0]}}</view>
       <view class="inputBox">{{roomInput[1]}}</view>
       <view class="inputBox">{{roomInput[2]}}</view>
       <view class="inputBox">{{roomInput[3]}}</view>
-
-      <!-- <input type="number" class="hiddenInput" id="roomInput" onChange="roomInputChangeHandler" /> -->
     </view>
   </view>
 
-  <view class="controlBtn">
+  <view class="controlBtn" catchtap="joinRoomAction">
     开始对战
   </view>
 
-  <view class="controlBtn">
+  <view class="controlBtn" catchtap="createRoomAction">
     创建房间
   </view>
+
+  <input type="text" class="hiddenInput" bindinput="roomInputChangeHandler" bindfocus="bindfocus" maxlength="4" focus="{{inputFocus}}" />
 </view>
 
  <!-- <view class="info">
