@@ -237,6 +237,13 @@
   border-radius: 49rpx;
 }
 
+.countDown .text {
+  font-family: Arial-Black, Arial;
+  font-weight: bold;
+  font-size: 45rpx;
+  color: #fff;
+}
+
 .quizsContainer .word {
   font-size: 72rpx;
   font-family: Arial-Black, Arial;

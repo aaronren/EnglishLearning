@@ -51,7 +51,7 @@
       <view class="countDown darkGreenCircle l">
         <view class="countDown lightGreenCircle m">
           <view class="countDown darkGreenCircle s">
-            {{countDown}}
+            <view class="text">{{countDown}}</view>
           </view>
         </view>
       </view>

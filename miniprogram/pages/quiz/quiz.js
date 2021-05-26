@@ -62,6 +62,7 @@ Page({
     this.setData({
       wrongAnswerIdx: -1,
       rightAnswerIdx: -1,
+      countDown: COUNT_DOWN,
     });
     const { progressIndex, quizs } = this.data;
     if (progressIndex === quizs.length - 1) {
@@ -95,7 +96,33 @@ Page({
       setTimeout(() => {
         this.setData({
           quizPreLoading: false,
-        })
+        });
+
+        let interval = setInterval(() => {
+          const { countDown, answers } = this.data;
+          if (countDown <= 0) {
+            // 超时, 算作错误
+            clearInterval(interval);
+            interval = null;
+            wx.showToast({
+              title: '答题超时',
+              icon: 'none',
+              duration: 2000,
+            });
+            answers.push(0);
+            this.setData({
+              answers,
+              countDown: COUNT_DOWN,
+            });
+            setTimeout(() => {
+              this.moveToNextQuiz();
+            }, 2000);
+          } else {
+            this.setData({
+              countDown: countDown - 1,
+            })
+          }
+        }, 1000);
       }, 2000)
     }
   },
