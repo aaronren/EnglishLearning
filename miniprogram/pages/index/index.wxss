@@ -1,6 +1,6 @@
 /* miniprogram/pages/index/index.wxss */
 
-page{
+page {
   height: 100%;
 }
 

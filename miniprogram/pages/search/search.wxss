@@ -1,0 +1,23 @@
+/* miniprogram/pages/search/search.wxss */
+
+page {
+  height: 100%;
+  background-color: white;
+}
+
+.search-bar {
+  border-radius: 12rpx;
+}
+
+.search-clear {
+  width: 70rpx;
+  height: 100%;
+  font-size: 18px;
+  text-align: right;
+  color: gray;
+}
+
+.text-search {
+  font-size: 32rpx;
+  color: #222222;
+}

@@ -1,0 +1,13 @@
+<!--miniprogram/pages/search/search.wxml-->
+
+<view class="cu-bar search bg-white">
+  <view class="search-form search-bar">
+      <text class="cuIcon-search"></text>
+      <input type="text" placeholder="请输入搜索单词" focus="{{inputFocus}}" value="{{inputValue}}" hold-keyboard="true" confirm-type="search" bindinput="getInputValue" bindconfirm="doSearch"></input>
+      <text class="cuIcon-roundclosefill search-clear" catchtap="onInputClear"
+      wx:if="{{inputValue.length>=1}}"></text>
+  </view>
+  <view class="action" catchtap="doSearch">
+      <text class="text-search">搜索</text>
+  </view>
+</view>

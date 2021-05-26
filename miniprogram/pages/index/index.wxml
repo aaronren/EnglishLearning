@@ -15,7 +15,7 @@
     </view>
   </view>
 
-  <view class="search flex">
+  <view class="search flex" catchtap="toSearch">
     <image class="searchIcon" src="../../images/search_icon.png" />
   </view>
 </view>

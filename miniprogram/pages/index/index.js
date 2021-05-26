@@ -136,6 +136,12 @@ Page({
     })
   },
 
+  toSearch(e) {
+    wx.navigateTo({ // 新开
+      url: '/pages/search/search'
+    })
+  },
+
   toAbout(e) {
     wx.navigateTo({ // 新开
       url: '/pages/about/about'
@@ -358,27 +364,6 @@ Page({
     event.on('dailyLearned', this, function() {
       this.filteNeedLearnWords()
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
   },
 
   /**
