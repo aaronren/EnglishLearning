@@ -3,7 +3,7 @@
 <view class="container">
   <enroll></enroll>
 
-  <block wx:if="{{hasRecord}}">
+  <block wx:if="{{!hasRecord}}">
     <view class="timelineItem flex" wx:for="{{records}}" wx:key="index">
       <view class="recordTime">
         Date
