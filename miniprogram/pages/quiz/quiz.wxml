@@ -41,7 +41,7 @@
   <view wx:if="{{finished}}" class="finishedContent">
     <view wx:if="{{!otherFinished}}" />
     <view wx:elif="{{isWin}}">
-      <image src="../../images/win.png" class="resultLogo" />
+      <image src="../../images/win.png" class="resultLogo winLogo" />
     </view>
     <view wx:else>
       <image src="../../images/lose.png" class="resultLogo" />

@@ -389,6 +389,11 @@
   margin-top: 20rpx;
 }
 
+.winLogo {
+  position: relative;
+  left: -40rpx;
+}
+
 .onemoreBattle {
   width: 314rpx;
   height: 80rpx;
