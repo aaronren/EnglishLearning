@@ -32,7 +32,7 @@
 
   <block wx:else>
     <view class="timelineItem flex" wx:for="{{records}}" wx:key="index">
-      <view class="recordTime">
+      <view class="recordDate">
         {{item.recordDate}}
       </view>
 
