@@ -21,6 +21,8 @@ Page({
     finished: false,
     wrongAnswerIdx: -1,
     rightAnswerIdx: -1,
+    curUser: null,
+    otherUser: {},
   },
 
   async makeDicision(event) {
@@ -87,6 +89,12 @@ Page({
           roomNumber: roomid,
         }
       });
+
+      // 重新拉取数据
+      setTimeout(() => {
+        this.initGame();
+      }, 1000);
+
     } else {
       this.setData({
         quizPreLoading: true,
@@ -142,13 +150,13 @@ Page({
     })
   },
 
-  onLoad(options) {
-    this.setData({
-      roomid: options.roomid,
-    })
+  onemoreBattle() {
+    wx.navigateTo({
+      url: `/pages/room/room`,
+    });
   },
 
-  onReady() {
+  initGame() {
     Promise.all([
       this.loadGame(this.data.roomid),
     ]).then(([gameRes]) => {
@@ -159,12 +167,12 @@ Page({
         const curUser = game.participates.find(p => p.pid === curOpenid);
         if (curUser) {
           const { status, score, answers } = curUser;
-          console.log('game', game)
           if (status === 'finished') {
             this.setData({
               ready: true,
               finished: true,
               quizs: game.quiz,
+              curUser,
               participates: game.participates,
             });
 
@@ -192,13 +200,12 @@ Page({
                 question: game.quiz[idx].word,
               });
             });
-            console.log('sss', resultPanel);
             // TODO progress bar
-            // TODO win lose icon
             // TODO 继续对战
             this.setData({
               resultPanel,
               isWin,
+              otherUser,
               otherFinished,
             })
           } else {
@@ -212,5 +219,16 @@ Page({
         }
       }
     })
+  },
+
+  onLoad(options) {
+    this.setData({
+      roomid: options.roomid,
+    })
+  },
+
+
+  onReady() {
+    this.initGame();
   }
 });

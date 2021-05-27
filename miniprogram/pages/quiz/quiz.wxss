@@ -140,8 +140,8 @@
 }
 
 .vsIcon {
-  width: 50rpx;
-  height: 50rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 
 .preLoadContent {
@@ -320,7 +320,11 @@
 }
 
 .finishedContent {
+  display: flex;
+  justify-content: center;
   position: relative;
+  flex-direction: column;
+  align-items: center;
 }
 
 .finishedContent .resultPanel {
@@ -329,8 +333,6 @@
   border-radius: 20rpx;
   border: 1rpx solid #E6E6E6;
   position: relative;
-  left: 50%;
-  margin-left: -335rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -380,4 +382,25 @@
   font-weight: bold;
   color: #666666;
   line-height: 32rpx;
+}
+
+.resultLogo {
+  width: 300rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
+}
+
+.onemoreBattle {
+  width: 314rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60rpx;
 }

@@ -12,7 +12,7 @@
   <view class="avatars">
     <view class="infos">
       <view class="part">
-        <image src="{{participates[0].avatarUrl}}" class="avatar left" />
+        <image src="{{curUser.avatarUrl}}" class="avatar left" />
         <view class="progressWrapper">
           <view class="cu-progress">
             <view class="progress-bgColor" style="width: 60%;"></view>
@@ -29,16 +29,24 @@
           <view class="score right">80</view>
           <view class="fake-progress" style="width: 60%" />
         </view>
-        <image src="{{participates[1].avatarUrl}}" class="avatar right" />
+        <image src="{{otherUser.avatarUrl}}" class="avatar right" />
       </view>
     </view>
     <view class="namePart">
-      <view class="name">{{participates[0].nickName || ''}}</view>
-      <view class="name">{{participates[1].nickName || ''}}</view>
+      <view class="name">{{curUser.nickName || ''}}</view>
+      <view class="name">{{otherUser.nickName || ''}}</view>
     </view>
   </view>
 
   <view wx:if="{{finished}}" class="finishedContent">
+    <view wx:if="{{!otherFinished}}" />
+    <view wx:elif="{{isWin}}">
+      <image src="../../images/win.png" class="resultLogo" />
+    </view>
+    <view wx:else>
+      <image src="../../images/lose.png" class="resultLogo" />
+    </view>
+
     <view class="resultPanel">
       <view wx:for="{{resultPanel}}" wx:key="index" wx:for-item="item" class="resultItem">
         <view class="part">
@@ -58,6 +66,10 @@
           <image src="../../images/result_{{item.otherResult === 1 ? 'right' : 'wrong'}}.png" class="resultIcon" />
         </view>
       </view>
+    </view>
+
+    <view class="onemoreBattle" catchtap="onemoreBattle">
+      继续对战
     </view>
   </view>
   <view wx:elif="{{!ready}}" />

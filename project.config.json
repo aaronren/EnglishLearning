@@ -61,8 +61,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/quiz/quiz",
-					"pathName": "pages/quiz/quiz",
+					"name": "pages/room/room",
+					"pathName": "pages/room/room",
 					"query": "roomid=0000",
 					"scene": null
 				}
