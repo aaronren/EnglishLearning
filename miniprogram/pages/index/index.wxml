@@ -28,7 +28,9 @@
     <image src="../../images/list_tag.png" class="listTagIcon" />
     <view class="text">单词本: {{curWordBook}}</view>
   </view>
-
+  <view class="leftWords">
+    剩余单词: {{leftWordsNumber}}
+  </view>
   <view class="studyPlan" catchtap="toAchievement">
     历史记录
   </view>

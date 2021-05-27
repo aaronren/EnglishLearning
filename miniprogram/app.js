@@ -4,13 +4,16 @@ const event = require('./utils/event.js')
 const storage = require('./utils/storage.js')
 const media = require('./utils/media.js')
 
+const ketlist = require('./data/ketWords.js')
+const petlist = require('./data/petWords.js')
+
 App({
 
   globalData: {
     openid: '',
     userInfo: undefined,
-    wordbook: 'KET',
-    dailynumber: 5,
+    bookWordList: {}, // 现有单词列表
+    bookWords: [], // 当前选择的单词列表
     caseWords: [], // 今次学习的单词, 字符串数组
     caseWordObjs: [], // 今次学习单词对象列表
     records: [], // 学习记录
@@ -42,16 +45,11 @@ App({
       })
     }
 
-    // 基础设置信息
-    var word_book = storage.read('WORD_BOOK')
-    if (word_book) {
-      this.globalData.wordbook = word_book // "KET" "PET"
-    }
-    var daily_number = storage.read('DAILY_NUMBER')
-    if (daily_number) {
-      this.globalData.dailynumber = daily_number
-    }
-
+    // 注册后可以及时更新参数
+    event.on('settingChanged', this, function(param) {
+      this.gainLocalSetting()
+      event.emit('bookWordsChanged', '')
+    })
     // 注册后可以接收到通知带来的参数
     event.on('dailyRecordSuccess', this, function(param) {
       this.gainCloudRecords()
@@ -69,11 +67,17 @@ App({
 
     // 获取用户信息
     this.gainUserInfo()
+
+    // 基础设置信息
+    this.gainLocalSetting()
   },
 
   onShow: function (options) {
     // 初始化音频
     media.initAudioContext()
+    // 字典列表初始化
+    this.globalData.bookWordList['KET'] = ketlist.wordList
+    this.globalData.bookWordList['PET'] = petlist.wordList
   },
 
   onHide: function () {
@@ -131,5 +135,19 @@ App({
         }
       }
     })
+  },
+
+  // 基础设置信息
+  gainLocalSetting: function() {
+    var word_book = storage.read('WORD_BOOK')
+    if (word_book === "PET") {
+      this.globalData.bookWords = petlist.wordList
+    } else {
+      this.globalData.bookWords = ketlist.wordList
+    }
+    var daily_number = storage.read('DAILY_NUMBER')
+    if (daily_number) {
+      this.globalData.dailynumber = daily_number
+    }
   }
 })

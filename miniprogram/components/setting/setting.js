@@ -20,22 +20,22 @@ Component({
     settingBookOptions: {
       name: ['单词本'],
       books: [
-        `KET`,
-        `PET`,
+        'KET',
+        'PET',
       ],
-      value: [0, 0, 0],
+      number: ['']
     },
     settingDailyOptions: {
       name: ['每次词汇量'],
       number: [
         5, 10, 15, 20, 25, 30, 35, 40, 45, 50
       ],
-      unit: ['词'],
-      value: [0, 0, 0],
+      unit: ['词']
     },
     settingBookValue: 'KET',
     settingDailyValue: 5,
     curWordBook: '',
+    curBookWordNumber: app.globalData.bookWordList['KET'].length + '词'
   },
 
   /**
@@ -44,8 +44,11 @@ Component({
   methods: {
     settingBookChange(event) {
       const { detail } = event;
+      var book = this.data.settingBookOptions.books[detail.value[1]]
+      var len = app.globalData.bookWordList[book].length
       this.setData({
-        settingBookValue: this.data.settingBookOptions.books[detail.value[1]]
+        curBookWordNumber: len + '词',
+        settingBookValue: book
       });
     },
   
@@ -64,11 +67,8 @@ Component({
   
       // 目前云端操作仅做类似上报的作用，并没有从云端读取配置
       storage.save('WORD_BOOK', settingBookValue)
-      app.globalData.wordbook = settingBookValue
       // 基础设置信息
       storage.save('DAILY_NUMBER', settingDailyValue)
-      app.globalData.dailynumber = settingDailyValue
-  
       // 发送通知
       event.emit('settingChanged', settingBookValue);
   

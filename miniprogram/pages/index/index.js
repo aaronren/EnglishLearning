@@ -1,6 +1,4 @@
 // miniprogram/pages/index/index.js
-const ketlist = require('../../data/ketWords.js')
-const petlist = require('../../data/petWords.js')
 const storage = require('../../utils/storage.js')
 const event = require('../../utils/event.js')
 const app = getApp()
@@ -52,7 +50,8 @@ Page({
         nav: 'timeRecord/timeRecord'
       },
     ],
-    curWordBook: '',
+    curWordBook: 'KET',
+    leftWordsNumber: 0
   },
 
   //授权成功后
@@ -198,6 +197,9 @@ Page({
       learnedData: [insisDays, learnedWords, averageSore]
     })
 
+    // 更新单词本和剩余单词信息显示
+    this.updateBookInfo()
+
     // 筛选所有需要学习单词
     this.filteNeedLearnWords()
 
@@ -207,15 +209,8 @@ Page({
 
   // 筛选出需学单词
   filteNeedLearnWords() {
-    // 所有单词
-    var whole_list = [];
-    if (app.globalData.wordbook == "KET") {
-      whole_list = ketlist.wordList
-    } else if (app.globalData.wordbook == "PET") {
-      whole_list = petlist.wordList
-    } else {
-      whole_list = ketlist.wordList
-    }
+    // 当前单词本的单词列表
+    var whole_list = app.globalData.bookWords
     //
     var studied_list = this.data.wordsList
     var score_list = this.data.scoreList
@@ -272,6 +267,18 @@ Page({
     })
   },
 
+  updateBookInfo() {
+    var book = storage.read('WORD_BOOK') || 'KET'
+    var leftNumber = app.globalData.bookWordList[book].length - this.data.learnedData[1][0]
+    if (leftNumber < 0) {
+      leftNumber = 0
+    }
+    this.setData({
+      curWordBook: book,
+      leftWordsNumber: leftNumber
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -288,19 +295,13 @@ Page({
       this.updateBasedata(records)
     })
     // 重新初始化单词列表
-    event.on('settingChanged', this, function(settingBookValue) {
-      this.setData({
-        curWordBook: settingBookValue,
-      })
+    event.on('bookWordsChanged', this, function() {
+      this.updateBookInfo()
       this.filteNeedLearnWords()
     })
     // 更新单词组
     event.on('dailyLearned', this, function() {
       this.filteNeedLearnWords()
-    });
-
-    this.setData({
-      curWordBook: storage.read('WORD_BOOK') || 'KET',
     });
   },
 
@@ -310,7 +311,7 @@ Page({
   onUnload: function () {
     event.remove('userHasLogin',this)
     event.remove('gainCloudRecords',this)
-    event.remove('settingChanged',this)
+    event.remove('bookWordsChanged',this)
     event.remove('dailyLearned',this)
   },
 
