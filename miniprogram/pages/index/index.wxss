@@ -200,6 +200,7 @@ page {
   width: 336rpx;
   height: 152rpx;
   border: 20rpx;
+  border-radius: 20rpx;
   margin-bottom: 20rpx;
   display: flex;
 }
