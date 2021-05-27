@@ -54,6 +54,7 @@
     <view class="actionItem {{item.name}}">
       <view class="iconWrapper">
         <image class="actionIcon" src="../../images/{{item.name}}.png" />
+        <image class="dotIcon" src="../../images/light_dot_{{item.name}}.png" />
       </view>
       <view class="actionInfo">
         <view class="title">{{item.title}}</view>

@@ -25,7 +25,11 @@
           {{currentWord.sentense.en}}
         </view>
       </block>
-      <text class="word-definition" wx:if="{{stepIndex==1}}">{{currentWord.trans}}</text>
+      <view class="word-definition" wx:if="{{stepIndex==1}}">
+        <view class="definition" wx:for="{{currentWord.transArr}}" wx:for-item="item" wx:key="index">
+          {{item}};
+        </view>
+      </view>
     </view>
 
     <view class="select-options" wx:if="{{wordIndex < wordCount}}">
