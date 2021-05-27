@@ -2,6 +2,8 @@
 const storage = require('../../utils/storage.js')
 const event = require('../../utils/event.js')
 
+const app = getApp();
+
 Component({
   /**
    * 组件的属性列表
@@ -18,10 +20,9 @@ Component({
     settingBookOptions: {
       name: ['单词本'],
       books: [
-        'KET',
-        'PET'
+        `KET`,
+        `PET`,
       ],
-      words: ['750词'],
       value: [0, 0, 0],
     },
     settingDailyOptions: {
@@ -34,6 +35,7 @@ Component({
     },
     settingBookValue: 'KET',
     settingDailyValue: 5,
+    curWordBook: '',
   },
 
   /**
@@ -68,7 +70,7 @@ Component({
       app.globalData.dailynumber = settingDailyValue
   
       // 发送通知
-      event.emit('settingChanged', '');
+      event.emit('settingChanged', settingBookValue);
   
       this.settingModalHide();
   
@@ -88,9 +90,9 @@ Component({
     settingModalShow() {
       const { settingBookOptions, settingDailyOptions } = this.data;
       // read storage
-      const wordBook = storage.read('WORD_BOOK') || 'KET'
-      const dailyNumber = storage.read('DAILY_NUMBER') || 5
-      
+      const wordBook = storage.read('WORD_BOOK') || 'KET';
+      const dailyNumber = storage.read('DAILY_NUMBER') || 5;
+
       this.setData({
         settingBookOptions: {
           ...settingBookOptions,

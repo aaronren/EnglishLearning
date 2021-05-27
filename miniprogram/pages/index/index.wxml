@@ -26,11 +26,7 @@
 <view class="studyCard">
   <view class="listTag flex">
     <image src="../../images/list_tag.png" class="listTagIcon" />
-    <view class="text">单词本: KET</view>
-  </view>
-
-  <view class="leftWords">
-    剩余单词: 6750
+    <view class="text">单词本: {{curWordBook}}</view>
   </view>
 
   <view class="studyPlan" catchtap="toAchievement">
