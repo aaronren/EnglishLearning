@@ -20,9 +20,6 @@
         <picker-view-column class="pickerColumn">
           <view wx:for="{{settingBookOptions.books}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
         </picker-view-column>
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingBookOptions.words}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
       </picker-view>
 
       <picker-view bindchange="settingDailyChange" indicator-style="height: 40px;" value="{{settingDailyOptions.value}}">

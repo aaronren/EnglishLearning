@@ -1,40 +1,61 @@
 // miniprogram/pages/room/room.js
+const event = require('../../utils/event');
 
 const app = getApp();
 
 Page({
   data: {
-    gameInfo: null,
-    participates: [],
-    curOpenId: '',
-    button: null,
+    roomInput: [],
+    inputFocus: false,
+    curUser: null,
+  },
+
+  directToQuizPage() {
+    const roomNumber = this.data.roomInput.join('');
+    wx.navigateTo({
+      url: `/pages/quiz/quiz?roomid=${roomNumber}`,
+    });
   },
 
   joinRoomAction() {
+    if (this.data.roomInput.length < 4) {
+      wx.showToast({
+        title: '房间号不正确, 请重新输入',
+        icon: 'none',
+        duration: 2000,
+      });
+      return;
+    }
+
+    const roomNumber = this.data.roomInput.join('');
     wx.cloud.callFunction({
       name: 'game',
       data: {
         action: 'join',
-        roomNumber: '1234567',
+        roomNumber,
         userInfo: app.globalData.userInfo,
       },
       success: res => {
-        console.log('result', res);
         if (res && res.result.code === 0) {
           wx.showToast({
             title: '加入成功',
             duration: 2000,
             icon: 'none',
             complete: () => {
-              this.initPage();
+              this.directToQuizPage();
             }
           });
         } else {
-          wx.showToast({
-            title: '加入失败',
-            duration: 2000,
-            icon: 'none',
-          })
+          // 已经在队伍中, 直接进入quiz页面
+          if (res.result.code === 100) {
+            this.directToQuizPage();
+          } else {
+            wx.showToast({
+              title: '加入房间失败',
+              duration: 2000,
+              icon: 'none',
+            });
+          }
         }
       }
     })
@@ -45,91 +66,47 @@ Page({
       name: 'game',
       data: {
         action: 'createRoom',
-        roomNumber: '1234567',
         userInfo: app.globalData.userInfo,
       },
       success: res => {
-        this.initGame(res.result.data);
+        console.log('res', res)
+        this.setData({
+          roomInput: res.result.data.roomNumber.split(''),
+        });
+        wx.showToast({
+          title: '创建房间成功',
+          duration: 2000,
+        })
       }
     })
   },
 
-  beginQuiz() {
-    wx.navigateTo({
-      url: `/pages/quiz/quiz?roomid=${'1234567'}`,
-      events: {
-        quizFinishHandler: () => {
-          this.initPage();
-        }
-      }
-    })
-  },
-
-  initGame(gameInfo) {
-    const { participates = [] } = gameInfo;
-    const data = {
-      participates,
-    };
-    const curOpenId = app.globalData.openid;
-    const curUser = participates.find(p => p.pid === curOpenId);
-    if (curUser) {
-      data.curUser = curUser;
-    } else {
-      if (participates.length === 2) {
-        this.setData({
-          ...data,
-          button: {
-            disable: true,
-            msg: '人数已满',
-          }
-        })
-      } else {
-        this.setData({
-          ...data,
-          button: {
-            disable: false,
-            msg: '加入',
-            action: this.joinRoomAction,
-          }
-        })
-      }
-      return;
-    }
+  roomInputChangeHandler(event) {
+    const { detail } = event;
     this.setData({
-      ...data,
-    });
+      roomInput: detail.value.split(''),
+    })
   },
 
-  initPage() {
-    wx.cloud.callFunction({
-      name: 'game',
-      data: {
-        action: 'load',
-        roomNumber: '1234567',
-      },
-      success: res => {
-        console.log('load game', res);
-        if (res && res.result && res.result.code === 0) {
-          const game = res.result.game;
-          if (!game) {
-            this.createRoomAction();
-          } else {
-            this.initGame(game);
-          }
-        }
-      }
-    });
-  },
-
-  finishHandler() {
-    wx.showToast({
-      title: '您已经参加过了比赛了~',
-      icon: 'none',
-      duration: 2000,
+  focusInputHandler() {
+    this.setData({
+      inputFocus: true,
     })
   },
 
   onLoad() {
-    this.initPage();
+    event.on('userHasLogin', this, (param) => {
+      this.setData({
+        curUser: param,
+      });
+    })
+  },
+
+  onReady() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        curUser: app.globalData.userInfo,
+      });
+    }
   }
 })

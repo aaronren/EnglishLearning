@@ -1,0 +1,405 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.container .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .bg .leftBg {
+  display: flex;
+  flex: 1;
+  background: #E1F8F1;
+  height: 100%;
+}
+
+.container .bg .rightBg {
+  display: flex;
+  flex: 1;
+  background: #B9F1E5;
+  opacity: 0.68;
+  height: 100%;
+}
+
+.container .bg .bgText {
+  position: absolute;
+  width: 600rpx;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgText .text {
+  font-size: 500rpx;
+  opacity: 0.2;
+  font-weight: bold;
+  color: #41EFB5;
+}
+
+.avatars {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-top: 44rpx;
+  flex-direction: column;
+}
+
+.avatars .infos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatars .namePart {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10rpx;
+  position: relative;
+  padding: 0 20rpx;
+}
+
+.namePart .name {
+  font-size: 24rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #222222;
+  line-height: 34rpx;
+}
+
+.avatars .part {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+}
+
+.avatars .part .avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  border: 4rpx solid #FFF;
+}
+
+.avatars .progressWrapper {
+  display: flex;
+  width: 250rpx;
+  height: 48rpx;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+}
+
+.progressWrapper .progress-bgColor {
+  background-image: linear-gradient(90deg, #3DFB9A 0%, #00CF88 100%);
+  border-radius: 4rpx 0 0 4rpx;
+}
+
+.progressWrapper .fake-progress {
+  background-image: linear-gradient(90deg, #FEAE26 0%, #FEC95C 100%);
+  height: 30rpx;
+  position: absolute;
+  right: 0;
+}
+
+.progressWrapper .cu-progress {
+  height: 30rpx;
+  background-color: #fff;
+}
+
+.progressWrapper .score {
+  position: absolute;
+  height: 28rpx;
+  font-size: 28rpx;
+  font-family: DINMittelschriftLTW1G;
+  color: #FFFFFF;
+  top: 50%;
+  margin-top: -14rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.progressWrapper .score.right {
+  right: 10rpx;
+}
+
+.progressWrapper .score.left {
+  left: 10rpx;
+}
+
+.vsIcon {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.preLoadContent {
+  width: 100%;
+  margin-top: 482rpx;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.preLoadContent .quizIndex {
+  width: 458rpx;
+  height: 112rpx;
+  background: linear-gradient(90deg, #3BFA99 0%, #50E3F7 100%);
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preLoadContent .quizIndex .text {
+  font-size: 32rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 32rpx;
+  text-shadow: 0rpx 2rpx 2rpx #00A46C;
+}
+
+.preLoadContent .quizIndex .quizNumberIcon {
+  width: 26rpx;
+  height: 50rpx;
+  margin: 0 16rpx;
+}
+
+.quizsContainer {
+  position: relative;
+  margin-top: 150rpx;
+  width: 670rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  left: 50%;
+  margin-left: -335rpx;
+  padding: 164rpx 0 100rpx 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.countDown.whiteCircle {
+  background-color: #fff;
+}
+
+.countDown.darkGreenCircle {
+  background-color: #B9F1E5;
+}
+
+.countDown.lightGreenCircle {
+  background-color: #E1F8F1;
+}
+
+.countDown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.countDown.xl {
+  width: 164rpx;
+  height: 164rpx;
+  border-radius: 82rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -82rpx;
+  top: -82rpx;
+}
+
+.countDown.l {
+  width: 142rpx;
+  height: 142rpx;
+  border-radius: 71rpx;
+}
+
+.countDown.m {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+}
+
+.countDown.s {
+  width: 98rpx;
+  height: 98rpx;
+  border-radius: 49rpx;
+}
+
+.countDown .text {
+  font-family: Arial-Black, Arial;
+  font-weight: bold;
+  font-size: 45rpx;
+  color: #fff;
+}
+
+.quizsContainer .word {
+  font-size: 72rpx;
+  font-family: Arial-Black, Arial;
+  font-weight: 900;
+  color: #222222;
+  line-height: 72rpx;
+  margin-bottom: 100rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.quizsContainer .option {
+  width: 590rpx;
+  height: 90rpx;
+  border-radius: 20rpx 40rpx 12rpx 12rpx;
+  border: 1rpx solid #E6E6E6;
+  position: relative;
+  left: 50%;
+  margin-left: -295rpx;
+  margin-bottom: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
+}
+
+.quizsContainer .option.wrong {
+  color: #F96A32;
+  border: 1rpx solid #FF8E57;
+  background-color: #FFF4F0;
+}
+
+.quizsContainer .option.right {
+  color: #00CF88;
+  border: 1rpx solid #00CF88;
+  background-color: #E9FFF5;
+}
+
+.option .text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90%;
+  text-align: center;
+}
+
+.option .tag {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 12rpx 2rpx 12rpx 2rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.option .tag.wrong-tag {
+  background-color: #FF8E56;
+}
+
+.option .tag.right-tag {
+  background-color: #06CF88;
+}
+
+.option .tag .icon {
+  width: 16rpx;
+  height: 16rpx;
+}
+
+.finishedContent {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+
+.finishedContent .resultPanel {
+  width: 670rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  border: 1rpx solid #E6E6E6;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 0;
+  margin-top: 60rpx;
+}
+
+.resultPanel .resultItem {
+  display: flex;
+  margin: 24rpx 40rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resultItem .part {
+  display: flex;
+  position: relative;
+  flex: 1;
+}
+
+.resultItem .resultIcon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.resultItem .name {
+  display: flex;
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+.resultItem .name .text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90%;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
+}
+
+.resultItem .noResult {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: bold;
+  color: #666666;
+  line-height: 32rpx;
+}
+
+.resultLogo {
+  width: 300rpx;
+  height: 200rpx;
+  margin-top: 20rpx;
+}
+
+.onemoreBattle {
+  width: 314rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  border-radius: 40rpx;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60rpx;
+}

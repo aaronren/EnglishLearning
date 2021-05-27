@@ -1,6 +1,7 @@
 // miniprogram/pages/index/index.js
 const ketlist = require('../../data/ketWords.js')
 const petlist = require('../../data/petWords.js')
+const storage = require('../../utils/storage.js')
 const event = require('../../utils/event.js')
 const app = getApp()
 
@@ -51,6 +52,7 @@ Page({
         nav: 'timeRecord/timeRecord'
       },
     ],
+    curWordBook: '',
   },
 
   //授权成功后
@@ -286,13 +288,20 @@ Page({
       this.updateBasedata(records)
     })
     // 重新初始化单词列表
-    event.on('settingChanged', this, function() {
+    event.on('settingChanged', this, function(settingBookValue) {
+      this.setData({
+        curWordBook: settingBookValue,
+      })
       this.filteNeedLearnWords()
     })
     // 更新单词组
     event.on('dailyLearned', this, function() {
       this.filteNeedLearnWords()
-    })
+    });
+
+    this.setData({
+      curWordBook: storage.read('WORD_BOOK') || 'KET',
+    });
   },
 
   /**

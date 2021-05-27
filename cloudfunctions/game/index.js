@@ -1,15 +1,15 @@
 // 云函数入口文件 // mark: xxx
 const cloud = require('wx-server-sdk')
 cloud.init({
-  env: 'debug-0k6dy', // 'debug-0k6dy', // 
-  traceUser: true,
+  // API 调用都保持和云函数当前所在环境一致
+  env: cloud.DYNAMIC_CURRENT_ENV
 })
 const db = cloud.database();
 
 const generatePaper = async () => {
   const words = await db.collection('wordsList')
   .aggregate()
-  .sample({ size: 10 })
+  .sample({ size: 7 })
   .end()
   .then(res => {
     return res && res.list || [];
@@ -56,8 +56,33 @@ exports.main = async (event, context) => {
   const {
     roomNumber,
     score,
+    answers,
     userInfo,
   } = event;
+
+  if (event.action === 'createRoom') {
+    const paper = await generatePaper();
+    const roomCnt = await db.collection('game').count();
+    const roomNumber = Array.from({ length: 4 - String(roomCnt.total).length }, (i) => 0).join('') + String(roomCnt.total);
+    
+    const addItem = {
+      roomNumber,
+      owner: wxContext.OPENID,
+      quiz: paper,
+      status: 'open',
+      participates: [],
+    }
+    await db.collection('game').add({
+      data: {
+        ...addItem,
+      }
+    });
+    // 创建成功
+    return promisify({
+      code: 0,
+      data: addItem,
+    })
+  }
 
   const gameIns = await db.collection('game').where({
     roomNumber,
@@ -68,32 +93,6 @@ exports.main = async (event, context) => {
       code: 0,
       game: gameIns.data[0],
     });
-  }
-
-  if (event.action === 'createRoom') {
-    const paper = await generatePaper();
-    const addItem = {
-      roomNumber,
-      owner: wxContext.OPENID,
-      quiz: paper,
-      status: 'open',
-      participates: [{
-        pid: wxContext.OPENID,
-        status: 'pending',
-        score: 0,
-        ...userInfo,
-      }],
-    }
-    await db.collection('game').add({
-      data: {
-        ...addItem,
-      }
-    })
-    // 创建成功
-    return promisify({
-      code: 0,
-      data: addItem,
-    })
   }
 
   if (event.action === 'join') {
@@ -129,7 +128,7 @@ exports.main = async (event, context) => {
         })
       } else {
         return promisify({
-          code: -1,
+          code: 100,
           msg: '已经在队伍中',
         })
       }
@@ -141,30 +140,6 @@ exports.main = async (event, context) => {
     }
   }
 
-  if (event.action === 'beginQuiz') {
-    // if (gameIns.data.length > 0) {
-    //   const game = gameIns.data[0];
-    //   const { participates = [] } = game;
-
-    //   const me = participates.find(p => p.pid === wxContext.OPENID);
-    //   if (me) {
-    //     me.status = 'starting';
-    //     await db.collection('game').where({
-    //       roomNumber,
-    //     }).update({
-    //       data: {
-    //         participates,
-    //       },
-    //     });
-    //     return promisify({
-    //       code: 0,
-    //       msg: '比赛开始',
-    //       users: participates,
-    //     })
-    //   }
-    // }
-  }
-
   if (event.action === 'finishQuiz') {
     if (gameIns.data.length > 0) {
       const game = gameIns.data[0];
@@ -173,6 +148,7 @@ exports.main = async (event, context) => {
       if (me) {
         me.status = 'finished';
         me.score = score;
+        me.answers = answers;
         await db.collection('game').where({
           roomNumber,
         }).update({
@@ -187,7 +163,32 @@ exports.main = async (event, context) => {
         })
       }
     }
+  }
 
+  if (event.action === 'updateScore') {
+    if (gameIns.data.length > 0) {
+      const game = gameIns.data[0];
+      const { participates = [] } = game;
+      const me = participates.find(p => p.pid === wxContext.OPENID);
+      console.log('更新成绩')
+      if (me) {
+        me.status = 'goingon';
+        me.score = score;
+        me.answers = answers;
+        await db.collection('game').where({
+          roomNumber,
+        }).update({
+          data: {
+            participates,
+          },
+        });
+        return promisify({
+          code: 0,
+          msg: '更新成功',
+          users: participates,
+        })
+      }
+    }
   }
 
   // 关闭比赛

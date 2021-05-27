@@ -4,48 +4,154 @@
   height: 100vh;
 }
 
-.container .info {
-  margin-top: 20rpx;
+.container .bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.container .bg .leftBg {
+  display: flex;
+  flex: 1;
+  background: #E1F8F1;
+  height: 100%;
+}
+
+.container .bg .rightBg {
+  display: flex;
+  flex: 1;
+  background: #B9F1E5;
+  opacity: 0.68;
+  height: 100%;
+}
+
+.container .bg .bgText {
+  position: absolute;
+  width: 600rpx;
+  height: 500rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgText .text {
+  font-size: 500rpx;
+  opacity: 0.2;
+  font-weight: bold;
+  color: #41EFB5;
+}
+
+.avatars {
+  position: relative;
+  padding-top: 362rpx;
+  width: 100%;
+  display: flex;
   justify-content: space-between;
 }
 
-.info .person {
-  width: 50%;
-  flex-direction: column;
-  align-items: center;
+.avatars .leftPart {
+  width: 282rpx;
+  height: 148rpx;
+  background: linear-gradient(270deg, #2CEE95 0%, rgba(45, 239, 149, 0) 100%);
+  border-radius: 0rpx 200rpx 200rpx 0rpx;
   display: flex;
-}
-
-.person .avatar {
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 100rpx;
-  margin-bottom: 10rpx;
-}
-
-.person .avatar.empty {
-  background-color: #666;
-}
-
-.person .name {
-  font-size: 24rpx;
-}
-
-.bottom_button {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 150rpx;
-  background-color: bisque;
-}
-
-.bottom_button .text {
   align-items: center;
+  position: relative;
+}
+
+.avatars .rightPart {
+  width: 282rpx;
+  height: 148rpx;
+  background: linear-gradient(90deg, #FEC759 0%, rgba(254, 199, 89, 0) 100%);
+  border-radius: 200rpx 0rpx 0rpx 200rpx;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.avatars .avatar {
+  width: 108rpx;
+  height: 108rpx;
+  border: 2rpx solid #FFFFFF;
+  position: absolute;
+  border-radius: 54rpx;
+}
+
+.avatar.left {
+  right: 20rpx;
+}
+
+.avatar.right {
+  left: 20rpx;
+}
+
+.roomInput {
+  margin-top: 78rpx;
+  width: 100%;
   justify-content: center;
   display: flex;
-  font-size: 28rpx;
-  color: #000;
-  height: 100%;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 120rpx;
+}
+
+.roomInput .title {
+  font-size: 36rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
+  line-height: 50rpx;
+  margin-bottom: 40rpx;
+}
+
+.roomInput .inputWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.inputWrapper .inputBox {
+  width: 90rpx;
+  height: 90rpx;
+  background: #FFFFFF;
+  border-radius: 8rpx;
+  border: 1rpx solid #E6E6E6;
+  margin: 0 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60rpx;
+  font-family: DINMittelschriftLTW1G;
+  color: #222222;
+  font-weight: bold;
+  line-height: 52rpx;
+}
+
+.controlBtn {
+  width: 394rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #FFFFFF;
+  line-height: 32rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+  left: 50%;
+  margin-left: -197rpx;
+}
+
+.hiddenInput {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  /* display: none; */
 }

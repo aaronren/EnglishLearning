@@ -1,13 +1,112 @@
 <view class="container">
-  <!-- progress -->
+  <view class="bg">
+    <view class="leftBg" />
+    <view class="rightBg" />
 
-  <view class="word" wx:if="{{quizs[progressIndex]}}">
-    {{quizs[progressIndex].word}}
-  </view>
-
-  <view class="options" wx:if="{{quizs[progressIndex]}}">
-    <view wx:for="{{quizs[progressIndex].quiz.questions}}" wx:for-item="question" wx:key="index" catchtap="makeDicision" data-index="{{index}}">
-      {{question}}
+    <view class="bgText">
+      <view class="text">V</view>
+      <view class="text">S</view>
     </view>
   </view>
+
+  <view class="avatars">
+    <view class="infos">
+      <view class="part">
+        <image src="{{curUser.avatarUrl}}" class="avatar left" />
+        <view class="progressWrapper">
+          <view class="cu-progress">
+            <view class="progress-bgColor" style="width: {{curScore}}%"></view>
+          </view>
+
+          <view class="score left">{{curScore}}</view>
+        </view>
+      </view>
+
+      <image class="vsIcon" src="../../images/vs.png" />
+
+      <view class="part">
+        <view class="progressWrapper">
+          <view class="score right">{{otherScore}}</view>
+          <view class="fake-progress" style="width: {{otherScore}}%" />
+        </view>
+        <image src="{{otherUser.avatarUrl}}" class="avatar right" />
+      </view>
+    </view>
+    <view class="namePart">
+      <view class="name">{{curUser.nickName || ''}}</view>
+      <view class="name">{{otherUser.nickName || ''}}</view>
+    </view>
+  </view>
+
+  <view wx:if="{{finished}}" class="finishedContent">
+    <view wx:if="{{!otherFinished}}" />
+    <view wx:elif="{{isWin}}">
+      <image src="../../images/win.png" class="resultLogo" />
+    </view>
+    <view wx:else>
+      <image src="../../images/lose.png" class="resultLogo" />
+    </view>
+
+    <view class="resultPanel">
+      <view wx:for="{{resultPanel}}" wx:key="index" wx:for-item="item" class="resultItem">
+        <view class="part">
+          <image src="../../images/result_{{item.curResult === 1 ? 'right' : 'wrong'}}.png" class="resultIcon" />
+
+          <view class="name">
+            <view class="text">
+              {{item.question}}
+            </view>
+          </view>
+        </view>
+
+        <view wx:if="{{item.otherResult === -1}}">
+          <text class="noResult">-</text>
+        </view>
+        <view wx:else>
+          <image src="../../images/result_{{item.otherResult === 1 ? 'right' : 'wrong'}}.png" class="resultIcon" />
+        </view>
+      </view>
+    </view>
+
+    <view class="onemoreBattle" catchtap="onemoreBattle">
+      继续对战
+    </view>
+  </view>
+  <view wx:elif="{{!ready}}" />
+  <view wx:elif="{{quizPreLoading}}" class="preLoadContent">
+    <view class="quizIndex">
+      <view class="text">第</view>
+      <image src="../../images/number_{{progressIndex+1}}.png" class="quizNumberIcon" />
+      <view class="text">题</view>
+    </view>
+  </view>
+  <view wx:else class="quizsContainer">
+    <view class="countDown whiteCircle xl">
+      <view class="countDown darkGreenCircle l">
+        <view class="countDown lightGreenCircle m">
+          <view class="countDown darkGreenCircle s">
+            <view class="text">{{countDown}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="word">
+      {{quizs[progressIndex].word}}
+    </view>
+
+    <view class="option {{wrongAnswerIdx === index ? 'wrong' : rightAnswerIdx === index ? 'right' : ''}}" wx:for="{{quizs[progressIndex].quiz.questions}}" wx:for-item="item" wx:for-index="index" data-index="{{index}}" wx:key="index" catchtap="makeDicision">
+      <view class="text">
+        {{item}}
+      </view>
+      <view class="tag wrong-tag" wx:if="{{wrongAnswerIdx == index}}">
+        <image src="../../images/option_wrong.png" class="icon" />
+      </view>
+      <view class="tag right-tag" wx:elif="{{rightAnswerIdx == index}}">
+        <image src="../../images/option_right.png" class="icon" />
+      </view>
+      <view wx:else />
+    </view>
+  </view>
+
 </view>
