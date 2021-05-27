@@ -95,12 +95,26 @@
 
   <!--恭喜完成-->
   <view wx:if="{{stepIndex==3}}">
-    <view class="word-info">
-      <text class="word-content">🎉恭喜完成🎉</text>
-    </view>
-    <view class="bottom-button cu-bar tabbar border shop">
-      <view class="submit" bindtap="toAddSubscribeMessage">
-        明天{{remindTime}}提醒学习</view>
+    <image class="topBgImg" src="../../images/top_banner.png" />
+
+    <view class="finishContent">
+      <image class="goodjobIcon" src="../../images/good_job.png" />
+      <view class="goodJobText">恭喜你已完成今日任务</view>
+
+      <view class="studyCard">
+        <image src="{{userInfo.avatarUrl}}" class="finishAvatar" />
+        <view class="finishNickname">{{userInfo.nickName}}</view>
+
+        <view class="finishInfo">
+          <view class="infoItem" wx:for="{{learnedData}}" wx:for-item="item" wx:key="index">
+            <view class="value">{{item[0]}}</view>
+            <view class="title">{{item[1]}}</view>
+          </view>
+        </view>
+
+        <view class="controlBtn">继续学习</view>
+        <view class="controlBtn orange" bindtap="toAddSubscribeMessage">明天{{remindTime}}提醒学习</view>
+      </view>
     </view>
   </view>
 

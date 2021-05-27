@@ -3,6 +3,7 @@ const timing = require('../../utils/timing.js')
 const event = require('../../utils/event.js')
 const media = require('../../utils/media.js')
 const utils = require('../../utils/utils.js')
+const userUtils = require('../../utils/user.js');
 const app = getApp()
 const pushId = 'LmksV0w7m6py37BcSMOMArEEB9UxInLEh9xydqmFbJs'
 
@@ -371,6 +372,14 @@ Page({
       })
     }, 1000) // 1s后切换
   },
+
+  updateBasedata(records) {
+    if (!records) return;
+    const { insisDays, learnedWords, averageSore } = userUtils.calcDailyUserData(records);
+    this.setData({
+      learnedData: [insisDays, learnedWords, averageSore]
+    })
+  },
   
   /**
    * 生命周期函数--监听页面加载
@@ -389,16 +398,24 @@ Page({
       randomWordList: init_random_list,
       wordCount: init_random_list.length,
       wordIndex: 0,
-      startTimestamp: timing.timestamp()
+      startTimestamp: timing.timestamp(),
     })
     this.nextSteps()
+
+    event.on('gainCloudRecords', this, function(records) {
+      this.updateBasedata(records)
+    });
+
+    this.updateBasedata(app.globalData.records)
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    
+    this.setData({
+      userInfo: app.globalData.userInfo,
+    })
   },
 
   /**

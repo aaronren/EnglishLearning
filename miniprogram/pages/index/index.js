@@ -1,6 +1,7 @@
 // miniprogram/pages/index/index.js
 const storage = require('../../utils/storage.js')
 const event = require('../../utils/event.js')
+const userUtils = require('../../utils/user.js');
 const app = getApp()
 
 Page({
@@ -142,57 +143,9 @@ Page({
 
   // 从历史记录里统计词汇总量、天数、已学单词、平均得分
   updateBasedata(records) {
-    console.log("updateBasedata")
-    // 统计不重复单词数量
-    var words = {}
-    // 统计不重复天数
-    var days = {}
-    // 单词最高得分
-    var avgscore = 0
-    // 循环统计
-    for (var recordIdx in records) {
-      // 单词列表
-      var wlist = records[recordIdx].wordslist
-      // 得分
-      var slist = records[recordIdx].scorelist
-      // 
-      for (var wordIdx in wlist) {
-        var word = wlist[wordIdx]
-        if (wordIdx < slist.length) {
-          if (words[word]) {
-            if (slist[wordIdx] > words[word]) {
-              words[word] =  slist[wordIdx]
-            }
-          } else {
-            words[word] = slist[wordIdx]
-          }
-        }
-      }
-      if (slist && slist.length>0) {
-        var eachAvg = 0
-        for (var scoreIdx in slist) {
-          eachAvg = eachAvg + slist[scoreIdx]
-        }
-        avgscore = avgscore + eachAvg / slist.length
-      }
-      // 时间
-      var date = records[recordIdx].starttime
-      var dateStr = new Date(date).toDateString()
-      if (days[dateStr]) {
-        days[dateStr] = days[dateStr] + 1
-      } else {
-        days[dateStr] = 1
-      }
-    }
-    const key_wordlist = Object.keys(words)
-    const key_daylist = Object.keys(days)
-    const avg_scorelist = records.length>0 ? (avgscore / records.length) : 0
-    this.data.wordsList = key_wordlist
-    this.data.scoreList = Object.values(words)
-
-    var insisDays = [key_daylist.length, '坚持天数']
-    var learnedWords = [key_wordlist.length, '已学单词']
-    var averageSore = [avg_scorelist.toPrecision(2)+'/3', '平均得分']
+    const { insisDays, learnedWords, averageSore, key_wordlist, scoreList } = userUtils.calcDailyUserData(records);
+    this.data.scoreList = scoreList;
+    this.data.wordsList = key_wordlist;
     this.setData({
       learnedData: [insisDays, learnedWords, averageSore]
     })
