@@ -12,7 +12,10 @@
   <view class="avatars">
     <view class="infos">
       <view class="part">
-        <image src="{{curUser.avatarUrl}}" class="avatar left" />
+        <view class="imageHolder left">
+          <image src="{{curUser.avatarUrl}}" class="avatar" />
+          <view class="name">{{curUser.nickName || ''}}</view>
+        </view>
         <view class="progressWrapper">
           <view class="cu-progress">
             <view class="progress-bgColor" style="width: {{curScore}}%"></view>
@@ -29,12 +32,11 @@
           <view class="score right">{{otherScore}}</view>
           <view class="fake-progress" style="width: {{otherScore}}%" />
         </view>
-        <image src="{{otherUser.avatarUrl}}" class="avatar right" />
+        <view class="imageHolder right">
+          <image src="{{otherUser.avatarUrl}}" class="avatar" />
+          <view class="name">{{otherUser.nickName || ''}}</view>
+        </view>
       </view>
-    </view>
-    <view class="namePart">
-      <view class="name">{{curUser.nickName || ''}}</view>
-      <view class="name">{{otherUser.nickName || ''}}</view>
     </view>
   </view>
 

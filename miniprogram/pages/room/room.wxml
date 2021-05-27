@@ -35,7 +35,7 @@
     开始对战
   </view>
 
-  <view class="controlBtn" catchtap="createRoomAction">
+  <view class="controlBtn orange" catchtap="createRoomAction">
     创建房间
   </view>
 

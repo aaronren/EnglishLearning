@@ -1,6 +1,6 @@
 const app = getApp();
 
-const COUNT_DOWN = 10;
+const COUNT_DOWN = 1000;
 let countDownInterval = null;
 let updateInfoInterval = null;
 
