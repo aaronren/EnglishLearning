@@ -163,7 +163,32 @@ exports.main = async (event, context) => {
         })
       }
     }
+  }
 
+  if (event.action === 'updateScore') {
+    if (gameIns.data.length > 0) {
+      const game = gameIns.data[0];
+      const { participates = [] } = game;
+      const me = participates.find(p => p.pid === wxContext.OPENID);
+      console.log('更新成绩')
+      if (me) {
+        me.status = 'goingon';
+        me.score = score;
+        me.answers = answers;
+        await db.collection('game').where({
+          roomNumber,
+        }).update({
+          data: {
+            participates,
+          },
+        });
+        return promisify({
+          code: 0,
+          msg: '更新成功',
+          users: participates,
+        })
+      }
+    }
   }
 
   // 关闭比赛

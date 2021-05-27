@@ -1,8 +1,8 @@
-const event = require('../../utils/event');
 const app = getApp();
 
-const COUNT_DOWN = 100;
+const COUNT_DOWN = 10;
 let countDownInterval = null;
+let updateInfoInterval = null;
 
 Page({
   /**
@@ -25,6 +25,7 @@ Page({
     otherUser: {},
     curScore: 0,
     otherScore: 0,
+    isAnswering: false,
   },
 
   scoreCalc(correctCnt) {
@@ -33,12 +34,18 @@ Page({
   },
 
   async makeDicision(event) {
+    const { answers, roomid, isAnswering } = this.data;
+    if (isAnswering) {
+      return;
+    }
+    this.setData({
+      isAnswering: true,
+    });
     clearInterval(countDownInterval);
     countDownInterval = null;
     const { currentTarget } = event;
     const { dataset } = currentTarget;
     const optionIdx = dataset.index;
-    const { answers } = this.data;
     const { quizs, progressIndex, correctCnt } = this.data;
     const currentQuestion = quizs[progressIndex];
     let correct = correctCnt;
@@ -53,12 +60,22 @@ Page({
           rightAnswerIdx: answer,
           curScore,
         });
+
+        await wx.cloud.callFunction({
+          name: 'game',
+          data: {
+            action: 'updateScore',
+            score: curScore,
+            answers,
+            roomNumber: roomid,
+          }
+        });
       } else {
         // 回答错误
         answers.push(0);
         this.setData({
           wrongAnswerIdx: optionIdx,
-        })
+        });
       }
 
       this.setData({
@@ -68,6 +85,9 @@ Page({
 
       // 移动到下一题
       setTimeout(() => {
+        this.setData({
+          isAnswering: false,
+        });
         this.moveToNextQuiz();
       }, 2000);
     }
@@ -165,20 +185,25 @@ Page({
     });
   },
 
-  initScoreProgress(participates) {
+  initScoreProgress(participates, useCur = false) {
     const curOpenid = app.globalData.openid;
     const curUser = participates.find(p => p.pid === curOpenid);
     const otherUser = participates.find(p => p.pid !== curOpenid);
 
-    const correctCalc = (answers) => {
+    const correctCalc = (answers = []) => {
       return answers.reduce((acc, item) => acc += item, 0);
     }
 
     if (curUser) {
-      const { answers } = curUser;
+      let answers = []
+      if (useCur) {
+        answers = this.data.answers;
+      } else {
+        answers = curUser.answers;
+      }
       const curCorrects = correctCalc(answers);
       const curScore = this.scoreCalc(curCorrects);
-
+      
       this.setData({
         curScore,
       })
@@ -195,7 +220,79 @@ Page({
     }
   },
 
-  initGame() {
+  resultPanelHandler(game, curUser, curOpenid) {
+    const { score, answers } = curUser; 
+    this.setData({
+      ready: true,
+      finished: true,
+      curUser,
+      participates: game.participates,
+    });
+
+    // 与另一个对手作比较
+    const otherUser = game.participates.find(p => p.pid !== curOpenid) || {};
+    const {
+      status: otherStatus,
+      score: otherScore,
+      answers: otherAnswers = [],
+    } = otherUser;
+    let isWin = false;
+    let otherFinished = false
+    if (otherStatus === 'finished') {
+      // 生成比较
+      isWin = score > otherScore;
+      otherFinished = true;
+
+      clearInterval(updateInfoInterval);
+      updateInfoInterval = null;
+    }
+
+    const resultPanel = [];
+    game.quiz.forEach((item, idx) => {
+      const otherAnswer = otherAnswers[idx];
+      resultPanel.push({
+        curResult: answers[idx],
+        otherResult: otherAnswer === undefined ? -1 : otherAnswer,
+        question: game.quiz[idx].word,
+      });
+    });
+    this.setData({
+      resultPanel,
+      isWin,
+      otherUser,
+      otherFinished,
+    });
+    this.initScoreProgress(game.participates);
+  },
+
+  updateBattleInfo() {
+    this.loadGame(this.data.roomid)
+      .then((res) => {
+        if (res && res.result && res.result.code == 0) {
+          const game = res.result.game;
+          const { participates } = game;
+          const curOpenid = app.globalData.openid;
+          const curUser = game.participates.find(p => p.pid === curOpenid);
+          const otherUser = participates.find(p => p.pid !== curOpenid) || {};
+
+          this.initScoreProgress(participates, true);
+
+          this.setData({
+            otherUser,
+          });
+
+          // 判断是否结束
+          if (curUser) {
+            const { status } = curUser;
+            if (status === 'finished') {
+              this.resultPanelHandler(game, curUser, curOpenid);
+            }
+          }
+        }
+      });
+  },
+
+  initGame(init = false) {
     Promise.all([
       this.loadGame(this.data.roomid),
     ]).then(([gameRes]) => {
@@ -204,49 +301,12 @@ Page({
         // 查看状态
         const curOpenid = app.globalData.openid;
         const curUser = game.participates.find(p => p.pid === curOpenid);
+        const otherUser = game.participates.find(p => p.pid !== curOpenid);
         if (curUser) {
-          const { status, score, answers } = curUser;
+          const { status } = curUser;
           if (status === 'finished') {
-            this.setData({
-              ready: true,
-              finished: true,
-              quizs: game.quiz,
-              curUser,
-              participates: game.participates,
-            });
-
-            // 与另一个对手作比较
-            const otherUser = game.participates.find(p => p.pid !== curOpenid) || {};
-            const {
-              status: otherStatus,
-              score: otherScore,
-              answers: otherAnswers = [],
-            } = otherUser;
-            let isWin = false;
-            let otherFinished = false
-            if (otherStatus === 'finished') {
-              // 生成比较
-              isWin = score > otherScore;
-              otherFinished = true;
-            }
-
-            const resultPanel = [];
-            game.quiz.forEach((item, idx) => {
-              const otherAnswer = otherAnswers[idx];
-              resultPanel.push({
-                curResult: answers[idx],
-                otherResult: otherAnswer === undefined ? -1 : otherAnswer,
-                question: game.quiz[idx].word,
-              });
-            });
-            this.setData({
-              resultPanel,
-              isWin,
-              otherUser,
-              otherFinished,
-            });
-            this.initScoreProgress(game.participates);
-          } else {
+            this.resultPanelHandler(game, curUser, curOpenid);
+          } else if (init) {
             this.setData({
               ready: true,
               quizs: game.quiz,
@@ -254,6 +314,11 @@ Page({
             });
             this.moveToNextQuiz();
           }
+
+          this.setData({
+            curUser,
+            otherUser,
+          });
         }
       }
     })
@@ -265,8 +330,11 @@ Page({
     })
   },
 
-
   onReady() {
-    this.initGame();
+    this.initGame(true);
+
+    updateInfoInterval = setInterval(() => {
+      this.updateBattleInfo();
+    }, 10000)
   }
 });
