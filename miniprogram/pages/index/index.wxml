@@ -36,87 +36,35 @@
   <view class="studyPlan" catchtap="toAchievement">
     历史记录
   </view>
-
+  <!-- 学习数据栏 -->
   <view class="studyStatus flex">
-    <view class="statusItem flex">
+    <view class="statusItem flex" wx:for="{{learnedData}}" wx:key="index">
       <view class="value">
-        {{insistDays}}
+        {{item[0]}}
       </view>
       <view class="title">
-        坚持天数
-      </view>
-    </view>
-
-    <view class="statusItem flex">
-      <view class="value">
-        {{learnedWords}}
-      </view>
-      <view class="title">
-        已学单词
-      </view>
-    </view>
-
-    <view class="statusItem flex">
-      <view class="value">
-        {{averageSore}}/3
-      </view>
-      <view class="title">
-        平均得分
+        {{item[1]}}
       </view>
     </view>
   </view>
-
-  <view class="beginStudy" catchtap="beginStudy">
+  <!-- 进入学习 -->
+  <view class="beginStudy" catchtap="toStudy">
     开始学习
   </view>
 </view>
-
+<!-- 页面导航 -->
 <view class="actions">
-  <navigator open-type="navigate" url="/pages/room/room" hover-class="none">
-    <view class="actionItem battle">
+  <view wx:for="{{elements}}" wx:key="index" bindtap="toNavigatePage" data-index="{{index}}">
+    <view class="actionItem {{item.name}}">
       <view class="iconWrapper">
-        <image class="actionIcon" src="../../images/battle.png" />
+        <image class="actionIcon" src="../../images/{{item.name}}.png" />
       </view>
       <view class="actionInfo">
-        <view class="title">单词对战</view>
-        <view class="subtitle">对战排位比拼</view>
+        <view class="title">{{item.title}}</view>
+        <view class="subtitle">{{item.subtitle}}</view>
       </view>
-    </view>
-  </navigator>
-
-  <navigator open-type="navigate" url="/pages/review/review" hover-class="none">
-    <view class="actionItem review">
-      <view class="iconWrapper">
-        <image class="actionIcon" src="../../images/review.png" />
-      </view>
-      <view class="actionInfo">
-        <view class="title">错题集</view>
-        <view class="subtitle">错题加强练习</view>
-      </view>
-    </view>
-  </navigator>
-
-  <view class="actionItem setting" catchtap="toShowSetting">
-    <view class="iconWrapper">
-      <image class="actionIcon" src="../../images/setting.png" />
-    </view>
-    <view class="actionInfo">
-      <view class="title">学习设置</view>
-      <view class="subtitle">个人偏好设置</view>
     </view>
   </view>
-
-  <navigator open-type="navigate" url="/pages/timeRecord/timeRecord" hover-class="none">
-    <view class="actionItem record">
-      <view class="iconWrapper">
-        <image class="actionIcon" src="../../images/record.png" />
-      </view>
-      <view class="actionInfo">
-        <view class="title">学习记录</view>
-        <view class="subtitle">学习进阶详情</view>
-      </view>
-    </view>
-  </navigator>
 </view>
-
+<!-- 设置界面 -->
 <setting id="setting"></setting>

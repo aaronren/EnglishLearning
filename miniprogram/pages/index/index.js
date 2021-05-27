@@ -15,9 +15,7 @@ Page({
     userInfo: undefined,
 
     // 学习数据
-    insistDays: 0,
-    learnedWords: 0,
-    averageSore: 0,
+    learnedData: [[0, '-'], [0, '-'], [0, '-']],
 
     // 学习记录
     wordsList: [],
@@ -25,32 +23,32 @@ Page({
 
     // 可用模块
     elements: [{
-        title: '开始学习',
-        name: 'Start',
-        color: 'blue',
-        icon: 'newsfill',
-        nav: 'dailyWords/dailyWords'
+        name: 'battle',
+        title: '单词对战',
+        subtitle: '对战成绩比拼',
+        color: '#FEF5F7',
+        nav: 'room/room'
       },
       {
-        title: '学习记录',
-        name: 'Record',
-        color: 'purple',
-        icon: 'timefill',
-        nav: 'timeRecord/timeRecord'
-      },
-      {
+        name: 'review',
         title: '错题集',
-        name: 'Review',
-        color: 'orange',
-        icon: 'edit',
+        subtitle: '错题加强练习',
+        color: '#E6FFF4',
         nav: 'review/review'
       },
       {
+        name: 'setting',
         title: '学习设置',
-        name: 'Setting',
-        color: 'grey',
-        icon: 'settingsfill',
+        subtitle: '个人偏好设置',
+        color: '#ECFEFF',
         nav: 'setting/setting'
+      },
+      {
+        name: 'record',
+        title: '学习记录',
+        subtitle: '学习进阶详情',
+        color: '#FFFDEB',
+        nav: 'timeRecord/timeRecord'
       },
     ],
   },
@@ -63,12 +61,6 @@ Page({
         userInfo: _userInfo
       })
     }
-  },
-
-  beginStudy() {
-    wx.navigateTo({
-      url: '/pages/dailyWords/dailyWords',
-    })
   },
 
   // 用户按了允许授权按钮
@@ -93,11 +85,32 @@ Page({
     }
     var temp_url = 'review/review?words=' + encodeURIComponent(reviewWords) + 
                     '&scores=' + encodeURIComponent(reviewScore)
-    this.data.elements[2].nav = temp_url
+    this.data.elements[1].nav = temp_url
     this.setData({
       elements: this.data.elements
     })
-    console.log(this.data.elements[2].nav)
+    console.log(this.data.elements[1].nav)
+  },
+
+  /**
+   * 点击事件处理
+   */
+
+  toStudy() {
+    wx.navigateTo({
+      url: '/pages/dailyWords/dailyWords',
+    })
+  },
+
+  toNavigatePage(e) {
+    var idx = e.currentTarget.dataset.index
+    if (idx === 2) {
+      this.selectComponent('#setting').settingModalShow()
+    } else {
+      wx.navigateTo({ // 新开
+        url: '/pages/' + this.data.elements[idx].nav
+      })
+    }
   },
 
   // 点击天数跳转
@@ -110,7 +123,6 @@ Page({
   // 点击已学单词和得分的跳转
   toAchievement(e) {
     wx.navigateTo({ // 新开
-      // url: '/pages/achievement/achievement'
       url: '/pages/achievement/achievement?words=' + this.data.wordsList + '&scores=' + this.data.scoreList
     })
   },
@@ -119,10 +131,6 @@ Page({
     wx.navigateTo({ // 新开
       url: '/pages/search/search'
     })
-  },
-
-  toShowSetting(e) {
-    this.selectComponent('#setting').settingModalShow()
   },
 
   toAbout(e) {
@@ -180,10 +188,12 @@ Page({
     const avg_scorelist = records.length>0 ? (avgscore / records.length) : 0
     this.data.wordsList = key_wordlist
     this.data.scoreList = Object.values(words)
+
+    var insisDays = [key_daylist.length, '坚持天数']
+    var learnedWords = [key_wordlist.length, '已学单词']
+    var averageSore = [avg_scorelist.toPrecision(2)+'/3', '平均得分']
     this.setData({
-      learnedWords: key_wordlist.length,
-      insistDays: key_daylist.length,
-      averageSore: avg_scorelist.toPrecision(2)
+      learnedData: [insisDays, learnedWords, averageSore]
     })
 
     // 筛选所有需要学习单词
