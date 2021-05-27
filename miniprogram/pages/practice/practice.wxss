@@ -25,7 +25,10 @@ page {
 .bottom-button {
   width: 100%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
+  background-image: linear-gradient(to right, #00cf88, #3dfb9a);
+  font-size: 32rpx;
+  color: #ffffff;
 }
 
 .select-botton {
