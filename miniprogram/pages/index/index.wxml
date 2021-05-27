@@ -96,7 +96,7 @@
     </view>
   </navigator>
 
-  <view class="actionItem setting" catchtap="settingModalShow">
+  <view class="actionItem setting" catchtap="toShowSetting">
     <view class="iconWrapper">
       <image class="actionIcon" src="../../images/setting.png" />
     </view>
@@ -119,46 +119,4 @@
   </navigator>
 </view>
 
-<view class="modal" wx:if="{{settingModalShow}}">
-  <view class="mask" catchtap="settingModalHide" />
-
-  <view class="modalPopup">
-    <image src="../../images/modal_close.png" class="closeBtn" catchtap="settingModalHide" />
-
-    <image src="../../images/modal_banner.png" class="banner" />
-
-    <view class="title">
-      学习设置
-    </view>
-
-    <view class="content">
-      <picker-view bindchange="settingBookChange" indicator-style="height: 40px;" class="pickerview" value="{{settingBookOptions.value}}">
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingBookOptions.name}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingBookOptions.books}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingBookOptions.words}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
-      </picker-view>
-
-      <picker-view bindchange="settingDailyChange" indicator-style="height: 40px;" value="{{settingDailyOptions.value}}">
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingDailyOptions.name}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingDailyOptions.number}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
-        <picker-view-column class="pickerColumn">
-          <view wx:for="{{settingDailyOptions.unit}}" wx:key="index" style="line-height: 40px; text-align: center;">{{item}}</view>
-        </picker-view-column>
-      </picker-view>
-    </view>
-
-    <view class="saveButton" catchtap="settingSaveActon">
-      保存
-    </view>
-  </view>
-</view>
+<setting id="setting"></setting>
