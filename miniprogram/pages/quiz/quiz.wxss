@@ -323,4 +323,61 @@
   position: relative;
 }
 
+.finishedContent .resultPanel {
+  width: 670rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  border: 1rpx solid #E6E6E6;
+  position: relative;
+  left: 50%;
+  margin-left: -335rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px 0;
+  margin-top: 60rpx;
+}
 
+.resultPanel .resultItem {
+  display: flex;
+  margin: 24rpx 40rpx;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resultItem .part {
+  display: flex;
+  position: relative;
+  flex: 1;
+}
+
+.resultItem .resultIcon {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.resultItem .name {
+  display: flex;
+  flex: 1;
+  margin-left: 24rpx;
+}
+
+.resultItem .name .text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 90%;
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #666666;
+}
+
+.resultItem .noResult {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: bold;
+  color: #666666;
+  line-height: 32rpx;
+}

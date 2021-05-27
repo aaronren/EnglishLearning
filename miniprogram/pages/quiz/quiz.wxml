@@ -33,22 +33,29 @@
       </view>
     </view>
     <view class="namePart">
-      <view class="name">超级王者</view>
-      <view class="name">超级王者</view>
+      <view class="name">{{participates[0].nickName || ''}}</view>
+      <view class="name">{{participates[1].nickName || ''}}</view>
     </view>
   </view>
 
   <view wx:if="{{finished}}" class="finishedContent">
     <view class="resultPanel">
-      <view wx:for="{{resultPanel}}" wx:key="index" wx:for-item="item">
+      <view wx:for="{{resultPanel}}" wx:key="index" wx:for-item="item" class="resultItem">
         <view class="part">
-          <view>
-            
+          <image src="../../images/result_{{item.curResult === 1 ? 'right' : 'wrong'}}.png" class="resultIcon" />
+
+          <view class="name">
+            <view class="text">
+              {{item.question}}
+            </view>
           </view>
         </view>
 
-        <view class="part">
-        
+        <view wx:if="{{item.otherResult === -1}}">
+          <text class="noResult">-</text>
+        </view>
+        <view wx:else>
+          <image src="../../images/result_{{item.otherResult === 1 ? 'right' : 'wrong'}}.png" class="resultIcon" />
         </view>
       </view>
     </view>

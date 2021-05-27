@@ -62,7 +62,6 @@ Page({
   },
 
   createRoomAction() {
-    console.log('cc', app.globalData.userInfo)
     wx.cloud.callFunction({
       name: 'game',
       data: {

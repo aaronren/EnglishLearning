@@ -1,3 +1,4 @@
+const event = require('../../utils/event');
 const app = getApp();
 
 const COUNT_DOWN = 6;
@@ -126,75 +127,87 @@ Page({
     }
   },
 
+  loadGame(roomid) {
+    return new Promise((resolve) => {
+      wx.cloud.callFunction({
+        name: 'game',
+        data: {
+          action: 'load',
+          roomNumber: roomid,
+        },
+        success: res => {
+          resolve(res);
+        }
+      })
+    })
+  },
+
   onLoad(options) {
     this.setData({
       roomid: options.roomid,
     })
+  },
 
-    wx.cloud.callFunction({
-      name: 'game',
-      data: {
-        action: 'load',
-        roomNumber: options.roomid,
-      },
-      success: res => {
-        if (res && res.result && res.result.code === 0) {
-          const game = res.result.game;
-          // 查看状态
-          const curOpenid = app.globalData.openid;
-          const curUser = game.participates.find(p => p.pid === curOpenid);
+  onReady() {
+    Promise.all([
+      this.loadGame(this.data.roomid),
+    ]).then(([gameRes]) => {
+      if (gameRes && gameRes.result && gameRes.result.code === 0) {
+        const game = gameRes.result.game;
+        // 查看状态
+        const curOpenid = app.globalData.openid;
+        const curUser = game.participates.find(p => p.pid === curOpenid);
+        if (curUser) {
+          const { status, score, answers } = curUser;
+          console.log('game', game)
+          if (status === 'finished') {
+            this.setData({
+              ready: true,
+              finished: true,
+              quizs: game.quiz,
+              participates: game.participates,
+            });
 
-          if (curUser) {
-            const { status, score, answers } = curUser;
-            if (status === 'finished') {
-              this.setData({
-                ready: true,
-                finished: true,
-                quizs: game.quiz,
-                participates: game.participates,
-              });
-
-              // 与另一个对手作比较
-              const otherUser = game.participates.find(p => p.pid !== curOpenid) || {};
-              const {
-                status: otherStatus,
-                score: otherScore,
-                answers: otherAnswers = [],
-              } = otherUser;
-              let isWin = false;
-              let otherFinished = false
-              if (otherStatus === 'finished') {
-                // 生成比较
-                isWin = score > otherScore;
-                otherFinished = true;
-              }
-
-              const resultPanel = [];
-              game.quiz.forEach((item, idx) => {
-                const otherAnswer = otherAnswers[idx];
-                resultPanel.push({
-                  curResult: answers[idx],
-                  otherResult: otherAnswer === undefined ? -1 : otherAnswer,
-                  question: game.quiz[idx].word,
-                });
-              });
-              console.log('sss', resultPanel);
-              // TODO progress bar
-              // TODO win lose icon
-              // TODO 继续对战
-              this.setData({
-                resultPanel,
-                isWin,
-                otherFinished,
-              })
-            } else {
-              this.setData({
-                ready: true,
-                quizs: game.quiz,
-                participates: game.participates,
-              });
-              this.moveToNextQuiz();
+            // 与另一个对手作比较
+            const otherUser = game.participates.find(p => p.pid !== curOpenid) || {};
+            const {
+              status: otherStatus,
+              score: otherScore,
+              answers: otherAnswers = [],
+            } = otherUser;
+            let isWin = false;
+            let otherFinished = false
+            if (otherStatus === 'finished') {
+              // 生成比较
+              isWin = score > otherScore;
+              otherFinished = true;
             }
+
+            const resultPanel = [];
+            game.quiz.forEach((item, idx) => {
+              const otherAnswer = otherAnswers[idx];
+              resultPanel.push({
+                curResult: answers[idx],
+                otherResult: otherAnswer === undefined ? -1 : otherAnswer,
+                question: game.quiz[idx].word,
+              });
+            });
+            console.log('sss', resultPanel);
+            // TODO progress bar
+            // TODO win lose icon
+            // TODO 继续对战
+            this.setData({
+              resultPanel,
+              isWin,
+              otherFinished,
+            })
+          } else {
+            this.setData({
+              ready: true,
+              quizs: game.quiz,
+              participates: game.participates,
+            });
+            this.moveToNextQuiz();
           }
         }
       }

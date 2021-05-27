@@ -63,7 +63,7 @@
 					"id": 0,
 					"name": "pages/quiz/quiz",
 					"pathName": "pages/quiz/quiz",
-					"query": "roomid=0008",
+					"query": "roomid=0000",
 					"scene": null
 				}
 			]
