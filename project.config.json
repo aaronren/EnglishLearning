@@ -53,8 +53,8 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/room/room",
-          "pathName": "pages/room/room",
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
           "query": "roomid=0008",
           "scene": null
         }
