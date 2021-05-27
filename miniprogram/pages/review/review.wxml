@@ -34,9 +34,7 @@
   <view class="bottom-space bg-white"></view>
 </scroll-view>
 
-<view class="bottom-button">
-  <view class="cu-bar bg-white tabbar border shop">
-    <view class="bg-{{wordsList.length>4?'blue':'grey'}} submit" 
-    catchtap="{{wordsList.length>4?'toReviewSelectWords':''}}">开始复习</view>
-  </view>
+<view class="{{wordsList.length>4?'bottom-button':'bottom-disable'}} cu-bar tabbar border shop">
+  <view class="submit" 
+  catchtap="toReviewSelectWords">开始复习</view>
 </view>

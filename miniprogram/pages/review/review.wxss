@@ -55,15 +55,26 @@ page {
 }
 
 .text-sentence {
-  display: flex;
+  display: inline-block;
   font-size: 28rpx;
+  /* height: 38rpx; */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: #666666;
   /* background-color: green; */
-  margin-top: 20rpx;
+  margin-top: 16rpx;
 }
 
 .bottom-button {
   width: 100%;
   bottom: 0;
-  position: absolute;
+  position: fixed;
+  background-image: linear-gradient(to right, #00cf88, #3dfb9a);
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+.button-disable {
+  background-image: linear-gradient(to right, #aaaaaa, #cccccc);
 }
