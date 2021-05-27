@@ -78,3 +78,8 @@ page {
 .button-disable {
   background-image: linear-gradient(to right, #aaaaaa, #cccccc);
 }
+
+.bottom-space {
+	bottom: 0;
+	min-height: 166rpx;
+}

@@ -8,13 +8,17 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 单词数据结构 用于展示
     wordsList: [],
+    // 用于开始学习
+    words: [],
+    wordsDetail: []
   },
 
   toReviewSelectWords: function(e) {
-    if (this.data.selectedIndex.length < 5) {
+    if (this.data.wordsList.length < 5) {
       wx.showToast({
-        title: '满5个错题单词可开始，请再继续学习',
+        title: '满5个错题单词可开始，请至主页学习',
         icon: 'none',
         duration: 2000
       })
@@ -23,8 +27,10 @@ Page({
     }
   },
 
-  // 点击天数跳转
+  // 跳转开始学习
   toDailyWords: function() {
+    app.globalData.caseWords = this.data.words
+    app.globalData.caseWordObjs = this.data.wordsDetail
     wx.redirectTo({ // 新开
       url: '/pages/dailyWords/dailyWords'
     })
@@ -66,21 +72,27 @@ Page({
     this.setData({
       wordsList: wordObjs
     })
+    if (words.length === app.globalData.dailynumber) {
+      this.data.words = words
+      this.data.wordsDetail = wordsDetail
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //
     console.log("options: "+options)
     if (options && 'words' in options) {
+      var words = decodeURIComponent(options.words).split(',')
+      var scores = decodeURIComponent(options.scores).split(',')
       // 每次仅取前n个单词展示
-      var words = decodeURIComponent(options.words).split(',').slice(0, app.globalData.dailynumber)
-      var scores = decodeURIComponent(options.scores).split(',').slice(0, app.globalData.dailynumber)
+      var len_n = words.length > app.globalData.dailynumber ? app.globalData.dailynumber : words.length
+      words = words.slice(0, len_n)
+      scores = scores.slice(0, len_n)
       // 获取单词详细数据
       request.getWords(words, data => {
-        if (data.length === app.globalData.dailynumber) {
+        if (data.length === len_n) {
           this.readyWordsStruct(words, scores, data)
         }
       })
