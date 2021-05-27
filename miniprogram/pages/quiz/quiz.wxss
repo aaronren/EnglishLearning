@@ -59,13 +59,23 @@
   align-items: center;
 }
 
+.avatars .imageHolder {
+  position: relative;
+}
+
+.avatars .imageHolder .name {
+  position: absolute;
+  top: 100rpx;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .avatars .namePart {
   display: flex;
-  width: 100%;
   justify-content: space-between;
   margin-top: 10rpx;
   position: relative;
-  padding: 0 20rpx;
+  width: 680rpx;
 }
 
 .namePart .name {
@@ -90,9 +100,19 @@
   border: 4rpx solid #FFF;
 }
 
+.avatars .part .imageHolder.left {
+  left: 10rpx;
+  z-index: 20;
+}
+
+.avatars .part .imageHolder.right {
+  z-index: 20;
+  right: 10rpx;
+}
+
 .avatars .progressWrapper {
   display: flex;
-  width: 250rpx;
+  width: 220rpx;
   height: 48rpx;
   align-items: center;
   position: relative;
@@ -112,7 +132,7 @@
 }
 
 .progressWrapper .cu-progress {
-  height: 30rpx;
+  height: 36rpx;
   background-color: #fff;
 }
 
@@ -131,15 +151,15 @@
 }
 
 .progressWrapper .score.right {
-  right: 10rpx;
+  right: 15rpx;
 }
 
 .progressWrapper .score.left {
-  left: 10rpx;
+  left: 15rpx;
 }
 
 .vsIcon {
-  width: 80rpx;
+  width: 90rpx;
   height: 80rpx;
 }
 
@@ -350,6 +370,7 @@
   display: flex;
   position: relative;
   flex: 1;
+  align-items: center;
 }
 
 .resultItem .resultIcon {
@@ -387,6 +408,11 @@
   width: 300rpx;
   height: 200rpx;
   margin-top: 20rpx;
+}
+
+.winLogo {
+  position: relative;
+  left: -40rpx;
 }
 
 .onemoreBattle {

@@ -55,7 +55,7 @@
         {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
-          "query": "roomid=0008",
+          "query": "roomid=0031",
           "scene": null
         }
       ]

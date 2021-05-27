@@ -123,7 +123,7 @@ page {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   position: relative;
-  border-radius: 200rpx 40rpx 12rpx 200rpx;
+  border-radius: 200rpx 200rpx 12rpx 200rpx;
   margin: 20rpx 0;
 }
 
@@ -177,4 +177,117 @@ page {
 .select-option .tag .icon {
   width: 16rpx;
   height: 16rpx;
+}
+
+.topBgImg {
+  width: 100%;
+  height: 568rpx;
+  position: absolute;
+  top: 0;
+}
+
+.finishContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.finishContent .goodjobIcon {
+  width: 194rpx;
+  height: 166rpx;
+  margin-top: 44rpx;
+  margin-bottom: 39rpx;
+}
+
+.finishContent .goodJobText {
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  line-height: 44rpx;
+  margin-bottom: 52rpx;
+}
+
+.finishContent .studyCard {
+  width: 714rpx;
+  border-radius: 20rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5rpx 5rpx 5rpx #A6A6A6;
+}
+
+.studyCard .finishAvatar {
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 54rpx;
+  margin-top: 64rpx;
+  margin-bottom: 12rpx;
+}
+
+.studyCard .finishNickname {
+  font-size: 36rpx;
+  font-family: PingFangSC-Semibold, PingFang SC;
+  font-weight: bold;
+  color: #222222;
+  line-height: 50rpx;
+  margin-bottom: 70rpx;
+}
+
+.studyCard .finishInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 70rpx;
+  width: 90%;
+}
+
+.finishInfo .infoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.finishInfo .infoItem .value {
+  font-size: 60rpx;
+  font-family: DINMittelschriftLTW1G;
+  font-weight: bold;
+  color: #222222;
+  line-height: 52rpx;
+  letter-spacing: 4rpx;
+  margin-bottom: 20rpx;
+}
+
+.finishInfo .infoItem .title {
+  font-size: 28rpx;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #A6A6A6;
+  line-height: 28rpx;
+}
+
+.controlBtn {
+  width: 394rpx;
+  height: 80rpx;
+  background: linear-gradient(90deg, #00CF88 0%, #3DFB9A 100%);
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: bold;
+  color: #FFFFFF;
+  line-height: 32rpx;
+  margin-bottom: 40rpx;
+}
+
+.controlBtn.orange {
+  background: linear-gradient(90deg, #FEC95C 0%, #FEAE26 100%);
 }

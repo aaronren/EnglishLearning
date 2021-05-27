@@ -1,6 +1,6 @@
 const app = getApp();
 
-const COUNT_DOWN = 10;
+const COUNT_DOWN = 8;
 let countDownInterval = null;
 let updateInfoInterval = null;
 
@@ -336,5 +336,15 @@ Page({
     updateInfoInterval = setInterval(() => {
       this.updateBattleInfo();
     }, 10000)
-  }
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+   onUnload: function () {
+     clearInterval(countDownInterval);
+     clearInterval(updateInfoInterval);
+     countDownInterval = null;
+     updateInfoInterval = null;
+  },
 });

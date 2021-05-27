@@ -149,6 +149,10 @@
   margin-left: -197rpx;
 }
 
+.controlBtn.orange {
+  background: linear-gradient(90deg, #FEC95C 0%, #FEAE26 100%);
+}
+
 .hiddenInput {
   opacity: 0;
   position: absolute;
