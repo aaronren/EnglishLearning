@@ -24,7 +24,6 @@ Component({
   data: {
     // Current显示单词
     currentWord: {},
-    showEgs: false,
     scrollTopOffset: 0,
     // 反馈内容列表
     feedbackList: ['发音问题', '解释有误', '例句有误', '短语有误', '音标错误']
@@ -44,12 +43,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    prepareData: function(the_word, showEg, isTop) {
+    prepareData: function(the_word, topOffset) {
       var new_word = this.reshapeWord(the_word)
       this.setData({
         currentWord: new_word,
-        showEgs: showEg,
-        scrollTopOffset: isTop
+        scrollTopOffset: topOffset
       })
     },
 
@@ -62,13 +60,6 @@ Component({
     toPlayWord: function() {
       this.playWord()
       this.selectComponent("#tipbar").showTip()
-    },
-
-    // 展示例句
-    toShowEgs: function() {
-      this.setData({
-        showEgs: !this.data.showEgs
-      })
     },
 
     //-----------------------------------------------------------------------------------------

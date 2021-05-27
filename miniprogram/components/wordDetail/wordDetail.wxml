@@ -2,7 +2,7 @@
 
 <tip-bar message="没有声音？请检查手机静音按钮，并开启音量" id="tipbar"></tip-bar>
 
-<scroll-view scroll-y class="scrollview">
+<scroll-view scroll-y scroll-top='{{scrollTopOffset}}' class="scrollview">
 
   <view class="word-head" catchtap="toPlayWord">
     <view class="text-sl text-black text-bold">{{currentWord.word}}</view>
@@ -61,17 +61,10 @@
         <view class="fr cu-tag radius bg-green bright">释义</view>
         <view class="text-black text-lg">{{item['trans']}}</view>
         <!-- >> 例句 -->
-        <view wx:if="{{wxsmd.hasExample(item)}}" catchtap="toShowEgs">
-          <view class="text-lg margin-top-sm">
-            <text class="cuIcon-{{showEgs?'rounddown':'roundright'}} text-greenbright"></text>
-            <text class="text-gray margin-left">例句：</text>
-          </view>
-          <view class="text-gray light margin-bottom-xs" wx:if="{{!showEgs}}">(点击展开查看例句)</view>
-          <block wx:if="{{showEgs}}">
-            <block wx:for="{{item['eg']}}" wx:for-item="egitem" wx:key="egidx">
-              <view class="text-black text-df margin-top-sm">{{egitem['en']}}</view>
-              <view class="text-gray text-df margin-top-xs">{{egitem['cn']}}</view>
-            </block>
+        <view wx:if="{{wxsmd.hasExample(item)}}">
+          <block wx:for="{{item['eg']}}" wx:for-item="egitem" wx:key="egidx">
+            <view class="text-black text-df margin-top-sm">{{egitem['en']}}</view>
+            <view class="text-gray text-df margin-top-xs">{{egitem['cn']}}</view>
           </block>
         </view>
       </view>
@@ -89,18 +82,11 @@
               {{phitem['trans']}}
             </view>
             <!-- >> 例句 -->
-            <view wx:if="{{wxsmd.hasExample(phitem)}}" catchtap="toShowEgs">
-              <view class="text-lg margin-top-sm">
-                <text class="cuIcon-{{showEgs?'rounddown':'roundright'}} text-greenbright"></text>
-                <text class="text-gray margin-left">例句：</text>
-              </view>
-              <view class="text-gray light margin-bottom-xs" wx:if="{{!showEgs}}">(点击展开查看例句)</view>
-              <block wx:if="{{showEgs}}">
-                <block wx:for="{{phitem['eg']}}" wx:for-item="egitem" wx:key="egidx">
-                  <!-- <rich-text class="text-black text-lg margin-top-sm" nodes="{{egitem['en']}}"></rich-text> -->
-                  <view class="text-black text-df margin-top-sm">{{egitem['en']}}</view>
-                  <view class="text-gray text-df margin-top-xs">{{egitem['cn']}}</view>
-                </block>
+            <view wx:if="{{wxsmd.hasExample(phitem)}}">
+              <block wx:for="{{phitem['eg']}}" wx:for-item="egitem" wx:key="egidx">
+                <!-- <rich-text class="text-black text-lg margin-top-sm" nodes="{{egitem['en']}}"></rich-text> -->
+                <view class="text-black text-df margin-top-sm">{{egitem['en']}}</view>
+                <view class="text-gray text-df margin-top-xs">{{egitem['cn']}}</view>
               </block>
             </view>
           </block>

@@ -83,7 +83,7 @@ Page({
       })
       var curWord = this.data.wordList[index]
       const word_detail_component = this.selectComponent('.scroll-view') //获取WordDetail组件
-      word_detail_component.prepareData(curWord, false, 0)
+      word_detail_component.prepareData(curWord, 0)
       if (autoplay) {
         word_detail_component.playWord()
       }
