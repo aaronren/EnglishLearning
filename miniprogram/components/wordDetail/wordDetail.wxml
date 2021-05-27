@@ -2,17 +2,18 @@
 
 <tip-bar message="没有声音？请检查手机静音按钮，并开启音量" id="tipbar"></tip-bar>
 
-<!-- scroll-anchoring="true"  scroll-top="{{scrollTopOffset}}"-->
 <scroll-view scroll-y class="scrollview">
 
-  <view class="margin-top margin-left" catchtap="toPlayWord">
+  <view class="word-head" catchtap="toPlayWord">
     <view class="text-sl text-black text-bold">{{currentWord.word}}</view>
-    <view class="text-xl margin-top margin-bottom">
-      <text class="cuIcon-notification text-blue margin-right-xs"></text>
+    <view class="word-pron">
+      <image src="../../images/speaker.png" class="pron-icon" />
       <text class="text-black">{{currentWord.uk_pron}}</text>
     </view>
+    <text class="word-trans">{{currentWord['trans']}}</text>
   </view>
 
+  <text class="margin-left text-grey">更多释义</text>
   <view class="margin-left margin-right" wx:for="{{currentWord['sense']}}" wx:key="index">
     <wxs module="wxsmd">
       var getType = function(item) {
@@ -41,36 +42,35 @@
     </wxs>
     <!-- 一级：词性 -->
     <block wx:if="{{wxsmd.getType(item)=='type'}}">
-      <view class="cu-line round sm margin-top-ss">
-        <view class="bg-blue" style="width:{{'100%'}}"></view>
+      <!-- 词性横线 -->
+      <view class="cu-line round xs margin-top-ss">
+        <view class="bg-grey light" style="width:{{'100%'}}"></view>
       </view>
-      <view class="fr cu-tag radius bg-blue light sm margin-top-ss">词性</view>
-      <text class="text-blue">{{item['type']}}</text>
+      <view class="fr cu-tag radius bg-grey light sm margin-top-ss">词性</view>
+      <text class="text-grey">{{item['type']}}</text>
     </block>
     <!-- 二级：词性下的释义 -->
     <block wx:if="{{wxsmd.getType(item)=='sense_line'}}">
-      <view class="text-purple margin-top">
+      <view class="text-gray margin-top">
         <text class="cuIcon-tag text-gray margin-right-xs"></text>{{item['sense_line']}}
       </view>
     </block>
     <!-- 三级：词义解释及例句 -->
     <block wx:if="{{wxsmd.getType(item)=='defn'}}">
       <view class="cu-card case radius margin-top-xs padding-sm">
-        <view class="fr cu-tag radius bg-blue">释义</view>
-        <view class="text-black text-xl">{{item['trans']}}</view>
-        <!-- <view class="text-darkGray text-df">{{item['defn']}}</view> -->
+        <view class="fr cu-tag radius bg-green bright">释义</view>
+        <view class="text-black text-lg">{{item['trans']}}</view>
         <!-- >> 例句 -->
         <view wx:if="{{wxsmd.hasExample(item)}}" catchtap="toShowEgs">
-          <view class="text-xl margin-top-sm">
-            <text class="cuIcon-{{showEgs?'rounddown':'roundright'}} text-blue"></text>
-            <text class="text-black margin-left">例句：</text>
+          <view class="text-lg margin-top-sm">
+            <text class="cuIcon-{{showEgs?'rounddown':'roundright'}} text-greenbright"></text>
+            <text class="text-gray margin-left">例句：</text>
           </view>
           <view class="text-gray light margin-bottom-xs" wx:if="{{!showEgs}}">(点击展开查看例句)</view>
           <block wx:if="{{showEgs}}">
             <block wx:for="{{item['eg']}}" wx:for-item="egitem" wx:key="egidx">
-              <!-- <rich-text class="text-black text-lg margin-top-sm" nodes="{{egitem['en']}}"></rich-text> -->
-              <view class="text-black text-lg margin-top-sm">{{egitem['en']}}</view>
-              <view class="text-black text-lg margin-top-xs">{{egitem['cn']}}</view>
+              <view class="text-black text-df margin-top-sm">{{egitem['en']}}</view>
+              <view class="text-gray text-df margin-top-xs">{{egitem['cn']}}</view>
             </block>
           </block>
         </view>
@@ -80,26 +80,26 @@
     <block wx:if="{{wxsmd.getType(item)=='phrase'}}">
       <view class="cu-card case radius bg-yellow light margin-top-sm margin-bottom-sm padding-sm">
         <view class="fr cu-tag radius bg-yellow">短语</view>
-        <view class="text-black text-xl">{{item['phrase']}}</view>
+        <view class="text-black text-lg">{{item['phrase']}}</view>
         <block wx:for="{{item['phrase_sense']}}" wx:for-item="phitem" wx:key="phidx">
           <!-- 该短语下的第i个解释 -->
           <block wx:if="{{wxsmd.getType(phitem)=='defn'}}">
-            <view class="text-black text-xl margin-top-xs">
+            <view class="text-black text-lg margin-top-xs">
               <text class="cuIcon-title text-gray margin-right-ss"></text>
               {{phitem['trans']}}
             </view>
             <!-- >> 例句 -->
             <view wx:if="{{wxsmd.hasExample(phitem)}}" catchtap="toShowEgs">
-              <view class="text-xl margin-top-sm">
-                <text class="cuIcon-{{showEgs?'rounddown':'roundright'}} text-blue"></text>
-                <text class="text-black margin-left">例句：</text>
+              <view class="text-lg margin-top-sm">
+                <text class="cuIcon-{{showEgs?'rounddown':'roundright'}} text-greenbright"></text>
+                <text class="text-gray margin-left">例句：</text>
               </view>
               <view class="text-gray light margin-bottom-xs" wx:if="{{!showEgs}}">(点击展开查看例句)</view>
               <block wx:if="{{showEgs}}">
                 <block wx:for="{{phitem['eg']}}" wx:for-item="egitem" wx:key="egidx">
                   <!-- <rich-text class="text-black text-lg margin-top-sm" nodes="{{egitem['en']}}"></rich-text> -->
-                  <view class="text-black text-lg margin-top-sm">{{egitem['en']}}</view>
-                  <view class="text-black text-lg margin-top-xs">{{egitem['cn']}}</view>
+                  <view class="text-black text-df margin-top-sm">{{egitem['en']}}</view>
+                  <view class="text-gray text-df margin-top-xs">{{egitem['cn']}}</view>
                 </block>
               </block>
             </view>

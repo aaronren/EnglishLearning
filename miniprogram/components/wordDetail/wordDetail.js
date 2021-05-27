@@ -108,7 +108,14 @@ Component({
         //       }
         //     }
         //   }
-        // } // 特殊处理完毕
+        // } 
+        // 截取固定长度显示
+        var trans = theWord['trans']
+        if (trans.length > 30) {
+          trans = theWord['trans'].slice(0, 30) + '...'
+          newWord['trans'] = trans
+        }
+        // 特殊处理完毕
         timing.dTimeLog(tstart, 'dailyWords - reshapeWord')
         return newWord
       }

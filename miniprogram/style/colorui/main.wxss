@@ -35,6 +35,7 @@ page {
 	--pinkLight: #f9d7ea;
 	--brownLight: #ede1d9;
 	--greyLight: #e7ebed;
+	--greenBright: #00cf88;
 	/* 渐变色 */
 	--gradualRed: linear-gradient(45deg, #f43f3b, #ec008c);
 	--gradualOrange: linear-gradient(45deg, #ff9700, #ed1c24);
@@ -3593,6 +3594,10 @@ scroll-view.cu-steps .cu-item {
 	background-color: var(--greyLight);
 }
 
+.bg-green.bright {
+	background-color: var(--greenBright);
+}
+
 .bg-gradual-red {
 	background-image: var(--gradualRed);
 	color: var(--white);
@@ -3954,4 +3959,10 @@ scroll-view.cu-steps .cu-item {
 .line-white,
 .lines-white {
 	color: var(--white);
+}
+
+.text-greenbright,
+.line-greenbright,
+.lines-greenbright {
+	color: var(--greenBright);
 }

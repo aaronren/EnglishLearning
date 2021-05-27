@@ -8,6 +8,41 @@
   background-color: #ffffff;
 }
 
+/* 头部单词信息 */
+
+.word-head {
+	display: flex;
+	flex-direction: column;
+	margin-top: 80rpx;
+	margin-bottom: 70rpx;
+	justify-content: center;
+	align-items: center;
+}
+
+.pron-icon {
+  width: 28rpx;
+	height: 28rpx;
+	margin-right: 30rpx;
+}
+
+.word-pron {
+	display: flex;
+	flex-direction: row;
+	font-size: 28rpx;
+	color: #666666;
+	margin-top: 20rpx;
+	margin-bottom: 48rpx;
+}
+
+.word-trans {
+	width: 60%;
+	height: 70rpx;
+	text-align: center;
+	font-size: 28rpx;
+	line-height: 38rpx;
+	color: #222222;
+}
+
 /* 词性和sense line上方的横线条 */
 
 .cu-line {
@@ -20,7 +55,7 @@
 }
 
 .cu-line.xs {
-	height: 5rpx;
+	height: 3rpx;
 }
 
 .cu-line.sm {
@@ -44,9 +79,3 @@
 .margin-right-ss {
 	margin-top: 5rpx;
 }
-
-/* .text-darkGray,
-.line-darkGray,
-.lines-darkGray {
-	color: var(--darkGray);
-} */

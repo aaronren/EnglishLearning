@@ -18,6 +18,13 @@ page {
   width: 100%;
   bottom: 0;
   position: fixed;
+  background-image: linear-gradient(to right, #00cf88, #3dfb9a);
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
+.button-disable {
+  background-image: linear-gradient(to right, #aaaaaa, #cccccc);
 }
 
 .bottom-space {
