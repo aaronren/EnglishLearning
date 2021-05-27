@@ -69,6 +69,7 @@ Page({
         userInfo: app.globalData.userInfo,
       },
       success: res => {
+        console.log('res', res)
         this.setData({
           roomInput: res.result.data.roomNumber.split(''),
         });
@@ -88,7 +89,6 @@ Page({
   },
 
   focusInputHandler() {
-    console.log('focusInput')
     this.setData({
       inputFocus: true,
     })
@@ -101,4 +101,12 @@ Page({
       });
     })
   },
+
+  onReady() {
+    if (app.globalData.userInfo) {
+      this.setData({
+        curUser: app.globalData.userInfo,
+      });
+    }
+  }
 })

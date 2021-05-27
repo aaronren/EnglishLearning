@@ -152,5 +152,6 @@
 .hiddenInput {
   opacity: 0;
   position: absolute;
-  bottom: 0;
+  top: 0;
+  display: none;
 }

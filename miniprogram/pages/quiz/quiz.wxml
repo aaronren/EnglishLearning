@@ -15,10 +15,10 @@
         <image src="{{curUser.avatarUrl}}" class="avatar left" />
         <view class="progressWrapper">
           <view class="cu-progress">
-            <view class="progress-bgColor" style="width: 60%;"></view>
+            <view class="progress-bgColor" style="width: {{curScore}}%"></view>
           </view>
 
-          <view class="score left">80</view>
+          <view class="score left">{{curScore}}</view>
         </view>
       </view>
 
@@ -26,8 +26,8 @@
 
       <view class="part">
         <view class="progressWrapper">
-          <view class="score right">80</view>
-          <view class="fake-progress" style="width: 60%" />
+          <view class="score right">{{otherScore}}</view>
+          <view class="fake-progress" style="width: {{otherScore}}%" />
         </view>
         <image src="{{otherUser.avatarUrl}}" class="avatar right" />
       </view>

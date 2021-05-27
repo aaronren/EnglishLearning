@@ -1,7 +1,7 @@
 const event = require('../../utils/event');
 const app = getApp();
 
-const COUNT_DOWN = 6;
+const COUNT_DOWN = 100;
 let countDownInterval = null;
 
 Page({
@@ -23,6 +23,13 @@ Page({
     rightAnswerIdx: -1,
     curUser: null,
     otherUser: {},
+    curScore: 0,
+    otherScore: 0,
+  },
+
+  scoreCalc(correctCnt) {
+    const { quizs } = this.data;
+    return (correctCnt * 100 / quizs.length).toFixed(2);
   },
 
   async makeDicision(event) {
@@ -41,8 +48,10 @@ Page({
         // 回答正确
         correct += 1;
         answers.push(1);
+        const curScore = this.scoreCalc(correct);
         this.setData({
           rightAnswerIdx: answer,
+          curScore,
         });
       } else {
         // 回答错误
@@ -110,8 +119,8 @@ Page({
           const { countDown, answers } = this.data;
           if (countDown <= 0) {
             // 超时, 算作错误
-            clearInterval(interval);
-            interval = null;
+            clearInterval(countDownInterval);
+            countDownInterval = null;
             wx.showToast({
               title: '答题超时',
               icon: 'none',
@@ -154,6 +163,36 @@ Page({
     wx.navigateTo({
       url: `/pages/room/room`,
     });
+  },
+
+  initScoreProgress(participates) {
+    const curOpenid = app.globalData.openid;
+    const curUser = participates.find(p => p.pid === curOpenid);
+    const otherUser = participates.find(p => p.pid !== curOpenid);
+
+    const correctCalc = (answers) => {
+      return answers.reduce((acc, item) => acc += item, 0);
+    }
+
+    if (curUser) {
+      const { answers } = curUser;
+      const curCorrects = correctCalc(answers);
+      const curScore = this.scoreCalc(curCorrects);
+
+      this.setData({
+        curScore,
+      })
+    }
+
+    if (otherUser) {
+      const { answers } = otherUser;
+      const otherCorrects = correctCalc(answers);
+      const otherScore = this.scoreCalc(otherCorrects);
+
+      this.setData({
+        otherScore,
+      })
+    }
   },
 
   initGame() {
@@ -200,14 +239,13 @@ Page({
                 question: game.quiz[idx].word,
               });
             });
-            // TODO progress bar
-            // TODO 继续对战
             this.setData({
               resultPanel,
               isWin,
               otherUser,
               otherFinished,
-            })
+            });
+            this.initScoreProgress(game.participates);
           } else {
             this.setData({
               ready: true,
