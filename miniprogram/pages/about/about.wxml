@@ -2,7 +2,7 @@
 <view class='margin-xl bg-white padding-xl radius shadow-lg'>
   <view class='text-center margin-bottom text-lg  text-grey'>关于背单词小程序</view>
   <view class='text-content'>
-    <view>Hi！欢迎使用青少年背单词！</view>
+    <view>Hi！欢迎使用单词大作战！</view>
     <view class='margin-top-sm'>我们专注于KET和PET。</view>
     <view class='margin-top-sm'>学习成就梦想！</view>
   </view>

@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "青少年背单词",
+  "navigationBarTitleText": "单词大作战",
   "disableScroll": true,
   "usingComponents": {
     "setting": "../../components/setting/setting"
