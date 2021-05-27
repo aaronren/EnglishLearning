@@ -27,6 +27,15 @@ page {
   background-image: linear-gradient(to right, #aaaaaa, #cccccc);
 }
 
+.bottom-double-button {
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  background-image: linear-gradient(to right, #FEC95C, #FEAE26 50%, #00CF88 50%, #3DFB9A);
+  font-size: 32rpx;
+  color: #ffffff;
+}
+
 .bottom-space {
 	bottom: 0;
 	min-height: 120rpx;
