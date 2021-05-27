@@ -36,8 +36,7 @@ page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  margin: 15% 0rpx 25rpx;
+  margin: 150rpx 60rpx 25rpx 60rpx;
 }
 
 .word-content {
@@ -46,7 +45,7 @@ page {
   font-weight: bold;
   color: #222222;
   line-height: 72rpx;
-  margin-bottom: 10rpx;
+  margin-bottom: 15rpx;
 }
 
 .pron-container {
@@ -66,7 +65,7 @@ page {
   font-family: PingFangSC-Regular, PingFang SC;
   font-weight: 400;
   color: #666666;
-  line-height: 28rpx;
+  line-height: 36rpx;
   margin-left: 5rpx;
 }
 
@@ -85,7 +84,14 @@ page {
   font-family: PingFangSC-Medium, PingFang SC;
   font-weight: bold;
   color: #222222;
-  line-height: 36rpx;
+  line-height: 42rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.word-definition .definition:not(:last-child) {
+  margin-bottom: 20rpx;
 }
 
 .tips-align {
