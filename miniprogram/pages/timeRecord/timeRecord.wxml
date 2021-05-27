@@ -79,7 +79,7 @@
             <view class="infoItem flex">
               <view class="valueWrapper">
                 <view class="value">
-                {{item.averageScore}}
+                {{item.averageScore || '-'}}
                 </view>
                 <view class="unit">星</view>
               </view>
