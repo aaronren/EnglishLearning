@@ -226,6 +226,7 @@ Page({
       ready: true,
       finished: true,
       curUser,
+      quizs: game.quiz,
       participates: game.participates,
     });
 
