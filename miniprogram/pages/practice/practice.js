@@ -278,7 +278,7 @@ Page({
         break;
       }
     }
-    console.log('word', tmpWord);
+    tmpWord.transArr = tmpWord.trans.split('；').slice(0, 4);
     return tmpWord;
   },
 
@@ -307,6 +307,8 @@ Page({
       }
       tempFourWord[idx] = this.data.currentWord
     }
+
+    console.log('tem', tempFourWord);
     this.setData({
       randomFourWord: tempFourWord
     })
