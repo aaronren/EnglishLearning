@@ -70,6 +70,7 @@
   display: flex;
   align-items: center;
   position: relative;
+
 }
 
 .avatars .avatar {
@@ -86,6 +87,7 @@
 
 .avatar.right {
   left: 20rpx;
+  background-color: #fff;
 }
 
 .roomInput {

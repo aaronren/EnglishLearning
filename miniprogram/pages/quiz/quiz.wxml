@@ -13,7 +13,7 @@
     <view class="infos">
       <view class="part">
         <view class="imageHolder left">
-          <image src="{{curUser.avatarUrl}}" class="avatar" />
+          <image src="{{curUser.avatarUrl || '../../images/default_avatar.png'}}" class="avatar" />
           <view class="name">{{curUser.nickName || ''}}</view>
         </view>
         <view class="progressWrapper">
@@ -33,7 +33,7 @@
           <view class="fake-progress" style="width: {{otherScore}}%" />
         </view>
         <view class="imageHolder right">
-          <image src="{{otherUser.avatarUrl}}" class="avatar" />
+          <image src="{{otherUser.avatarUrl || '../../images/default_avatar.png'}}" class="avatar" />
           <view class="name">{{otherUser.nickName || ''}}</view>
         </view>
       </view>

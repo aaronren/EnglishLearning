@@ -16,7 +16,7 @@
 
     <view class="rightPart">
     <!-- default -->
-      <image src="" class="avatar right" />
+      <image src="../../images/default_avatar.png" class="avatar right" />
     </view>
   </view>
 
