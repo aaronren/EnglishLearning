@@ -30,7 +30,9 @@ Page({
       new_item['recordTime'] = timing.formatTime(item.starttime)
       new_item['finishStep'] = item.finishstep
       new_item['wordsCount'] = item.wordslist.length
-      new_item['spendTime'] = Math.ceil((item.endtime - item.starttime) / 60000)
+      var spend_time = item.endtime - item.starttime
+      spend_time = spend_time >= 0 ? spend_time : 1
+      new_item['spendTime'] = Math.ceil(spend_time / 60000)
       if (item.finishstep >= 3) {
         if (item.scorelist && item.scorelist.length>0) {
           var avg = 0
