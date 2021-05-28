@@ -53,9 +53,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/quiz/quiz",
-          "pathName": "pages/quiz/quiz",
-          "query": "roomid=0031",
+          "name": "pages/index/index",
+          "pathName": "pages/index/index",
+          "query": "",
           "scene": null
         }
       ]
