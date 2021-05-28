@@ -49,6 +49,11 @@
   <view class="studyPlan" catchtap="toAchievement">
     历史记录
   </view>
+
+  <view class="cu-line round xs margin-top-ss">
+    <view class="bg-blue" style="width:{{'100%'}}"></view>
+  </view>
+
   <!-- 学习数据栏 -->
   <view class="studyStatus flex">
     <view class="statusItem flex" wx:for="{{learnedData}}" wx:key="index">

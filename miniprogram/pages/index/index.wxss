@@ -142,6 +142,18 @@ page {
   right: 50rpx;
 }
 
+.cu-line {
+  width: 642rpx;
+  margin-left: 36rpx;
+  margin-top: 128rpx;
+  position: absolute;
+  background-color: #E6E6E6;
+}
+
+.cu-line.xs {
+	height: 2rpx;
+}
+
 .studyStatus {
   padding: 180rpx 70rpx 0;
   align-items: center;
@@ -272,4 +284,3 @@ page {
   color: #A6A6A6;
   line-height: 24rpx;
 }
-
