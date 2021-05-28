@@ -21,7 +21,6 @@ App({
   },
 
   onLaunch: function (options) {
-
     mta.App.init({
       "appID":"500724250",
       "eventID":"500724254",
@@ -64,9 +63,6 @@ App({
     
     // 获取全局数据
     this.gainCloudRecords()
-
-    // 获取用户信息
-    this.gainUserInfo()
 
     // 基础设置信息
     this.gainLocalSetting()

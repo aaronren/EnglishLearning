@@ -2,17 +2,32 @@
 
 <view class="topBanner flex">
   <view class="userinfo avatar-flex">
-    <button
-      open-type="getUserInfo"
-      class="userinfo-avatar"
-      style="background-image: url({{avatarUrl}})"
-      size="default"
-      bindgetuserinfo='bindGetUserInfo'
-    ></button>
-
-    <view class="userName">
-      {{userInfo.nickName ? userInfo.nickName : '请点头像'}}
-    </view>
+    <block wx:if="{{!userInfo}}">
+      <button 
+        wx:if="{{canIUseGetUserProfile}}"
+        class="userinfo-avatar"
+        bindtap="getUserProfile"
+        size="default"
+        style="background-image: url('../../images/default_avatar.png')"
+      ></button>
+      <button 
+        wx:else
+        open-type="getUserInfo"
+        class="userinfo-avatar"
+        bindgetuserinfo="getUserInfo"
+        size="default"
+        style="background-image: url('../../images/default_avatar.png')"
+      ></button>
+      <view class="userName">
+        请点击头像
+      </view>
+    </block>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <view class="userName">
+        {{userInfo.nickName}}
+      </view>
+    </block>
   </view>
 
   <view class="search flex" catchtap="toSearch">

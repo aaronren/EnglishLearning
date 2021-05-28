@@ -35,7 +35,7 @@
   },
   "appid": "wxfa76cd66147fa115",
   "projectname": "EnglishLearning",
-  "libVersion": "2.8.1",
+  "libVersion": "2.16.1",
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
@@ -55,7 +55,7 @@
         {
           "name": "pages/index/index",
           "pathName": "pages/index/index",
-          "query": "roomid=0031",
+          "query": "",
           "scene": null
         }
       ]

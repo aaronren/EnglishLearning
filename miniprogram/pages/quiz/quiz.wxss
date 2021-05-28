@@ -98,6 +98,7 @@
   height: 80rpx;
   border-radius: 40rpx;
   border: 4rpx solid #FFF;
+  background-color: #eee;
 }
 
 .avatars .part .imageHolder.left {

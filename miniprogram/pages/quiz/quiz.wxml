@@ -13,7 +13,7 @@
     <view class="infos">
       <view class="part">
         <view class="imageHolder left">
-          <image src="{{curUser.avatarUrl}}" class="avatar" />
+          <image src="{{curUser.avatarUrl || '../../images/default_avatar.png'}}" class="avatar" />
           <view class="name">{{curUser.nickName || ''}}</view>
         </view>
         <view class="progressWrapper">
@@ -33,7 +33,7 @@
           <view class="fake-progress" style="width: {{otherScore}}%" />
         </view>
         <view class="imageHolder right">
-          <image src="{{otherUser.avatarUrl}}" class="avatar" />
+          <image src="{{otherUser.avatarUrl || '../../images/default_avatar.png'}}" class="avatar" />
           <view class="name">{{otherUser.nickName || ''}}</view>
         </view>
       </view>
@@ -42,8 +42,11 @@
 
   <view wx:if="{{finished}}" class="finishedContent">
     <view wx:if="{{!otherFinished}}" />
-    <view wx:elif="{{isWin}}">
+    <view wx:elif="{{isWin > 0}}">
       <image src="../../images/win.png" class="resultLogo winLogo" />
+    </view>
+    <view wx:elif="{{isWin === 0}}">
+      <image src="../../images/draw.png" class="resultLogo" />
     </view>
     <view wx:else>
       <image src="../../images/lose.png" class="resultLogo" />
