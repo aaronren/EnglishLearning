@@ -13,6 +13,7 @@ Page({
     // 用户信息
     avatarUrl: 'http://www.aaronview.cn/image/unlogin.png',
     userInfo: undefined,
+    canIUseGetUserProfile: false,
 
     // 学习数据
     learnedData: [[0, '-'], [0, '-'], [0, '-']],
@@ -66,12 +67,26 @@ Page({
   },
 
   // 用户按了允许授权按钮
-  bindGetUserInfo: function (res) {
+  getUserInfo(res) {
     if (this.data.userInfo==undefined && res.detail.userInfo) {
       // 授权成功后发通知，app.js也能获取userInfo
       event.emit('userHasLogin', res.detail.userInfo)
     }
   },
+
+  getUserProfile(callback) {
+    // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认
+    // 开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
+    wx.getUserProfile({
+      desc: '用于完善用户资料',
+      success: (res) => {
+        event.emit('userHasLogin', res.userInfo)
+        if (callback && typeof callback === 'function') {
+          callback();
+        }
+      },
+    })
+  },
 
   // 拼接错题记录
   spliceReviewData() {
@@ -105,13 +120,35 @@ Page({
   },
 
   toNavigatePage(e) {
-    var idx = e.currentTarget.dataset.index
+    const idx = e.currentTarget.dataset.index;
+    const { userInfo, canIUseGetUserProfile } = this.data;
+    const openNewPage = () => {
+      const nav = this.data.elements[idx].nav;
+      wx.navigateTo({ // 新开
+        url: `/pages/${nav}`
+      });
+    }
+    // 进入对战页面前, 获取用户头像
+    if (idx === 0 && !userInfo) {
+      if (canIUseGetUserProfile) {
+        this.getUserProfile(() => {
+          openNewPage();
+        });
+      } else {
+        wx.getUserInfo({
+          success: res => {
+            // 发送通知
+            event.emit('userHasLogin', res.userInfo);
+            openNewPage();
+          }
+        })
+      }
+      return;
+    }
     if (idx === 2) {
       this.selectComponent('#setting').settingModalShow()
     } else {
-      wx.navigateTo({ // 新开
-        url: '/pages/' + this.data.elements[idx].nav
-      })
+      openNewPage();
     }
   },
 
@@ -236,6 +273,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (wx.getUserProfile) {
+      this.setData({
+        canIUseGetUserProfile: true
+      })
+    }
     // 获取用户信息
     this.setUserInfo(app.globalData.userInfo)
     // 注册授权监听，如果在本页或登录页授权，就更新本页头像
