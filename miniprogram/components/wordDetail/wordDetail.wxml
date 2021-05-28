@@ -46,7 +46,7 @@
       <view class="cu-line round xs margin-top-ss">
         <view class="bg-grey light" style="width:{{'100%'}}"></view>
       </view>
-      <view class="fr cu-tag radius bg-grey light sm margin-top-ss">词性</view>
+      <view class="fr info-tag wordtype sm margin-top-ss">词性</view>
       <text class="text-grey">{{item['type']}}</text>
     </block>
     <!-- 二级：词性下的释义 -->
@@ -58,7 +58,7 @@
     <!-- 三级：词义解释及例句 -->
     <block wx:if="{{wxsmd.getType(item)=='defn'}}">
       <view class="cu-card case radius margin-top-xs padding-sm">
-        <view class="fr cu-tag radius bg-green bright">释义</view>
+        <view class="fr info-tag defn">释义</view>
         <view class="text-black text-lg">{{item['trans']}}</view>
         <!-- >> 例句 -->
         <view wx:if="{{wxsmd.hasExample(item)}}">
@@ -71,8 +71,8 @@
     </block>
     <!-- 三级：短语 -->
     <block wx:if="{{wxsmd.getType(item)=='phrase'}}">
-      <view class="cu-card case radius bg-yellow light margin-top-sm margin-bottom-sm padding-sm">
-        <view class="fr cu-tag radius bg-yellow">短语</view>
+      <view class="cu-card case radius phrase-board margin-top-sm margin-bottom-sm padding-sm">
+        <view class="fr info-tag phrase">短语</view>
         <view class="text-black text-lg">{{item['phrase']}}</view>
         <block wx:for="{{item['phrase_sense']}}" wx:for-item="phitem" wx:key="phidx">
           <!-- 该短语下的第i个解释 -->

@@ -72,6 +72,47 @@
 	color: var(--white);
 }
 
+/* 右侧小tag */
+
+.info-tag {
+	width: 60rpx;
+	height: 32rpx;
+	display: inline-flex;
+	vertical-align: middle;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	font-family: Helvetica Neue, Helvetica, sans-serif;
+	white-space: nowrap;
+	font-size: 20rpx;
+	border-radius: 4rpx;
+}
+
+.wordtype {
+	color: #94A4AD;
+	background-color: #F5F5F5;
+}
+
+.defn {
+	color: #00CF88;
+	background-color: #E9FFF5;
+	/* padding: 0rpx 16rpx; */
+}
+
+.phrase {
+	color: #FEAF28;
+	background-color: #FEC75933;
+}
+
+/* 词组板 */
+
+.phrase-board {
+	background-color: #F5F5F5;
+}
+
+/* -- */
+
 .margin-top-ss {
 	margin-top: 5rpx;
 }

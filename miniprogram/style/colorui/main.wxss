@@ -35,7 +35,7 @@ page {
 	--pinkLight: #f9d7ea;
 	--brownLight: #ede1d9;
 	--greyLight: #e7ebed;
-	--greenBright: #00cf88;
+	--greenBright: #E9FFF5;
 	/* 渐变色 */
 	--gradualRed: linear-gradient(45deg, #f43f3b, #ec008c);
 	--gradualOrange: linear-gradient(45deg, #ff9700, #ed1c24);
