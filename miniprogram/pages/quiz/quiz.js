@@ -237,11 +237,11 @@ Page({
       score: otherScore,
       answers: otherAnswers = [],
     } = otherUser;
-    let isWin = false;
+    let isWin = 0;
     let otherFinished = false
     if (otherStatus === 'finished') {
       // 生成比较
-      isWin = score > otherScore;
+      isWin = score > otherScore ? 1 : score === otherScore ? 0 : -1;
       otherFinished = true;
 
       clearInterval(updateInfoInterval);
