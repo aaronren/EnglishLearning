@@ -83,6 +83,8 @@ page {
   margin-left: -357rpx;
   border-radius: 20rpx;
   background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8rpx 12rpx 0rpx rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(3px);
 }
 
 .studyCard .listTag {
@@ -145,6 +147,7 @@ page {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 60rpx;
+  position: relative;
 }
 
 .studyStatus .statusItem {
