@@ -34,7 +34,7 @@ Component({
    */
   data: {
     keyboardItems: [],
-    spellAnswer: '     ',
+    spellAnswer: '',
     spellDisabled: false,
     spellResult: 0 // 0 spelling, 1 true, 2 false
   },
@@ -79,7 +79,7 @@ Component({
       var total_len = word_len
       var answer_str = ''
       for (var i=0; i<total_len; i++) {
-        answer_str += '.'
+        answer_str += '_'
       }
       return answer_str
     },
@@ -90,7 +90,7 @@ Component({
         return
       }
       // 已输满不允许再输入
-      if (this.data.spellAnswer.indexOf('.') === -1) {
+      if (this.data.spellAnswer.indexOf('_') === -1) {
         return
       }
       var touchIndex = e.currentTarget.dataset.index
@@ -101,7 +101,7 @@ Component({
       character.state = 1 // 修改选中状态
       // 修改Answer
       var new_str = this.data.spellAnswer
-      new_str = new_str.replace('.', character.char)
+      new_str = new_str.replace('_', character.char)
       this.setData({
         spellAnswer: new_str,
         keyboardItems: this.data.keyboardItems
@@ -115,16 +115,16 @@ Component({
         return
       }
       var new_str = this.data.spellAnswer
-      var idx = new_str.indexOf('.')
+      var idx = new_str.indexOf('_')
       var the_char = ''
       // 修改Answer
       if (idx > 0) {
         the_char = new_str[idx-1]
-        new_str = string.replaceChar(new_str, idx-1, '.')
+        new_str = string.replaceChar(new_str, idx-1, '_')
       }
       if (idx === -1) {
         the_char = new_str[new_str.length-1]
-        new_str = string.replaceChar(new_str, new_str.length-1, '.')
+        new_str = string.replaceChar(new_str, new_str.length-1, '_')
       }
       // 反选按钮状态
       for (var i=0; i<this.data.keyboardItems.length; i++) {
@@ -146,7 +146,7 @@ Component({
       if (the_word === undefined) {
         return
       }
-      if (the_word[the_word.length-1] === '.') {
+      if (the_word[the_word.length-1] === '_') {
         return
       }
       //拼写正确，则跳转下一个单词

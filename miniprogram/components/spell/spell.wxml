@@ -7,10 +7,7 @@
   </view>
   <text id="65-3" class="text-defn">{{word.trans}}</text>
   <view id="103-0" class="frame-answer">
-    <view id="201-2" class="frame-answerline">
-      <text id="30-0" class="text-answer text-answer-{{spellResult}}">{{spellAnswer}}</text>
-      <view id="201-3" class="view-line" />
-    </view>
+    <text id="30-0" class="text-answer text-answer-{{spellResult}}">{{spellAnswer}}</text>
     <text class="cuIcon-backdelete pron-icon lg text-grey" catchtap="toDeleteWord"></text>
   </view>
   <view id="29-10" class="keyboard-sel">
