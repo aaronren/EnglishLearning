@@ -55,7 +55,27 @@ Page({
         }
       }
     }
+    // 如果没有例句，用释义兜底
+    if (!example['en']) {
+      example['en'] = word['word']
+      example['cn'] = word['trans']
+    }
     return example
+  },
+
+  /**
+   * 后台返回详细数据的顺序可能不一致，需要取match的
+   */
+  findMatchWord: function(word, wordsDetail) {
+    var matchedDetail = {}
+    for (var idx in wordsDetail) {
+      var detail = wordsDetail[idx]
+      if (word === detail['word']) {
+        matchedDetail = detail
+        break;
+      }
+    }
+    return matchedDetail
   },
 
   readyWordsStruct: function(words, scores, wordsDetail) {
@@ -64,7 +84,7 @@ Page({
       var item = {}
       item['word'] = words[idx]
       item['star'] = scores[idx]
-      var detail = wordsDetail[idx]
+      var detail = this.findMatchWord(words[idx], wordsDetail)
       var example = this.parseDetailToGetExample(detail)
       item['example'] = example
       wordObjs.push(item)
