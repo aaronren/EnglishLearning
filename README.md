@@ -5,6 +5,7 @@
 ![cover.jpg](./images/cover.jpg)
 
 **单词大作战**，不服你来啊！
+
 作为一款寓学于乐、学与练结合的英语单词学习产品，打造了**实时单词对战**功能，**选择和拼写练习**功能，为了让单词深深印在你的脑海中！本产品单词内容丰富、释义和例句详实，并包含大量地道的用法和短语，满足不断深入学习的你！
 
 同时，
@@ -18,26 +19,31 @@
 ### 功能模块介绍
 
 **定制你的专属计划**
+
 产品包含丰富的单词学习功能，每次学习都有记录，并且可以定制自己的专属计划。
 学习、练习、对战娱乐...，学习娱乐一样不耽误。
 ![image.png](./images/11.png)
 
 **实时对战功能**
+
 寓学于乐，实时对战！
 一个人的学习总会变得boring，约上小伙伴一起吧，来几局双人对战，让英语学习变得更有意思！
 ![image.png](./images/22.png)
 
 **丰富的释义和例句**
+
 具备非常丰富的释义，包括单词的各种词性和中文解释，以及各释义下的多个例句。
 同时包含丰富的短语和地道的英语用法，让你透彻地了解单词的各种含义。
 ![image.png](./images/33.png)
 
 **练和学的结合**
+
 学习单词之后，紧接着就可以练习，通过多种题型的练习，进一步巩固内容。
 并且包含错题集，再现历史学习得分低的单词，可以循环往复学习加深印象！
 ![image.png](./images/44.png)
 
 **单词拼写练习**
+
 对于很多阅读认识、拼写不会的单词，本功能绝对是你的救星，通过不断的拼写练习，加深记忆。
 ![image.png](./images/55.png)
 
@@ -53,11 +59,6 @@ https://github.com/aaronren/EnglishLearning
 <video id="video" controls="" preload="none" poster="./images/cover.jpg">
 <source id="mp4" src="./images/realshow.mp4" type="video/mp4">
 </video>
-
-#### 给个👍吧
-<iframe style="margin-left: 2px; margin-bottom:-5px;"
-frameborder="0" scrolling="0" width="100px" height="20px" src="https://ghbtns.com/github-btn.html?user=aaronren&repo=EnglishLearning&type=star&count=true" >
-</iframe>
 
 
 ## 历史版本
