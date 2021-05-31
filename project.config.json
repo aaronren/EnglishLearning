@@ -33,7 +33,7 @@
     "packNpmRelationList": [],
     "minifyWXSS": true
   },
-  "appid": "wxfa76cd66147fa115",
+  "appid": "",
   "projectname": "EnglishLearning",
   "libVersion": "2.16.1",
   "simulatorType": "wechat",

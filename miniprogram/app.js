@@ -22,8 +22,8 @@ App({
 
   onLaunch: function (options) {
     mta.App.init({
-      "appID":"500724250",
-      "eventID":"500724254",
+      "appID":"",
+      "eventID":"",
       "lauchOpts":options,
       "autoReport": true,
       "statParam": true,

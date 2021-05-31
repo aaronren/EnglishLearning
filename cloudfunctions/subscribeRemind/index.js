@@ -84,7 +84,7 @@ function sendMessage(event) {
             value: '您预定的学习时间到啦，赶紧学习吧～'
           }
         },
-        templateId: 'LmksV0w7m6py37BcSMOMArEEB9UxInLEh9xydqmFbJs'
+        templateId: ''
       })
       // console.log('send result? > ' + result.errCode + ', ' + result.errMsg)
       // result success
