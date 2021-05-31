@@ -52,19 +52,20 @@
 ### 体验二维码
 ![image.png](./images/QRCode.png)
 
-源码链接
+### 源码链接
 https://github.com/aaronren/EnglishLearning
 
-### 演示视频
-<video id="video" controls="" preload="none" poster="./images/cover.jpg">
-<source id="mp4" src="./images/realshow.mp4" type="video/mp4">
-</video>
-
-## 项目配置
+### 项目配置
 
 运行项目需配置：
 1. appid，可以采用测试id，配置项在project.config.json中；
 2. 需要使用推送提醒，则需要配置推送提醒模版，在subscribeRemind中的templateId
+
+### 演示视频
+
+<video id="video" controls="" preload="none" poster="./images/cover.jpg">
+<source id="mp4" src="./images/realshow.mp4" type="video/mp4"/>
+</video>
 
 
 ## 历史版本
