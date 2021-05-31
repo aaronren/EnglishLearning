@@ -60,6 +60,12 @@ https://github.com/aaronren/EnglishLearning
 <source id="mp4" src="./images/realshow.mp4" type="video/mp4">
 </video>
 
+## 项目配置
+
+运行项目需配置：
+1. appid，可以采用测试id，配置项在project.config.json中；
+2. 需要使用推送提醒，则需要配置推送提醒模版，在subscribeRemind中的templateId
+
 
 ## 历史版本
 
